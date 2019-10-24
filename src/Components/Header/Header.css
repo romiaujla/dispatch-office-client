@@ -1,4 +1,8 @@
+.Header{
+    padding: 10px;
+}
 .Header .logo{
     display: flex;
     flex-direction: column;
+    font-family: 'Cinzel', serif;
 }
