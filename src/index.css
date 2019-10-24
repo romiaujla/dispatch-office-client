@@ -28,3 +28,31 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+
+/* COLOR PALLETE */
+.white-text{
+  color: #F9FAF5;
+}
+.white-back{
+  background-color: #F9FAF5;
+}
+.blue-text{
+  color: #0B245B;
+}
+.blue-back{
+  background-color: #0B245B;
+}
+.grey-text{
+  color: #E1E0E0;
+}
+.grey-back{
+  background-color: #E1E0E0;
+}
+.red-text{
+  color: #9A073C;
+}
+.red-back{
+  background-color: #9A073C;
+}
+
