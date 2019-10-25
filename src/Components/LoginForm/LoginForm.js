@@ -1,12 +1,28 @@
 import React, { Component } from 'react';
 import './LoginForm.css';
 import { validateUserName, validatePassword } from '../../HelperFunctions/HelperFunctions';
+import TokenService from '../../Services/TokenService';
 
 class LoginForm extends Component {
 
+    handleSubmitLoginForm = (e) => { 
+        e.preventDefault();
+
+        const{username, password } = e.target;
+        TokenService.saveAuthToken(
+            TokenService.makeBasicAuthToken(username.value, password.value)
+        );
+
+        username.value = '';
+        password.value = '';
+
+        
+        
+    }
+
     render() {
         return (
-            <form className='LoginForm width-wrapper'>
+            <form className='LoginForm width-wrapper' onSubmit={(e) => {this.handleSubmitLoginForm(e)}}>
                 <fieldset>
                     <legend className='blue-back white-text'>
                         Login
