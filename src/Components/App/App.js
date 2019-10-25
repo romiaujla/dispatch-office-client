@@ -5,6 +5,7 @@ import Header from '../Header/Header';
 import HomePage from '../../Routes/HomePage/HomePage';
 import AppContext from '../../Contexts/AppContext';
 import CreateAccountPage from '../../Routes/CreateAccountPage/CreateAccountPage';
+import LoginPage from '../../Routes/LoginPage/LoginPage';
 
 
 class App extends Component {
@@ -64,6 +65,11 @@ class App extends Component {
               component={CreateAccountPage}
             />
 
+            <Route
+              exact
+              path={`${value.basePath}/login`}
+              component={LoginPage}
+            />
 
           </Switch>
         </div>
