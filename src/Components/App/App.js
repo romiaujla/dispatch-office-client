@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './App.css';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Header from '../Header/Header';
-import Footer from '../Footer/Footer';
 import HomePage from '../../Routes/HomePage/HomePage';
 import AppContext from '../../Contexts/AppContext';
 
