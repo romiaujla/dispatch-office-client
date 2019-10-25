@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import './CreateAccount.css';
-import AppContext from '../../Contexts/AppContext';
+import {
+    validateUserName,
+    validatePassword
+} from '../../HelperFunctions/HelperFunctions';
 
 class CreateAccount extends Component {
-
-    validateUsername = (e) => {
-        const username = e.target.value;
-        
-    }
 
     handleFormSubmit = (e) => {
         e.preventDefault();
@@ -19,7 +17,6 @@ class CreateAccount extends Component {
             mc_num: mc_num.value,
             full_name: full_name.value
         }
-
         console.log(user);
     }
 
@@ -38,13 +35,18 @@ class CreateAccount extends Component {
                                 id='username'
                                 name='username'
                                 required
-                                onChange={(e) => { this.validateUsername(e) }}
+                                onChange={(e) => { validateUserName(e) }}
                             />
                             <span className='error'>Invalid Username</span>
                         </label>
                         <label htmlFor='password'>
                             <span className='input-title'>* Password:</span>
-                            <input type='password' id='password' name='password' required />
+                            <input
+                                type='password'
+                                id='password'
+                                name='password'
+                                required
+                                onChange={(e) => { validatePassword(e) }} />
                             <span className='error'>Password Error</span>
                         </label>
                         <label htmlFor='full_name'>
