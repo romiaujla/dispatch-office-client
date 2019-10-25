@@ -1,0 +1,15 @@
+.HomePage .width-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 20px;
+}
+
+.HomePage p{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 0.9em;
+    letter-spacing: 0.06em;
+    line-height: 1.6em;
+}

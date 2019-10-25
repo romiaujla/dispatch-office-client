@@ -5,7 +5,7 @@ class Header extends Component {
 
     render() {
         return (
-            <header className='Header'>
+            <header className='Header blue-back white-text'>
                 <div className='width-wrapper'>
                     <div className='logo'>
                         <span>Dispatch</span>
@@ -15,10 +15,10 @@ class Header extends Component {
                         
                         {/* Display Nav Button Only When User is setup */}
                         <nav className=''>
-                            <button className='mobile-nav-button'>
-                                <div className='l1'></div>
-                                <div className='l2'></div>
-                                <div className='l3'></div>
+                            <button className='mobile-nav-button blue-back'>
+                                <div className='l1 white-back'></div>
+                                <div className='l2 white-back'></div>
+                                <div className='l3 white-back'></div>
                             </button>
                         </nav>
                     </div>

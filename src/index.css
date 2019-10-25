@@ -1,3 +1,4 @@
+/* Global Normalization Styles */
 *{
   box-sizing: border-box;
 }
@@ -30,7 +31,7 @@ body {
 }
 
 
-/* COLOR PALLETE */
+/* Color Pallete */
 .white-text{
   color: #F9FAF5;
 }
@@ -56,3 +57,40 @@ body {
   background-color: #9A073C;
 }
 
+
+/* Global Button Styling */
+.app-button{
+  background: #0B245B;
+  color: #F9FAF5;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.9em;
+  letter-spacing: 0.06em;
+  padding: 8px 24px;
+  text-transform: uppercase;
+  font-weight: 600;
+  cursor: pointer;
+}
+.app-button:hover,
+.app-button:focus{
+  background-color: #000099;
+}
+.app-link{
+  color: #0B245B;
+  text-decoration: underline;
+  text-transform: uppercase;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.9em;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+}
+.app-link:hover,
+.app-link:focus{
+  color: #000099;
+}
+
+@media only screen and (max-width: 480px){
+  .app-button{
+    width: 100%;
+    text-align: center;
+  }
+}
