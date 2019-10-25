@@ -1,0 +1,58 @@
+.LoginForm{
+    font-family: 'Montserrat', sans-serif;
+    margin: 40px auto;
+    border: 1px solid #0B245B;
+    box-shadow: 0 0 10px 1px rgba(0,0,0,0.21);
+}
+.LoginForm fieldset{
+    border: none;
+}
+.LoginForm legend{
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 600;
+    box-shadow: 4px 0 10px 1px rgba(0,0,0,0.21);
+}
+.LoginForm .flex{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+.LoginForm label{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.LoginForm label:nth-of-type(even){
+    margin: 25px 0px 0px 0px;
+}
+.LoginForm label .input-title{
+    font-size: 0.9em;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+.LoginForm label input{
+    margin-top: 6px;
+}
+.LoginForm .error{
+    color: #9A073C;
+    font-weight: 600;
+    font-size: 0.7em;
+    padding: 5px;
+    display: none;
+}
+button.app-button{
+    margin: 25px auto 10px auto;
+}
+
+@media only screen and (min-width: 500px){
+    .LoginForm{
+        width: 80%;
+        max-width: 500px;
+    }
+    button.app-button{
+        width: 50%;
+    }
+}
