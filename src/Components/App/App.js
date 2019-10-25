@@ -12,7 +12,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      basePath: '/app', 
+      basePath: '/dispatch-office-client', 
       loggedIn: () => {},
       newUser: () => {},
     }
@@ -24,12 +24,12 @@ class App extends Component {
 
   // this function will check if the user is logged in
   isLoggedIn = () => {
-    return true;
+    return false;
   }
 
   // this function will check if the user is new
   isNewUser = () => {
-    return true;
+    return false;
   }
 
   render() {
@@ -49,12 +49,12 @@ class App extends Component {
 
             {/* Begin the app with the /app endpoint */}
             <Route exact path='/'>
-              <Redirect to='/app' />
+              <Redirect to={value.basePath} />
             </Route>  
 
             <Route 
               exact
-              path={`${this.state.basePath}`}
+              path={value.basePath}
               component={HomePage}
             />
 
