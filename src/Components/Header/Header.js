@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './Header.css';
+import { Link } from 'react-router-dom';
 
 class Header extends Component {
 
@@ -7,12 +8,14 @@ class Header extends Component {
         return (
             <header className='Header blue-back white-text'>
                 <div className='width-wrapper'>
-                    <div className='logo'>
-                        <span>Dispatch</span>
-                        <span>Office</span>
-                    </div>
+                    <Link to='/'>
+                        <div className='logo'>
+                            <span>Dispatch</span>
+                            <span>Office</span>
+                        </div>
+                    </Link>
                     <div className='menu'>
-                        
+
                         {/* Display Nav Button Only When User is setup */}
                         <nav className=''>
                             <button className='mobile-nav-button blue-back'>
