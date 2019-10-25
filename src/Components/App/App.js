@@ -4,6 +4,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import Header from '../Header/Header';
 import HomePage from '../../Routes/HomePage/HomePage';
 import AppContext from '../../Contexts/AppContext';
+import CreateAccountPage from '../../Routes/CreateAccountPage/CreateAccountPage';
 
 
 class App extends Component {
@@ -57,6 +58,11 @@ class App extends Component {
               component={HomePage}
             />
 
+            <Route
+              exact
+              path={`${value.basePath}/create-account`}
+              component={CreateAccountPage}
+            />
 
 
           </Switch>
