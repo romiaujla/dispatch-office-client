@@ -28,3 +28,16 @@
 .Header .l2{
     margin: 3px 0px;
 }
+
+@media only screen and (min-width:680px){
+    .Header .logo{
+        font-size: 1.9em;
+        padding: 0px 10px;
+    }
+}
+
+@media only screen and (min-width:1050px){
+    .mobile-nav-button{
+        display: none;
+    }
+}

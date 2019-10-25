@@ -14,7 +14,7 @@ class HomePage extends Component {
             <section className='HomePage blue-text'>
                 <div className='width-wrapper'>
                     <p>
-                        Welcome !! to <span className='span-title'>Dispatch Office</span>, a transportation management
+                        Welcome !! to <span className='span-title red-text'>Dispatch Office</span>, a transportation management
                         system, which assists freight managers with workflow,
                         automation and shipment scheduling.
                     </p>

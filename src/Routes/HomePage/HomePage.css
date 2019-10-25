@@ -7,9 +7,27 @@
 }
 
 .HomePage p{
+    padding: 15% 0 9% 0;
     font-family: 'Montserrat', sans-serif;
     font-weight: 400;
     font-size: 0.9em;
     letter-spacing: 0.06em;
     line-height: 1.6em;
+}
+
+.HomePage .app-button{
+    margin: 20px;
+}
+
+.span-title{
+    font-weight: 800;
+    font-size: 1.2em;
+}
+
+@media only screen and (min-width:680px){
+    .HomePage p{
+        font-size: 1.3em;
+        letter-spacing: 0.07em;
+        line-height: 1.9em;
+    }
 }
