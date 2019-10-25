@@ -57,11 +57,10 @@ class App extends Component {
               path={`${this.state.basePath}`}
               component={HomePage}
             />
-            
-                  
+
+
 
           </Switch>
-          <Footer />
         </div>
       </AppContext.Provider>
     );
