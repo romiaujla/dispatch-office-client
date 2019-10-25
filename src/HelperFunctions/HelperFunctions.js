@@ -1,9 +1,11 @@
 export function validateUserName(e){
     const username = e.target.value;
-    console.log(username);
+    
+    // write code for validating username
 }
 
 export function validatePassword(e){
     const password = e.target.value;
-    console.log(password);
+    
+    // Write code for validating Password
 }
