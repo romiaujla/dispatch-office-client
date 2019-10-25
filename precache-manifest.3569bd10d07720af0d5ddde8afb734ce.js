@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "ae2b6f97a46149655f17eec3b1fb74c4",
+    "revision": "8b311519e4c62eeee01268eac299f319",
     "url": "/dispatch-office-client/index.html"
   },
   {
-    "revision": "f6bb320985926856e4b1",
+    "revision": "d0549250b025ac5ed880",
     "url": "/dispatch-office-client/static/css/main.82b21c91.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/dispatch-office-client/static/js/2.14d1eeec.chunk.js"
   },
   {
-    "revision": "f6bb320985926856e4b1",
-    "url": "/dispatch-office-client/static/js/main.51aab6a3.chunk.js"
+    "revision": "d0549250b025ac5ed880",
+    "url": "/dispatch-office-client/static/js/main.ac9d4412.chunk.js"
   },
   {
     "revision": "92bdfa6a251d0a922a03",
