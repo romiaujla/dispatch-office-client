@@ -7,7 +7,7 @@
     font-family: 'Cinzel', serif;
     font-size: 1.3em;
     padding: 0px 5px;
-    border-left: 15px double #F9FAF5;
+    border-left: 15px double rgb(210, 22, 91);
 }
 .Header .width-wrapper{
     display: flex;
@@ -28,9 +28,39 @@
 .Header .l2{
     margin: 3px 0px;
 }
+.Header .mobile-nav-button:hover div,
+.Header .mobile-nav-button:focus div{
+    background: rgb(210, 22, 91);
+}
 
 .Header a{
     color: inherit;
+}
+.nav{
+    position: relative;
+}
+.Header .open{
+    background: #E1E0E0;
+}
+.Header .open .mobile-nav-button div{
+    background: rgb(210, 22, 91);
+}
+.menu-list{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    background: #E1E0E0;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    right: 0;
+}
+
+.menu-list a{
+    font-size: 1.4em;
+    margin: 20px 0px;
+    padding: 0px 30px;
+    color: rgb(210, 22, 91);
 }
 
 @media only screen and (min-width:680px){
@@ -43,5 +73,27 @@
 @media only screen and (min-width:1050px){
     .mobile-nav-button{
         display: none;
+    }
+    .menu-list{
+        position: static;
+        background: inherit;
+        text-transform: uppercase;
+        display: flex;
+        flex-direction: row;
+        align-self: center;
+        justify-content: space-around;
+    }
+    .menu-list a{
+        cursor: pointer;
+        margin: 0px 20px;
+        padding: 10px 10px;
+        font-size: 0.8em;
+        color: #E1E0E0;
+        border-bottom: 2px solid #E1E0E0;
+    }
+    .menu-list a:hover,
+    .menu-list a:focus{
+        border-bottom-color: rgb(210, 22, 91);
+        transition: border-color 0.4s ease;
     }
 }

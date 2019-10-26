@@ -33,7 +33,6 @@ class LoginForm extends Component {
             password: password.value
         })
             .then((res) => {
-                console.log(res.message);
                 if(res.message === 'Incorrect Username'){
                     this.setState({
                         incorrectUsername: true,
@@ -54,14 +53,12 @@ class LoginForm extends Component {
                     password.value = '';
                 }
                 
-                if(res.message == null){
-                    console.log(`Good Login`);
+                if(!this.state.incorrectPassword && !this.state.incorrectUsername){
                     TokenService.saveAuthToken(
                         TokenService.makeBasicAuthToken(username.value, password.value)
                     );
                     this.props.onLoginSuccess();
                 }
-                
             })
             .catch((res) => {
                 this.setState({
