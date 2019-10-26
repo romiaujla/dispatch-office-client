@@ -8,6 +8,11 @@ class LoginPage extends Component {
     
     static contextType = AppContext;
 
+    onLoginSuccess = (loggedIn) => {
+        this.props.history.push('/');
+        this.context.setLoggedIn(true);
+    }
+
     render() {
 
         const { basePath, loggedIn, newUser } = this.context;
@@ -15,7 +20,7 @@ class LoginPage extends Component {
         return (
             !loggedIn
                 ? <section className='LoginPage'>
-                    <LoginForm />
+                    <LoginForm onLoginSuccess={() => {this.onLoginSuccess()}}/>
                 </section>
                 : !newUser
                     ? <Redirect to={`${basePath}/dashboard`} />

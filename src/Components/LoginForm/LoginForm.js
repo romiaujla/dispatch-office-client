@@ -7,31 +7,63 @@ import AuthApiService from '../../Services/AuthApiService';
 class LoginForm extends Component {
 
     state = {
-        error: null
+        error: null,
+        incorrectUsername: false,
+        incorrectPassword: false,
     }
 
-    handleSubmitLoginForm = (e) => { 
+    static defaultProps = {
+        onLoginSuccess: () => {},
+    }
+
+    handleSubmitLoginForm = (e) => {
         e.preventDefault();
 
         this.setState({
-            error: null
+            error: null,
+            incorrectUsername: false,
+            incorrectPassword: false,
         })
 
-        const{username, password } = e.target;
-        
+        const { username, password } = e.target;
+
 
         AuthApiService.postLogin({
             username: username.value,
             password: password.value
         })
             .then((res) => {
-                username.value = '';
-                password.value = '';
-                TokenService.saveAuthToken(
-                    TokenService.makeBasicAuthToken(username.value, password.value)
-                );
+                console.log(res.message);
+                if(res.message === 'Incorrect Username'){
+                    this.setState({
+                        incorrectUsername: true,
+                        error: res.message
+                    })
+                    username.value = '';
+                    password.value = '';
+                    username.focus();
+                }
+                if(res.message === 'Incorrect Password'){
+                    this.setState({
+                        incorrectPassword: true,
+                        error: res.message
+                    })
+                    password.value = '';
+                }else{
+                    username.value = '';
+                    password.value = '';
+                }
+                
+                if(res.message == null){
+                    console.log(`Good Login`);
+                    TokenService.saveAuthToken(
+                        TokenService.makeBasicAuthToken(username.value, password.value)
+                    );
+                    this.props.onLoginSuccess();
+                }
+                
             })
-            .catch((res)=>{
+            .catch((res) => {
                 this.setState({
                     error: res.error
                 })
@@ -39,12 +71,18 @@ class LoginForm extends Component {
     }
 
     render() {
+
+
+        const { incorrectPassword, incorrectUsername, error } = this.state;
+
+
         return (
-            <form className='LoginForm width-wrapper' onSubmit={(e) => {this.handleSubmitLoginForm(e)}}>
+
+            <form className='LoginForm width-wrapper' onSubmit={(e) => { this.handleSubmitLoginForm(e) }}>
                 <fieldset>
                     <legend className='blue-back white-text'>
                         Login
-                    </legend>
+                        </legend>
                     <div className='flex'>
                         <label htmlFor='username'>
                             <span className='input-title'>* Username:</span>
@@ -55,8 +93,12 @@ class LoginForm extends Component {
                                 required
                                 onChange={(e) => { validateUserName(e) }}
                             />
-                            <span className='error'>Invalid Username</span>
+                            {
+                                incorrectUsername &&
+                                <span className='error'>{error}</span>
+                            }
                         </label>
+                        
                         <label htmlFor='password'>
                             <span className='input-title'>* Password:</span>
                             <input
@@ -64,15 +106,19 @@ class LoginForm extends Component {
                                 id='password'
                                 name='password'
                                 required
-                                onChange={(e) => { validatePassword(e) }} />
-                            <span className='error'>Password Error</span>
+                                onChange={(e) => { validatePassword(e) }} 
+                            />
+                            {
+                                incorrectPassword &&
+                                <span className='error'>{error}</span>
+                            }
                         </label>
                         <button
                             className='app-button'
                             type='submit'
                         >
                             Login
-                        </button>
+                            </button>
                     </div>
                 </fieldset>
             </form>

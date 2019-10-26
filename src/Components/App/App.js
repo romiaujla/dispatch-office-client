@@ -6,6 +6,7 @@ import HomePage from '../../Routes/HomePage/HomePage';
 import AppContext from '../../Contexts/AppContext';
 import CreateAccountPage from '../../Routes/CreateAccountPage/CreateAccountPage';
 import LoginPage from '../../Routes/LoginPage/LoginPage';
+import TokenService from '../../Services/TokenService';
 
 
 class App extends Component {
@@ -14,31 +15,41 @@ class App extends Component {
     super(props);
     this.state = {
       basePath: '/dispatch-office-client', 
-      loggedIn: () => {},
-      newUser: () => {},
+      loggedIn: false,
+      newUser: false,
+      setLoggedIn: () => {},
+      setNewUser: () => {},
     }
   }
 
-  static componentDidMount = () => {
+  componentDidMount = () => {
     // Do fetch requests here and initialize state
+    this.setState({
+      loggedIn: TokenService.hasAuthToken()
+    })
   }
 
-  // this function will check if the user is logged in
-  isLoggedIn = () => {
-    return false;
+  setLoggedIn = (loggedIn) => {
+    console.log(`Logged In: ${loggedIn}`);
+    this.setState({
+      loggedIn
+    })
   }
 
-  // this function will check if the user is new
-  isNewUser = () => {
-    return false;
+  setNewUser = (newUser) => {
+    this.setState({
+      newUser
+    })
   }
 
   render() {
 
     const value = {
       basePath: this.state.basePath,
-      loggedIn: this.isLoggedIn(),
-      newUser: this.isNewUser(),
+      loggedIn: this.state.loggedIn,
+      newUser: this.state.newUser,
+      setLoggedIn: this.setLoggedIn,
+      setNewUser: this.setNewUser,
     }
 
     return (
