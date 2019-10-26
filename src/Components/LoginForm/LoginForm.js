@@ -2,22 +2,40 @@ import React, { Component } from 'react';
 import './LoginForm.css';
 import { validateUserName, validatePassword } from '../../HelperFunctions/HelperFunctions';
 import TokenService from '../../Services/TokenService';
+import AuthApiService from '../../Services/AuthApiService';
 
 class LoginForm extends Component {
+
+    state = {
+        error: null
+    }
 
     handleSubmitLoginForm = (e) => { 
         e.preventDefault();
 
+        this.setState({
+            error: null
+        })
+
         const{username, password } = e.target;
-        TokenService.saveAuthToken(
-            TokenService.makeBasicAuthToken(username.value, password.value)
-        );
-
-        username.value = '';
-        password.value = '';
-
         
-        
+
+        AuthApiService.postLogin({
+            username: username.value,
+            password: password.value
+        })
+            .then((res) => {
+                username.value = '';
+                password.value = '';
+                TokenService.saveAuthToken(
+                    TokenService.makeBasicAuthToken(username.value, password.value)
+                );
+            })
+            .catch((res)=>{
+                this.setState({
+                    error: res.error
+                })
+            })
     }
 
     render() {
