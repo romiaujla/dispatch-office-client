@@ -7,6 +7,11 @@ class Header extends Component {
 
     static contextType = AppContext;
 
+    componentDidMount = () => {
+        const screenWidth = window.innerWidth();
+        console.log(screenWidth);
+    }
+
     render() {
 
         const {loggedIn, basePath} = this.context;
@@ -23,7 +28,7 @@ class Header extends Component {
                     <div className='menu'>
 
                         {/* Display Nav Button Only When User is setup */}
-                        <nav className='nav open'>
+                        <nav className='nav'>
                             <button className='mobile-nav-button open blue-back'>
                                 <div className='l1 white-back'></div>
                                 <div className='l2 white-back'></div>

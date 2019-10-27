@@ -39,9 +39,6 @@
 .nav{
     position: relative;
 }
-.Header .open{
-    background: #E1E0E0;
-}
 .Header .open .mobile-nav-button div{
     background: rgb(210, 22, 91);
 }
@@ -50,17 +47,21 @@
     display: flex;
     flex-direction: column;
     text-align: left;
-    background: #E1E0E0;
     font-family: 'Montserrat', sans-serif;
     font-weight: 600;
     right: 0;
+    background: #0B245B;
+    box-shadow: 0 0 10px 3px rgba(0,0,0,0.34);
 }
 
 .menu-list a{
+    color: #E1E0E0;
     font-size: 1.4em;
-    margin: 20px 0px;
-    padding: 0px 30px;
-    color: rgb(210, 22, 91);
+    padding: 20px 30px;
+}
+.menu-list a:hover,
+.menu-list a:focus{
+    background: rgb(210, 22, 91);
 }
 
 @media only screen and (min-width:680px){
@@ -79,12 +80,15 @@
         background: inherit;
         text-transform: uppercase;
         display: flex;
+        background: #0B245B;
         flex-direction: row;
         align-self: center;
         justify-content: space-around;
+        box-shadow: none;
     }
     .menu-list a{
         cursor: pointer;
+        background: #0B245B;
         margin: 0px 20px;
         padding: 10px 10px;
         font-size: 0.8em;
@@ -93,7 +97,11 @@
     }
     .menu-list a:hover,
     .menu-list a:focus{
+        background: inherit;
+        color: rgb(210, 22, 91);
         border-bottom-color: rgb(210, 22, 91);
-        transition: border-color 0.4s ease;
+        transition: 
+            border-color 0.4s ease,
+            color 0.4s ease;
     }
 }
