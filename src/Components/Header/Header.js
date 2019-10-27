@@ -2,15 +2,12 @@ import React, { Component } from 'react';
 import './Header.css';
 import { Link } from 'react-router-dom';
 import AppContext from '../../Contexts/AppContext';
+import DesktopMenu from '../DesktopMenu/DesktopMenu';
+import MobileMenu from '../MobileMenu/MobileMenu';
 
 class Header extends Component {
 
     static contextType = AppContext;
-
-    componentDidMount = () => {
-        const screenWidth = window.innerWidth();
-        console.log(screenWidth);
-    }
 
     render() {
 
@@ -25,40 +22,8 @@ class Header extends Component {
                             <span>Office</span>
                         </div>
                     </Link>
-                    <div className='menu'>
-
-                        {/* Display Nav Button Only When User is setup */}
-                        <nav className='nav'>
-                            <button className='mobile-nav-button open blue-back'>
-                                <div className='l1 white-back'></div>
-                                <div className='l2 white-back'></div>
-                                <div className='l3 white-back'></div>
-                            </button>
-                            <div className='menu-list'>
-                                <Link 
-                                    to={`${basePath}/dashboard`}
-                                    className='menu-item'>
-                                    Dashboard
-                                </Link>
-                                <Link 
-                                    to={`${basePath}/loads`}
-                                    className='menu-item'>
-                                    Loads
-                                </Link>
-                                <Link 
-                                    to={`${basePath}/equipments`}
-                                    className='menu-item'>
-                                    Equipments
-                                </Link>
-                                <Link 
-                                    to={`${basePath}/drivers`}
-                                    className='menu-item'>
-                                    Drivers
-                                </Link>
-                            </div>
-                        </nav>
-
-                    </div>
+                    <DesktopMenu />
+                    <MobileMenu />
                 </div>
             </header>
         );

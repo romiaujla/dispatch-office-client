@@ -28,42 +28,12 @@
 .Header .l2{
     margin: 3px 0px;
 }
-.Header .mobile-nav-button:hover div,
-.Header .mobile-nav-button:focus div{
-    background: rgb(210, 22, 91);
-}
 
 .Header a{
     color: inherit;
 }
-.nav{
-    position: relative;
-}
-.Header .open .mobile-nav-button div{
-    background: rgb(210, 22, 91);
-}
-.menu-list{
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 600;
-    right: 0;
-    background: #0B245B;
-    box-shadow: 0 0 10px 3px rgba(0,0,0,0.34);
-}
 
-.menu-list a{
-    color: #E1E0E0;
-    font-size: 1.4em;
-    padding: 20px 30px;
-}
-.menu-list a:hover,
-.menu-list a:focus{
-    background: rgb(210, 22, 91);
-}
-
+/* Ipads and Larger Screens */
 @media only screen and (min-width:680px){
     .Header .logo{
         font-size: 1.9em;
@@ -71,37 +41,7 @@
     }
 }
 
+/* Larger Screens */
 @media only screen and (min-width:1050px){
-    .mobile-nav-button{
-        display: none;
-    }
-    .menu-list{
-        position: static;
-        background: inherit;
-        text-transform: uppercase;
-        display: flex;
-        background: #0B245B;
-        flex-direction: row;
-        align-self: center;
-        justify-content: space-around;
-        box-shadow: none;
-    }
-    .menu-list a{
-        cursor: pointer;
-        background: #0B245B;
-        margin: 0px 20px;
-        padding: 10px 10px;
-        font-size: 0.8em;
-        color: #E1E0E0;
-        border-bottom: 2px solid #E1E0E0;
-    }
-    .menu-list a:hover,
-    .menu-list a:focus{
-        background: inherit;
-        color: rgb(210, 22, 91);
-        border-bottom-color: rgb(210, 22, 91);
-        transition: 
-            border-color 0.4s ease,
-            color 0.4s ease;
-    }
+    
 }

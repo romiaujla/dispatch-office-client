@@ -1,0 +1,24 @@
+.DesktopMenu ul{
+    display: flex;
+    font-size: 0.8em;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-family: 'Montserrat', sans-serif;
+}
+.DesktopMenu li a{
+    display: inline-block;
+    padding: 0px 10px 10px 10px;
+    margin: 0px 25px;
+    border-bottom: 2px solid #E1E0E0;
+}
+.DesktopMenu li a:active,
+.DesktopMenu li a:hover,
+.DesktopMenu li a:focus{
+    border-color: rgb(210, 22, 91);
+}
+
+@media only screen and (max-width: 1050px){
+    .DesktopMenu{
+        display: none;
+    }
+}
