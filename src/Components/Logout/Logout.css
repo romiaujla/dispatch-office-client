@@ -1,0 +1,20 @@
+.Logout{
+    text-align: right;
+    font-family: 'Montserrat', sans-serif;
+    padding: 10px 0px;
+    font-size: 1.1em;
+}
+.Logout .carrier-name{
+    text-transform: uppercase;
+    font-weight: 600;
+}
+.Logout .app-link{
+    border: none;
+    cursor: pointer;
+}
+.Logout .app-link:hover,
+.Logout .app-link:active,
+.Logout .app-link:focus
+{
+    color: #0000FF;
+}
