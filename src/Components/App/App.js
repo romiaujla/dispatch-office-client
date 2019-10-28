@@ -7,6 +7,7 @@ import AppContext from '../../Contexts/AppContext';
 import CreateAccountPage from '../../Routes/CreateAccountPage/CreateAccountPage';
 import LoginPage from '../../Routes/LoginPage/LoginPage';
 import TokenService from '../../Services/TokenService';
+import DashboardPage from '../../Routes/DashboardPage/DashboardPage';
 
 
 class App extends Component {
@@ -80,6 +81,12 @@ class App extends Component {
               exact
               path={`${value.basePath}/login`}
               component={LoginPage}
+            />
+
+            <Route
+              exact
+              path={`${value.basePath}/dashboard`}
+              component={DashboardPage}
             />
 
           </Switch>

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './MobileMenu.css';
-import MenuItems from '../MenuItems/MenuItems';
 import AppContext from '../../Contexts/AppContext';
 import { Link } from 'react-router-dom';
 
@@ -39,7 +38,7 @@ class MobileMenu extends Component {
 
     render() {
 
-        const {basePath } = this.context;
+        const { basePath } = this.context;
 
         return (
             <nav className='MobileMenu'>
@@ -51,34 +50,34 @@ class MobileMenu extends Component {
                 {
                     this.state.menuOpen &&
                     <ul className='menu-list'>
-                        <button 
+                        <button
                             className='close-button'
                             onClick={this.changeMenuOpenState}>
                             X
                         </button>
                         <li className='menu-item'>
-                            <Link 
-                                to={`${basePath}/dashboard`} 
+                            <Link
+                                to={`${basePath}/dashboard`}
                                 onClick={this.changeMenuOpenState}>
                                 Dashboard
                             </Link>
                         </li>
                         <li className='menu-item'>
-                            <Link 
+                            <Link
                                 to={`${basePath}/loads`}
                                 onClick={this.changeMenuOpenState}>
                                 Loads
                             </Link>
                         </li>
                         <li className='menu-item'>
-                            <Link 
+                            <Link
                                 to={`${basePath}/equipments`}
                                 onClick={this.changeMenuOpenState}>
                                 Equipments
                             </Link>
                         </li>
                         <li className='menu-item'>
-                            <Link 
+                            <Link
                                 to={`${basePath}/drivers`}
                                 onClick={this.changeMenuOpenState}>
                                 Drivers
