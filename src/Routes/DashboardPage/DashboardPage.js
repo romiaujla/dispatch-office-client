@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './DashboardPage.css';
 import UnAssignedLoads from '../../Components/UnAssignedLoads/UnAssignedLoads';
 import {Link} from 'react-router-dom';
+import AppContext from '../../Contexts/AppContext';
 
 class DashboardPage extends Component {
 
@@ -10,11 +11,16 @@ class DashboardPage extends Component {
         this.state = {  }
     }
 
+    static contextType = AppContext;
+
     render() { 
+
+        const {basePath} = this.context;
+
         return (  
             <section className='DashboardPage width-wrapper'>
                 <div className='AddLoadSection'>
-                    <Link className='add-load app-button'>
+                    <Link className='add-load app-button' to={`${basePath}/new/load`}>
                         Add Load
                     </Link>
                 </div>
