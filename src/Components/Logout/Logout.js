@@ -16,7 +16,7 @@ class Logout extends Component {
     render(){
         return (
             <div className='Logout width-wrapper'>
-                Welcome, <span class='carrier-name red-text'>
+                Welcome, <span className='carrier-name red-text'>
                     Username
                 </span>!! <button className='app-link' onClick={() => {this.handleLogout()}}>Logout</button>
             </div>
