@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import AppContext from '../../Contexts/AppContext';
 import DesktopMenu from '../DesktopMenu/DesktopMenu';
 import MobileMenu from '../MobileMenu/MobileMenu';
-import TokenService from '../../Services/TokenService';
 
 class Header extends Component {
 
@@ -12,7 +11,7 @@ class Header extends Component {
 
     render() {
 
-        const {loggedIn, basePath} = this.context;
+        const {loggedIn} = this.context;
 
         return (
             <header className='Header blue-back white-text'>
