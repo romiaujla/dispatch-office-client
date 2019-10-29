@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import "./App.css";
-import { Switch, Route, Redirect, Link } from "react-router-dom";
+import { 
+  Switch, 
+  Route, 
+  Redirect,
+} from "react-router-dom";
 import Header from "../Header/Header";
 import HomePage from "../../Routes/HomePage/HomePage";
 import AppContext from "../../Contexts/AppContext";
@@ -16,9 +20,7 @@ class App extends Component {
     this.state = {
       basePath: "/dispatch-office-client",
       loggedIn: false,
-      newUser: false,
-      setLoggedIn: () => {},
-      setNewUser: () => {},
+      newUser: false,      
       carrier: {}
     };
   }
@@ -31,11 +33,17 @@ class App extends Component {
   };
 
   setLoggedIn = loggedIn => {
-    console.log(`Logged In: ${loggedIn}`);
     this.setState({
       loggedIn
     });
   };
+
+  setCarrier = (carrier) => {
+    console.log(`Carrier: ` , carrier);
+    this.setState({
+      carrier
+    })
+  }
 
   setNewUser = newUser => {
     this.setState({
@@ -50,7 +58,7 @@ class App extends Component {
       newUser: this.state.newUser,
       setLoggedIn: this.setLoggedIn,
       setNewUser: this.setNewUser,
-      carrier: this.state.carrier
+      setCarrier: this.setCarrier,
     };
 
     return (
