@@ -1,11 +1,11 @@
 export function validateUserName(e){
-    const username = e.target.value;
+    // const username = e.target.value;
     
     // write code for validating username
 }
 
 export function validatePassword(e){
-    const password = e.target.value;
+    // const password = e.target.value;
     
     // Write code for validating Password
 }
