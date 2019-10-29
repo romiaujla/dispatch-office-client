@@ -5,8 +5,14 @@ class UnAssignedLoads extends Component {
     
     render() { 
         return (  
-            <div className='UnAssignedLoads red-back white-text'>
+            <div className='UnAssignedLoads blue-back white-text'>
                 <h3>Un Assigned Loads Section</h3>
+                <ul className='un-assigned-loads'>
+                    <li>
+                        
+                    </li>
+                </ul>
+
             </div>
         );
     }

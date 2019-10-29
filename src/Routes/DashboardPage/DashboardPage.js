@@ -25,6 +25,15 @@ class DashboardPage extends Component {
                     </Link>
                 </div>
                 <UnAssignedLoads />
+                <div className=''>
+                    Idle Drivers Section
+                </div>
+                <div className=''>
+                    Loads In Transit Section
+                </div>
+
+
+
             </section>
         );
     }

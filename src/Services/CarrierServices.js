@@ -2,14 +2,22 @@ import TokenService from './TokenService';
 import config from '../config';
 
 const CarrierService = {
-    getLoads() {
-        // get all loads for this carrier
-    },
-    getEquipments(){
-        // get all equipments
-    },
-    getDrivers(){
-        // get all drivers
+    getCarrierData(){
+        // return the response of a fetch that returns all the carrier info.
+        return fetch(`${config.API_ENDPOINT}/carrier`, {
+            method: 'GET',
+            headers: {
+                "content-type": "application/json"
+            }
+        })
+        .then(res => res.json())
+        .then(carrierData => {
+            carrierData = `New Carrier`;
+            return carrierData;
+        })
+        .catch(err => {
+            console.log(err);
+        })
     }
 }
 
