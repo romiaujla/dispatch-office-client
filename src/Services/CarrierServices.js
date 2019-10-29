@@ -7,12 +7,12 @@ const CarrierService = {
         return fetch(`${config.API_ENDPOINT}/carrier`, {
             method: 'GET',
             headers: {
-                "content-type": "application/json"
+                "content-type": "application/json",
+                "Authorization": `bearer ${TokenService.getAuthToken()}`
             }
         })
         .then(res => res.json())
         .then(carrierData => {
-            carrierData = `New Carrier`;
             return carrierData;
         })
         .catch(err => {
