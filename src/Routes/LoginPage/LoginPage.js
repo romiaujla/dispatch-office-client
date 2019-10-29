@@ -1,32 +1,37 @@
-import React, { Component } from 'react';
-import './LoginPage.css';
-import AppContext from '../../Contexts/AppContext';
-import LoginForm from '../../Components/LoginForm/LoginForm';
-import {Redirect} from 'react-router-dom';
+import React, { Component } from "react";
+import "./LoginPage.css";
+import AppContext from "../../Contexts/AppContext";
+import LoginForm from "../../Components/LoginForm/LoginForm";
+import { Redirect } from "react-router-dom";
+import CarrierService from '../../Services/CarrierServices';
 
 class LoginPage extends Component {
-    
-    static contextType = AppContext;
+  static contextType = AppContext;
 
-    onLoginSuccess = (loggedIn) => {
-        this.props.history.push('/');
-        this.context.setLoggedIn(true);
-    }
+  onLoginSuccess = loggedIn => {
+    this.props.history.push("/");
+    this.context.setLoggedIn(true);
+    // Call a service that sets the `Carrier` in state to the carrier logged in
+    this.context.setCarrier(CarrierService.getCarrierData())
+  };
 
-    render() {
+  render() {
+    const { basePath, loggedIn, newUser } = this.context;
 
-        const { basePath, loggedIn, newUser } = this.context;
-
-        return (
-            !loggedIn
-                ? <section className='LoginPage'>
-                    <LoginForm onLoginSuccess={() => {this.onLoginSuccess()}}/>
-                </section>
-                : !newUser
-                    ? <Redirect to={`${basePath}/dashboard`} />
-                    : <Redirect to={`${basePath}/newuser`} />
-        );
-    }
+    return !loggedIn ? (
+      <section className="LoginPage">
+        <LoginForm
+          onLoginSuccess={() => {
+            this.onLoginSuccess();
+          }}
+        />
+      </section>
+    ) : !newUser ? (
+      <Redirect to={`${basePath}/dashboard`} />
+    ) : (
+      <Redirect to={`${basePath}/newuser`} />
+    );
+  }
 }
- 
+
 export default LoginPage;
