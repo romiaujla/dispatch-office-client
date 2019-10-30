@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import "./App.css";
-import { 
-  Switch, 
-  Route, 
+import {
+  Switch,
+  Route,
   Redirect,
 } from "react-router-dom";
 import Header from "../Header/Header";
@@ -13,6 +13,7 @@ import LoginPage from "../../Routes/LoginPage/LoginPage";
 import TokenService from "../../Services/TokenService";
 import DashboardPage from "../../Routes/DashboardPage/DashboardPage";
 import Logout from "../Logout/Logout";
+import CarrierService from '../../Services/CarrierServices';
 
 class App extends Component {
   constructor(props) {
@@ -20,16 +21,28 @@ class App extends Component {
     this.state = {
       basePath: "/dispatch-office-client",
       loggedIn: false,
-      newUser: false,      
-      carrier: {}
+      newUser: false,
+      carrier: [],
+      loggedInCarrier: {
+        full_name: '',
+        company_name: '',
+        mc_num: ''
+      },
     };
   }
 
-  componentDidMount = () => {
-    // Do fetch requests here and initialize state
+  componentDidMount = async () => {
     this.setState({
       loggedIn: TokenService.hasAuthToken()
     });
+    if(TokenService.hasAuthToken()){
+      const carrierData = await CarrierService.getCarrierData()
+        .then(res => res)
+        .catch(err => console.log(err))
+      this.setState({
+        carrier: carrierData
+      });
+    }
   };
 
   setLoggedIn = loggedIn => {
@@ -38,12 +51,17 @@ class App extends Component {
     });
   };
 
+  setLoggedInCarrier = loggedInCarrier => {
+    this.setState({
+      loggedInCarrier
+    });
+  };
+
   setCarrier = (carrier) => {
-    console.log(`Carrier: ` , carrier);
     this.setState({
       carrier
-    })
-  }
+    });
+  };
 
   setNewUser = newUser => {
     this.setState({
@@ -59,6 +77,9 @@ class App extends Component {
       setLoggedIn: this.setLoggedIn,
       setNewUser: this.setNewUser,
       setCarrier: this.setCarrier,
+      setLoggedInCarrier: this.setLoggedInCarrier,
+      loggedInCarrier: this.state.loggedInCarrier,
+      carrier: this.state.carrier,
     };
 
     return (
