@@ -7,4 +7,7 @@ export default React.createContext({
     setLoggedIn: () => {},
     setNewUser: () => {},
     setCarrier: () => {},
+    loggedInCarrier: {},
+    carrier: [],
+    setLoggedInCarrier: () => {},
 });
