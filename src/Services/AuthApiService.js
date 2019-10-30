@@ -16,8 +16,11 @@ const AuthApiService = {
                     throw new Error(e.error.message)
                 })
             }
-            console.log(res.json());
+            
             return res.json();
+        })
+        .then(res => {
+            return res
         })
         .catch(error => {
             return error;

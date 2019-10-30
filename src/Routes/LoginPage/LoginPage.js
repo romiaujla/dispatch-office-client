@@ -8,11 +8,14 @@ import CarrierService from '../../Services/CarrierServices';
 class LoginPage extends Component {
   static contextType = AppContext;
 
-  onLoginSuccess = loggedIn => {
+  // using async await so app proceeds only once complete data for carrier is received
+  onLoginSuccess = async () => {
     this.props.history.push("/");
     this.context.setLoggedIn(true);
-    // Call a service that sets the `Carrier` in state to the carrier logged in
-    this.context.setCarrier(CarrierService.getCarrierData())
+    const carrierData = await CarrierService.getCarrierData()
+      .then(res => res)
+      .catch(err => console.log(err))
+    this.context.setCarrier(carrierData);
   };
 
   render() {

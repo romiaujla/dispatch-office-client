@@ -47,16 +47,13 @@ class LoginForm extends Component {
                         error: res.message
                     })
                     password.value = '';
-                }else{
-                    username.value = '';
-                    password.value = '';
                 }
                 
                 if(!this.state.incorrectPassword && !this.state.incorrectUsername){
-                    TokenService.saveAuthToken(
-                        TokenService.makeBasicAuthToken(username.value, password.value)
-                    );
+                    TokenService.saveAuthToken(res.authToken);
                     this.props.onLoginSuccess();
+                    username.value = '';
+                    password.value = '';
                 }
             })
             .catch((res) => {

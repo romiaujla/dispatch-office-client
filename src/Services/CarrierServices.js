@@ -3,7 +3,7 @@ import config from '../config';
 
 const CarrierService = {
     getCarrierData(){
-        // return the response of a fetch that returns all the carrier info.
+        console.log(TokenService.getAuthToken());
         return fetch(`${config.API_ENDPOINT}/carrier`, {
             method: 'GET',
             headers: {
