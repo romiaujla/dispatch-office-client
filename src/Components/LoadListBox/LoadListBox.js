@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './LoadListBox.css';
 import AppContext from '../../Contexts/AppContext';
-import PropType from 'prop-types';
 
 class LoadListBox extends Component {
     
@@ -25,7 +24,7 @@ class LoadListBox extends Component {
     }
 
     getLoadsWithStatus = (status) => {
-        const shipments = this.context.carrier.filter(shipment => shipment.status === status);
+        const shipments = this.context.shipments.filter(shipment => shipment.status === status);
         // to test empty lists
         // const shipments = [];
         if(shipments.length === 0){
@@ -36,7 +35,7 @@ class LoadListBox extends Component {
             )
         }        
         return shipments.map(shipment => {
-            console.log(shipment);
+
             return (
                 <li 
                     className='load'

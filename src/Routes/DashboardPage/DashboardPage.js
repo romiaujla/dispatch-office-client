@@ -3,6 +3,7 @@ import './DashboardPage.css';
 import {Link} from 'react-router-dom';
 import AppContext from '../../Contexts/AppContext';
 import LoadListBox from '../../Components/LoadListBox/LoadListBox';
+import IdleDriversBox from '../../Components/IdleDriversBox/IdleDriversBox';
 
 class DashboardPage extends Component {
 
@@ -25,10 +26,8 @@ class DashboardPage extends Component {
                     </Link>
                 </div>
                 <LoadListBox loadStatus='un-assigned' />
-                <div className=''>
-                    Idle Drivers Section
-                </div>
                 <LoadListBox loadStatus='in transit' />
+                <IdleDriversBox />
 
             </section>
         );

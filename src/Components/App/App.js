@@ -14,6 +14,7 @@ import TokenService from "../../Services/TokenService";
 import DashboardPage from "../../Routes/DashboardPage/DashboardPage";
 import Logout from "../Logout/Logout";
 import CarrierService from '../../Services/CarrierServices';
+import DriversService from '../../Services/DriversService';
 
 class App extends Component {
   constructor(props) {
@@ -22,7 +23,8 @@ class App extends Component {
       basePath: "/dispatch-office-client",
       loggedIn: false,
       newUser: false,
-      carrier: [],
+      shipments: [],
+      driverData: [],
       loggedInCarrier: {
         full_name: '',
         company_name: '',
@@ -31,17 +33,33 @@ class App extends Component {
     };
   }
 
+  // gets all the carrierData
+  getShipments = async () => {
+    const shipments = await CarrierService.getCarrierData()
+      .then(data => data)
+      .catch(err => console.log(err))
+    this.setState({
+      shipments
+    });
+  }
+
+  // gets all driversData
+  getDrivers = async () => {
+    const driverData = await DriversService.getDriversData()
+      .then(data => data)
+      .catch(err => console.log(err));
+    this.setState({
+      driverData
+    });
+  }
+
   componentDidMount = async () => {
     this.setState({
       loggedIn: TokenService.hasAuthToken()
     });
     if(TokenService.hasAuthToken()){
-      const carrierData = await CarrierService.getCarrierData()
-        .then(res => res)
-        .catch(err => console.log(err))
-      this.setState({
-        carrier: carrierData
-      });
+      this.getShipments();
+      this.getDrivers();
     }
   };
 
@@ -79,7 +97,8 @@ class App extends Component {
       setCarrier: this.setCarrier,
       setLoggedInCarrier: this.setLoggedInCarrier,
       loggedInCarrier: this.state.loggedInCarrier,
-      carrier: this.state.carrier,
+      shipments: this.state.shipments,
+      driversData: this.state.driverData,
     };
 
     return (

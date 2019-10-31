@@ -10,4 +10,5 @@ export default React.createContext({
     loggedInCarrier: {},
     carrier: [],
     setLoggedInCarrier: () => {},
+    driversData: [],
 });
