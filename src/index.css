@@ -61,7 +61,7 @@ body {
 
 /* Global Button Styling */
 .app-button{
-  background: #0B245B;
+  background: rgb(210, 22, 91);
   color: #F9FAF5;
   font-family: 'Montserrat', sans-serif;
   font-size: 0.9em;
@@ -74,10 +74,10 @@ body {
 }
 .app-button:hover,
 .app-button:focus{
-  background-color: #000099;
+  background-color: rgb(255, 0, 93);
 }
 .app-link{
-  color: #0B245B;
+  color: rgb(210, 22, 91);
   text-decoration: underline;
   text-transform: uppercase;
   font-family: 'Montserrat', sans-serif;
@@ -87,7 +87,7 @@ body {
 }
 .app-link:hover,
 .app-link:focus{
-  color: #000099;
+  color: rgb(255, 0, 93);
 }
 
 @media only screen and (max-width: 480px){

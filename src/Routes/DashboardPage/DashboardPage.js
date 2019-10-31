@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './DashboardPage.css';
-import UnAssignedLoads from '../../Components/UnAssignedLoads/UnAssignedLoads';
 import {Link} from 'react-router-dom';
 import AppContext from '../../Contexts/AppContext';
+import LoadListBox from '../../Components/LoadListBox/LoadListBox';
 
 class DashboardPage extends Component {
 
@@ -24,15 +24,11 @@ class DashboardPage extends Component {
                         Add Load
                     </Link>
                 </div>
-                <UnAssignedLoads />
+                <LoadListBox loadStatus='un-assigned' />
                 <div className=''>
                     Idle Drivers Section
                 </div>
-                <div className=''>
-                    Loads In Transit Section
-                </div>
-
-
+                <LoadListBox loadStatus='in transit' />
 
             </section>
         );
