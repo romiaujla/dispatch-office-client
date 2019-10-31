@@ -1,0 +1,108 @@
+.LoadListBox{
+    font-family: 'Montserrat', sans-serif;
+    margin: 20px 0px;
+    box-shadow: 0 0 10px 2px rgba(0,0,0,0.21);
+}
+.LoadListBox h3{
+    text-align: center;
+    font-size: 0.9em;
+    padding: 10px;
+    text-transform: uppercase;
+    box-shadow: 0px 3px 6px 2px rgba(0,0,0,0.21);
+}
+.LoadListBox .empty-list{
+    height: 200px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    text-transform: capitalize;
+}
+.LoadListBox ul{
+    padding: 50px 10px;
+}
+.LoadListBox ul .load{
+    background: #e1e0e0;
+    box-shadow: 0 0 6px 2px rgba(0,0,0,0.25);
+    padding: 20px;
+    margin: auto 20px;
+    font-size: 0.8em;
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+}
+.LoadListBox ul .load:nth-of-type(even){
+    margin: 50px 20px;
+}
+.LoadListBox ul .load:last-child{
+    margin-bottom: 0px;
+}
+.LoadListBox .load h6{
+    display: inline-block;
+    border-bottom: 1px solid #0b245b;
+}
+.LoadListBox .load .pick-up{
+    padding: 5px;
+}
+.LoadListBox .load .status-line{
+    display: flex;
+    height: 2px;
+    align-items: center;
+    margin: 10px 0px;
+    padding: 0px 20px;
+}
+.LoadListBox .status-line-wrapper{
+    margin: 10px 0px;
+    display: flex;
+    flex-direction: column;
+}
+.LoadListBox .circle{
+    background: rgb(210,22,91);
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
+}
+.LoadListBox .red-bold{
+    color: rgb(210,22,91);
+    font-weight: 800;
+    font-size: 1.2em;
+}
+.LoadListBox .status-line .line{
+    height: 2px;
+    width: 100%;
+    flex: 1;
+    background: rgb(210,22,91);
+}
+.LoadListBox .delivery{
+    text-align: right;
+}
+.status-line-wrapper .miles,
+.status-line-wrapper .rate-broker{
+    align-self: center;
+    text-align: center;
+}
+.status-line-wrapper .rate-broker{
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+}
+.LoadListBox .date{
+    font-size: 0.8em;
+    font-weight: 800;
+}
+
+@media only screen and (min-width:900px){
+    .LoadListBox ul{
+        display: flex;
+        flex-wrap: wrap;
+        padding: 3%;
+    }
+    .LoadListBox ul .load{
+        min-width: 46%;
+        margin: 2%;
+    }
+    .LoadListBox ul .load:nth-of-type(even){
+        margin: auto;
+    }
+}
