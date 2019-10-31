@@ -10,10 +10,6 @@ class LoadListBox extends Component {
         loadStatus: ''
     }
 
-    constructor(props){
-        super(props);
-    }
-
     formatDate = (dbDate) => {
         const date = new Date(dbDate);
         let day = date.getDate();
