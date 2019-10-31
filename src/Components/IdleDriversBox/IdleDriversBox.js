@@ -13,6 +13,12 @@ class IdleDriversBox extends Component {
 
     getIdleDrivers = () => {
         const {driversData, shipments} = this.context
+        const busyDrivers = shipments.filter(shipment => {
+            if(shipment.status !== 'un-assigned' || shipment.status !== 'completed'){
+                return shipment.driver;
+            }
+        });
+        console.log(busyDrivers);
         
     }
 
