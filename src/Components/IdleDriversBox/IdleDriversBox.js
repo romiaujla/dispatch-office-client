@@ -1,32 +1,26 @@
 import React, { Component } from 'react';
 import './IdleDriversBox.css';
 import AppContext from '../../Contexts/AppContext';
+import DriverCard from '../DriverCard/DriverCard';
 
 class IdleDriversBox extends Component {
     
-    constructor(props) {
-        super(props);
-        this.state = {  }
-    }
-
     static contextType = AppContext;
 
-    getIdleDrivers = () => {
-        const {driversData, shipments} = this.context
-        const busyDrivers = shipments.filter(shipment => {
-            if(shipment.status !== 'un-assigned' || shipment.status !== 'completed'){
-                return shipment.driver;
-            }
-        });
-        console.log(busyDrivers);
-        
+    renderIdleDriversList = () => {
+        const {idleDrivers} = this.context
+        return idleDrivers.map((iDriver) => {
+            return <li key={iDriver.id}><DriverCard driver={iDriver} /></li>
+        })
     }
 
     render() { 
         return (
             <div className='IdleDriversBox'>
-                Idle Drivers Box
-                {this.getIdleDrivers()}
+                <h3 className='blue-back white-text'>Idle Drivers</h3>
+                <ul>
+                    {this.renderIdleDriversList()}
+                </ul>
             </div>
         );
     }

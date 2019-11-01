@@ -16,6 +16,20 @@ const DriversService = {
             console.log(error);
         })
     },
+    getIdleDrivers(){
+        return fetch(`${config.API_ENDPOINT}/drivers/idle`, {
+            method: 'GET',
+            headers: {
+                "content-type": "application/json",
+                "Authorization": `bearer ${TokenService.getAuthToken()}`
+            }
+        })
+        .then(response => response.json())
+        .then(idleDrivers => idleDrivers)
+        .catch((error) => {
+            console.log(error);
+        })
+    },
 }
 
 export default DriversService;

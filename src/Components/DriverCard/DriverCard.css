@@ -1,0 +1,32 @@
+.DriverCard{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 6px 2px rgba(0,0,0,0.25);
+}
+.flex-wrapper{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+.card-div h6{
+    display: inline-block;
+    margin-bottom: 3px;
+    border-bottom: 1px solid #0b245b;
+    text-transform: uppercase;
+}
+
+.card-div{
+    flex: 1;
+    margin: 15px;
+}
+
+
+@media only screen and (min-width: 480px){
+    .view-button{
+        align-self: center;
+    }
+}
