@@ -1,3 +1,50 @@
 .EquipmentCard{
-    
+    box-shadow: 0 0 10px 2px rgba(0,0,0,0.21);
+}
+.EquipmentCard .flex-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-right: 20px;
+}
+.EquipmentCard h6{
+    text-transform: uppercase;
+    border-bottom: 1px solid #0b245b;
+    display: inline-block;
+    margin-bottom: 3px;
+    font-size: 0.5em;
+}
+.EquipmentCard > div{
+    /* border: 1px solid black; */
+    padding: 10px;
+    width: 100%;
+}
+.EquipmentCard .equip-driver{
+    flex: 1;
+    margin-left: 20px;
+}
+.EquipmentCard p{
+    font-size: 1em;
+    font-weight: 800;
+}
+.EquipmentCard .app-button{
+    margin-top: 0px;
+    font-size: 0.7em;
+}
+@media only screen and (min-width: 480px){
+    .EquipmentCard .equipment-buttons{
+        flex: 0;
+        display: flex;
+        flex-direction: column;
+    }
+    .EquipmentCard .equipment-buttons .app-button{
+        width: 100%;
+    }
+    .EquipmentCard .equipment-buttons .app-button:nth-of-type(odd){
+        margin-bottom: 5px;
+    }
+    .EquipmentCard{
+        display: flex;
+        flex-direction: row;
+    }
 }

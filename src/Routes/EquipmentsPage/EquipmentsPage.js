@@ -12,11 +12,21 @@ class EquipmentsPage extends Component{
         console.log(`Equipment Add Submitted`);
     }
 
+    filterEquipments = (equipments, filters) => {
+        return equipments.filter(equipment => equipment[filters.property] !== filters.value)
+    }
+
     renderEquipmentList = () => {
-        const { equipments } = this.context;
+        let { equipments } = this.context;
+        
+        equipments = this.filterEquipments(equipments, {
+            'property': 'status',
+            'value' : 'inactive'
+        })
+
         return equipments.map(equip => {
             return (
-                <li>
+                <li key={equip.id}>
                     <EquipmentCard equipment={equip} />
                 </li>
             )
@@ -48,7 +58,7 @@ class EquipmentsPage extends Component{
                     </form>
                 </div> */}
                 <div className='box'>
-                    <h3 className='box-header'>All Equipments</h3>
+                    <h3 className='box-header blue-back white-text'>Equipment List</h3>
                     <ul className='equipment-list'>
                         {this.renderEquipmentList()}
                     </ul>
