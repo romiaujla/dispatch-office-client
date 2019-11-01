@@ -1,58 +1,71 @@
-.LoginForm{
+.AddLoadPage{
     font-family: 'Montserrat', sans-serif;
     margin: 40px auto;
     border: 1px solid #0B245B;
     box-shadow: 0 0 10px 1px rgba(0,0,0,0.21);
 }
-.LoginForm fieldset{
+.AddLoadPage .DriversDropDown .select-css{
+    margin-top: 10px;
+}
+.AddLoadPage fieldset{
     border: none;
 }
-.LoginForm legend{
+.AddLoadPage legend{
     width: 100%;
     padding: 20px;
     text-align: center;
     text-transform: uppercase;
     font-weight: 600;
     box-shadow: 4px 0 10px 1px rgba(0,0,0,0.21);
+    display: flex;
+    align-items: center;
 }
-.LoginForm .flex{
+.AddLoadPage .go-back{
+    margin: 0;
+    width: auto;
+    border: none;
+    font-size: 0.6em;
+}
+.AddLoadPage legend span{
+    flex: 1;
+}
+.AddLoadPage .flex{
     display: flex;
     flex-direction: column;
     padding: 20px;
 }
-.LoginForm label{
+.AddLoadPage label{
     display: flex;
     flex-direction: column;
     width: 100%;
 }
-.LoginForm label:nth-of-type(even){
+.AddLoadPage label:nth-of-type(even){
     margin: 25px 0px 0px 0px;
 }
-.LoginForm label .input-title{
+.AddLoadPage label .input-title{
     font-size: 0.9em;
     text-transform: uppercase;
     font-weight: 600;
 }
-.LoginForm label input{
+.AddLoadPage label input{
     margin-top: 6px;
 }
-.LoginForm .error{
+.AddLoadPage .error{
     color: #9A073C;
     font-weight: 600;
     font-size: 0.7em;
     padding: 5px;
 }
-button.app-button{
+.AddLoadPage button.app-button{
     margin: 25px auto 10px auto;
 }
 
 @media only screen and (min-width: 500px){
-    .LoginForm{
+    .AddLoadPage{
         width: 80%;
         max-width: 500px;
     }
-    .LoginForm button.app-button{
-        width: auto;
-        margin: 30px auto 15px auto;
+    .AddLoadPage button.app-button{
+        margin-top: 20px;
     }
 }

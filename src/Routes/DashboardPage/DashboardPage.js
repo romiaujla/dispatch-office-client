@@ -20,9 +20,15 @@ class DashboardPage extends Component {
 
         return (  
             <section className='DashboardPage width-wrapper'>
-                <div className='AddLoadSection'>
-                    <Link className='add-load app-button' to={`${basePath}/new/load`}>
+                <div className='add-links'>
+                    <Link className='add-load app-button' to={`${basePath}/load/new`}>
                         Add Load
+                    </Link>
+                    <Link className='add-load app-button' to={`${basePath}/driver/new`}>
+                        Add Driver
+                    </Link>
+                    <Link className='add-load app-button' to={`${basePath}/equipment/new`}>
+                        Add Equipment
                     </Link>
                 </div>
                 <LoadListBox loadStatus='un-assigned' />

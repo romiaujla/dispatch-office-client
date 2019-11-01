@@ -30,6 +30,13 @@
 .EquipmentCard .app-button{
     margin-top: 0px;
     font-size: 0.7em;
+    text-align: center;
+}
+.EquipmentCard .no-driver{
+    font-weight: 400;
+    font-size :0.8em;  
+    margin-top: 3px;
+    color: rgb(210, 22, 91)
 }
 @media only screen and (min-width: 480px){
     .EquipmentCard .equipment-buttons{
@@ -46,5 +53,8 @@
     .EquipmentCard{
         display: flex;
         flex-direction: row;
+    }
+    .EquipmentCard .equip-num{
+        min-width: 100px;
     }
 }

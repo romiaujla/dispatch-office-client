@@ -9,3 +9,7 @@ export function validatePassword(e){
     
     // Write code for validating Password
 }
+
+export function handleGoBack(history){
+    return history.goBack();
+}

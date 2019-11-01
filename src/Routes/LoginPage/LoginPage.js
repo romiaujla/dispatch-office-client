@@ -13,6 +13,7 @@ class LoginPage extends Component {
     this.context.setLoggedIn(true);
     this.context.getShipments();
     this.context.getIdleDrivers();
+    this.context.getEquipments();
     
   };
 

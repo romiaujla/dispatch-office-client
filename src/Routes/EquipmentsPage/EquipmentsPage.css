@@ -49,8 +49,8 @@
     padding: 5px;
     display: none;
 }
-button.app-button{
-    margin: 25px auto 10px auto;
+.EquipmentPage button.app-button{
+    margin: 8px auto;
 }
 
 .EquipmentPage .EquipmentCard{
@@ -68,7 +68,7 @@ button.app-button{
         margin-bottom: 20px;
         max-width: 400px;
     }
-    button.app-button{
+    .EquipmentPage button.app-button{
         width: auto;
         margin: 0px;
     }

@@ -61,6 +61,7 @@ body {
 
 /* Global Button Styling */
 .app-button{
+  width: auto;
   background: rgb(210, 22, 91);
   color: #F9FAF5;
   font-family: 'Montserrat', sans-serif;

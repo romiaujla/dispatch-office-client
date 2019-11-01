@@ -15,6 +15,8 @@ import EquipmentService from "../../Services/EquipmentsService";
 import LoadsPage from "../../Routes/LoadsPage/LoadsPage";
 import EquipmentsPage from "../../Routes/EquipmentsPage/EquipmentsPage";
 import DriversPage from "../../Routes/DriversPage/DriversPage";
+import EquipmentEditPage from "../../Routes/EquipmentEditPaage/EquipmentEditPage";
+import AddLoadPage from "../../Routes/AddLoadPage/AddLoadPage";
 
 class App extends Component {
   constructor(props) {
@@ -165,6 +167,19 @@ class App extends Component {
               path={`${value.basePath}/drivers`}
               component={DriversPage}
             />
+
+            <Route
+              exact
+              path={`${value.basePath}/equipments/edit/:id`}
+              component={EquipmentEditPage}
+            />
+
+            <Route
+              exact
+              path={`${value.basePath}/load/new`}
+              component={AddLoadPage}
+            />
+
           </Switch>
         </div>
       </AppContext.Provider>
