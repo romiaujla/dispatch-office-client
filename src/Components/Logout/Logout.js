@@ -45,7 +45,7 @@ class Logout extends Component {
             <div className='Logout width-wrapper'>
                 Welcome, <span className='carrier-name red-text'>
                     {this.state.carrier.full_name}
-                </span>!! <button className='app-link' onClick={() => {this.handleLogout()}}>Logout</button>
+                </span>, <button className='app-link' onClick={() => {this.handleLogout()}}>Logout</button>
             </div>
         )
     }
