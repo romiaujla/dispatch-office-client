@@ -3,6 +3,8 @@ import './EquipmentEditPage.css';
 import DriversDropDown from '../../Components/DriversDropDown/DriversDropDown';
 import AppContext from '../../Contexts/AppContext';
 import { handleGoBack } from '../../HelperFunctions/HelperFunctions';
+import EquipmentService from '../../Services/EquipmentsService';
+import DriversService from '../../Services/DriversService';
 
 class EquipmentEditPage extends Component {
 
@@ -45,9 +47,21 @@ class EquipmentEditPage extends Component {
     
     static contextType = AppContext
 
-    handleEquipmentEdit = (e) => {
+    handleEquipmentEdit = (e, equipmentArray) => {
         e.preventDefault();
-        console.log(`Editing Equipment`);
+        const equipment = equipmentArray[0];
+        const driverId = e.target['driver'].value;
+        const unit_num = e.target['unit-num'].value;
+
+        if(driverId !== equipment.driver.id){
+            DriversService.updateEquipment(driverId, equipment.id)
+        }
+
+        if(unit_num !== equipment.unit_num){
+            EquipmentService.updateEquipment(unit_num, equipment.id)
+        }
+
+        console.log(`Editing Equipment`, equipment);
     } 
 
     validateUnitNum = (e) => {
@@ -76,7 +90,7 @@ class EquipmentEditPage extends Component {
         return (  
             <section className='EquipmentEditPage width-wrapper'>
                 
-                <form className='edit-equip' onSubmit={(e) => {this.handleEquipmentEdit(e)}}>
+                <form className='edit-equip' onSubmit={(e) => {this.handleEquipmentEdit(e, equipment)}}>
                     <fieldset>
                         <legend className='blue-back white-text'>
                             <button type='button' className='app-button go-back' onClick={(e) => {handleGoBack(this.props.rprops.history)}}>
