@@ -65,7 +65,7 @@ class App extends Component {
     })
   }
 
-  componentDidMount = async () => {
+  componentDidMount = () => {
     this.setState({
       loggedIn: TokenService.hasAuthToken()
     });
@@ -171,7 +171,10 @@ class App extends Component {
             <Route
               exact
               path={`${value.basePath}/equipments/edit/:id`}
-              component={EquipmentEditPage}
+              component={(rprops) => {return <EquipmentEditPage 
+                  rprops={rprops} 
+                  equipments={this.state.equipments}
+                  idleDrivers={this.state.idleDrivers}/>}}
             />
 
             <Route
