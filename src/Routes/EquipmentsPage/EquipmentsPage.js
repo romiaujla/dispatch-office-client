@@ -36,27 +36,6 @@ class EquipmentsPage extends Component{
     render(){
         return (
             <section className='EquipmentPage width-wrapper'>
-                {/* <div className='add-equipment-section'>
-                    <form className='add-form' onSubmit={(e)=> {this.handleAddEquipment(e)}}>
-                        <fieldset>
-                            <legend className='blue-back white-text'>Add Equipment</legend>
-                            <div className='flex'>
-                                <label htmlFor=''>
-                                    <span>Unit Num</span>
-                                    <input 
-                                        type='text'
-                                        id='unit_num'
-                                        name='unit_num'
-                                        required
-                                    />
-                                </label>
-                                <button className='app-button' type='submit'>
-                                    Add
-                                </button>
-                            </div>
-                        </fieldset>
-                    </form>
-                </div> */}
                 <div className='box'>
                     <h3 className='box-header blue-back white-text'>Equipment List</h3>
                     <ul className='equipment-list'>
