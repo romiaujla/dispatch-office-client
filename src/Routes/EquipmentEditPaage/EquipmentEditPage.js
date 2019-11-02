@@ -6,23 +6,55 @@ import { handleGoBack } from '../../HelperFunctions/HelperFunctions';
 
 class EquipmentEditPage extends Component {
 
+    static defaultProps = {
+        equipments: {},
+        idleDrivers: {},
+        rprops: {},
+    }
+
     constructor(props){
         super(props);
+
+        // setting state for editing equipment
+        const {equipments, idleDrivers} = props;
+        const {id} = this.props.rprops.match.params;
+        const equipment = equipments.filter(equipment => equipment.id === parseInt(id, 10));
+        let driver = {};
+        let availableDrivers = idleDrivers.filter(driver => driver);
+        let unitNum = '';
+        let currentDriver = -1;
+        if(equipment[0] !== undefined){
+            driver = equipment[0].driver;
+            unitNum = equipment[0].unit_num;
+            currentDriver = driver.id;
+        }
+
+        if(driver !== {}){
+            availableDrivers.unshift(driver);
+        }
+        
         this.state = {
             error: '',
-            unitNumError: false
+            unitNumError: false,
+            unitNum,
+            equipment,
+            availableDrivers,
+            currentDriver
         }
     }
     
     static contextType = AppContext
 
     handleEquipmentEdit = (e) => {
-        e.preventDefaul();
+        e.preventDefault();
         console.log(`Editing Equipment`);
     } 
 
     validateUnitNum = (e) => {
         const unitNum = e.target.value;
+        this.setState({
+            unitNum
+        })
         if(unitNum.trim() === '')
         {
             this.setState({
@@ -39,22 +71,7 @@ class EquipmentEditPage extends Component {
 
     render() { 
 
-        const {equipments, idleDrivers} = this.context;
-        const {id} = this.props.match.params;
-        const equipment = equipments.filter(equipment => equipment.id === parseInt(id, 10));
-        let driver = {};
-        let availableDrivers = idleDrivers.filter(driver => driver);
-        let unitNum = '';
-        let currentDriver = -1;
-        if(equipment[0] !== undefined){
-            driver = equipment[0].driver;
-            unitNum = equipment[0].unit_num;
-            currentDriver = driver.id;
-        }
-
-        if(driver !== {}){
-            availableDrivers.unshift(driver);
-        }
+        const {unitNum, equipment, availableDrivers, currentDriver} = this.state
 
         return (  
             <section className='EquipmentEditPage width-wrapper'>
@@ -62,7 +79,7 @@ class EquipmentEditPage extends Component {
                 <form className='edit-equip' onSubmit={(e) => {this.handleEquipmentEdit(e)}}>
                     <fieldset>
                         <legend className='blue-back white-text'>
-                            <button type='button' className='app-button go-back' onClick={(e) => {handleGoBack(this.props.history)}}>
+                            <button type='button' className='app-button go-back' onClick={(e) => {handleGoBack(this.props.rprops.history)}}>
                                 Go Back
                             </button>
                             <span>Edit Equipment</span>
@@ -75,7 +92,7 @@ class EquipmentEditPage extends Component {
                                     id='unit-num'
                                     name='unit-num'
                                     required
-                                    placeholder={unitNum}
+                                    value={unitNum}
                                     onChange={(e) => {this.validateUnitNum(e)}}
                                 />
                                 {
@@ -84,12 +101,17 @@ class EquipmentEditPage extends Component {
                                 }
                             </label>
                             
-                            <label htmlFor='password'>
+                            <label htmlFor='driver'>
                                 <span className='input-title'>Available Drivers</span>
-                                <DriversDropDown 
-                                    drivers={availableDrivers} 
-                                    className={'select-css'}
-                                    defaultValue={currentDriver}/>
+                                {
+                                    equipment[0] !== undefined &&
+                                    <DriversDropDown
+                                        nameId={'driver'}
+                                        drivers={availableDrivers} 
+                                        className={'select-css'}
+                                        defaultValue={currentDriver}/>
+                                }
+                                
                             </label>
                             <button
                                 className='app-button'
