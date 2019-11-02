@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import "./LoadListBox.css";
 import AppContext from "../../Contexts/AppContext";
 import { Link } from "react-router-dom";
+import {
+  formatDate
+} from '../../HelperFunctions/HelperFunctions'
 
 class LoadListBox extends Component {
   static contextType = AppContext;
@@ -9,17 +12,7 @@ class LoadListBox extends Component {
   static defaultProps = {
     loadStatus: ""
   };
-
-  formatDate = dbDate => {
-    const date = new Date(dbDate);
-    let day = date.getDate();
-    let month = date.getMonth();
-    let year = date.getYear();
-
-    return `${month + 1}/${day}/${year + 1900}`;
-  };
-
-
+  
   // A Method that sorts shipments as per the property requested
   sortShipments = (shipments, property) => {
     return shipments.sort((a, b) => (a[property] < b[property] ? 1 : -1));
@@ -52,7 +45,7 @@ class LoadListBox extends Component {
               {shipment.pickup_warehouse.city},{" "}
               {shipment.pickup_warehouse.state}
               <br />
-              Date: {this.formatDate(shipment.pickup_date)}
+              Date: {formatDate(shipment.pickup_date)}
             </span>
           </div>
           <div className="status-line-wrapper">
@@ -101,7 +94,7 @@ class LoadListBox extends Component {
             <span className="red-bold">
               {shipment.delivery_warehouse.city},{" "}
               {shipment.delivery_warehouse.state} <br />
-              Date: {this.formatDate(shipment.delivery_date)}
+              Date: {formatDate(shipment.delivery_date)}
             </span>
           </div>
           <div className="load-buttons">
