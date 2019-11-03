@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import './EquipmentEditPage.css';
 import DriversDropDown from '../../Components/DriversDropDown/DriversDropDown';
 import AppContext from '../../Contexts/AppContext';
-import { handleGoBack } from '../../HelperFunctions/HelperFunctions';
+import { 
+    handleGoBack,
+    objectIsEmpty,
+} from '../../HelperFunctions/HelperFunctions';
 import EquipmentService from '../../Services/EquipmentsService';
 import DriversService from '../../Services/DriversService';
 
@@ -22,18 +25,31 @@ class EquipmentEditPage extends Component {
         const {id} = this.props.rprops.match.params;
         const equipment = equipments.filter(equipment => equipment.id === parseInt(id, 10));
         let driver = {};
-        let availableDrivers = idleDrivers.filter(driver => driver);
+        let availableDrivers = idleDrivers.filter(driver => {
+            if(objectIsEmpty(driver.equipment)){
+                return driver
+            }
+        });
         let unitNum = '';
         let currentDriver = -1;
         if(equipment[0] !== undefined){
             driver = equipment[0].driver;
             unitNum = equipment[0].unit_num;
-            currentDriver = driver.id;
+            
+            // The server after adding serialization is sending in full_name and driver
+            // properties with empty strings so to solve and empty driver populating
+            // in the select statement the below line is as is, if there is a driver.id then
+            // set one else leave it to current driver which is -1
+            currentDriver = driver.id ? driver.id : currentDriver;
+            if(currentDriver !== -1){
+                console.log(driver);
+                availableDrivers.unshift(driver);
+            }
         }
-
-        if(driver !== {}){
-            availableDrivers.unshift(driver);
-        }
+        
+        
+        
+        console.log(availableDrivers);
         
         this.state = {
             error: '',
@@ -55,8 +71,12 @@ class EquipmentEditPage extends Component {
         const {equipments, idleDrivers} = this.props
 
         if(driverId !== equipment.driver.id){
-            
-            DriversService.updateEquipment(driverId, equipment.id)
+            idleDrivers.map((driver) => {
+                if(driver.id === driverId){
+                    console.log(driver);
+                }
+            })
+            // DriversService.updateEquipment(driverId, equipment.id)
         }
 
         if(unit_num !== equipment.unit_num){
@@ -129,7 +149,8 @@ class EquipmentEditPage extends Component {
                                 {
                                     equipment[0] !== undefined &&
                                     <DriversDropDown
-                                        nameId={'driver'}
+                                        name={'driver'}
+                                        id={'driver'}
                                         drivers={availableDrivers} 
                                         className={'select-css'}
                                         defaultValue={currentDriver}/>
