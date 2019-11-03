@@ -55,15 +55,11 @@ class LoadListBox extends Component {
                 <br />
                 {shipment.miles}
               </div>
-              {status === "all" ? (
-                <div className="status">
-                  <h6>Status</h6>
-                  <br />
-                  <span className="red-bold">{shipment.status}</span>
-                </div>
-              ) : (
-                ""
-              )}
+              <div className="status">
+                <h6>Status</h6>
+                <br />
+                <span className="red-bold">{shipment.status}</span>
+              </div>
             </div>
             <div className="status-line">
               <div className="circle left"></div>
