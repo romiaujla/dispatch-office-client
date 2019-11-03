@@ -50,18 +50,27 @@ class EquipmentEditPage extends Component {
     handleEquipmentEdit = (e, equipmentArray) => {
         e.preventDefault();
         const equipment = equipmentArray[0];
-        const driverId = e.target['driver'].value;
+        const driverId = parseInt(e.target['driver'].value,10);
         const unit_num = e.target['unit-num'].value;
+        const {equipments, idleDrivers} = this.props
 
         if(driverId !== equipment.driver.id){
+            
             DriversService.updateEquipment(driverId, equipment.id)
         }
 
         if(unit_num !== equipment.unit_num){
-            EquipmentService.updateEquipment(unit_num, equipment.id)
+            equipments.map((changeEquipment) => {
+                if(changeEquipment.id === equipment.id){
+                    changeEquipment.unit_num = unit_num
+                }
+            })
+            this.context.setEquipments(equipments);
+            // EquipmentService.updateEquipment(unit_num, equipment.id);
         }
 
-        console.log(`Editing Equipment`, equipment);
+        handleGoBack(this.props.rprops.history);
+        
     } 
 
     validateUnitNum = (e) => {
