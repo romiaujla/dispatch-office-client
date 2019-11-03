@@ -148,6 +148,7 @@ class App extends Component {
       setShipments: this.setShipments,
       setEquipments: this.setEquipments,
       setIdleDrivers: this.setIdleDrivers,
+      setDrivers: this.setDrivers,
       setLoggedInCarrier: this.setLoggedInCarrier,
       loggedInCarrier: this.state.loggedInCarrier,
       shipments: this.state.shipments,
@@ -213,7 +214,8 @@ class App extends Component {
               component={(rprops) => {return <EquipmentEditPage 
                   rprops={rprops} 
                   equipments={this.state.equipments}
-                  idleDrivers={this.state.idleDrivers}/>}}
+                  idleDrivers={this.state.idleDrivers}
+                  drivers={this.state.drivers}/>}}
             />
 
             <Route
