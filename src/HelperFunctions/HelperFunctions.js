@@ -20,6 +20,10 @@ export function handleGoBack(history){
     return history.goBack();
 }
 
+// Returns true if the object is empty
+export function objectIsEmpty(obj){
+    return (Object.entries(obj).length === 0 && obj.constructor === Object)
+}
 
 // Returns date in a formatted manner
 export function formatDate(dbDate){
