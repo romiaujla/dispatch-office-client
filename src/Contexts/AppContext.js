@@ -8,6 +8,7 @@ export default React.createContext({
     setNewUser: () => {},
     setShipments: () => {},
     setEquipments: () => {},
+    setIdleDrivers: () => {},
     getAllData: () => {},
     loggedInCarrier: {},
     shipments: [],

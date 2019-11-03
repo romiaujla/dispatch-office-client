@@ -22,7 +22,12 @@ export function handleGoBack(history){
 
 // Returns true if the object is empty
 export function objectIsEmpty(obj){
-    return (Object.entries(obj).length === 0 && obj.constructor === Object)
+    return (Object.entries(obj).length === 0 && obj.constructor === Object);
+}
+
+// Returns true if array is empty
+export function arrayIsEmpty(arr){
+    return (arr.length === 0);
 }
 
 // Returns date in a formatted manner

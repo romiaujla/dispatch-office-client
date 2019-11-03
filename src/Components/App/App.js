@@ -29,7 +29,6 @@ class App extends Component {
       drivers: [],
       idleDrivers: [],
       equipments: [],
-      drivers: [],
       loggedInCarrier: {
         full_name: "",
         company_name: "",
@@ -43,18 +42,12 @@ class App extends Component {
     return CarrierService.getCarrierData()
       .then(data => data)
       .catch(err => console.log(err));
-    // this.setState({
-    //   shipments
-    // });
   };
 
   getDrivers = async () => {
     return DriversService.getDriversData()
       .then(data => data)
       .catch(err => console.log(err))
-    // this.setState({
-    //   drivers
-    // })
   }
 
   // gets all idleDrivers for dashboard
@@ -70,7 +63,7 @@ class App extends Component {
       .catch(err => console.log(err));
   }
 
-  // only one function used in context now.
+  // only one function used in context now to be used in login page
   getAllData = async () => {
     if(TokenService.hasAuthToken()){
       await Promise.all([
@@ -154,6 +147,7 @@ class App extends Component {
       setNewUser: this.setNewUser,
       setShipments: this.setShipments,
       setEquipments: this.setEquipments,
+      setIdleDrivers: this.setIdleDrivers,
       setLoggedInCarrier: this.setLoggedInCarrier,
       loggedInCarrier: this.state.loggedInCarrier,
       shipments: this.state.shipments,
