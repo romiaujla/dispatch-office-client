@@ -30,6 +30,9 @@ const DriversService = {
             console.log(error);
         })
     },
+    updateEquipment(driverId, equipmentId){
+        
+    }
 }
 
 export default DriversService;

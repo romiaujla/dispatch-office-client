@@ -6,6 +6,8 @@ export default React.createContext({
     newUser: () => {},
     setLoggedIn: () => {},
     setNewUser: () => {},
+    setShipments: () => {},
+    setEquipments: () => {},
     getAllData: () => {},
     loggedInCarrier: {},
     shipments: [],

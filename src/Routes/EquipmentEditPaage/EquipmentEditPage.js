@@ -3,6 +3,8 @@ import './EquipmentEditPage.css';
 import DriversDropDown from '../../Components/DriversDropDown/DriversDropDown';
 import AppContext from '../../Contexts/AppContext';
 import { handleGoBack } from '../../HelperFunctions/HelperFunctions';
+import EquipmentService from '../../Services/EquipmentsService';
+import DriversService from '../../Services/DriversService';
 
 class EquipmentEditPage extends Component {
 
@@ -45,9 +47,30 @@ class EquipmentEditPage extends Component {
     
     static contextType = AppContext
 
-    handleEquipmentEdit = (e) => {
+    handleEquipmentEdit = (e, equipmentArray) => {
         e.preventDefault();
-        console.log(`Editing Equipment`);
+        const equipment = equipmentArray[0];
+        const driverId = parseInt(e.target['driver'].value,10);
+        const unit_num = e.target['unit-num'].value;
+        const {equipments, idleDrivers} = this.props
+
+        if(driverId !== equipment.driver.id){
+            
+            DriversService.updateEquipment(driverId, equipment.id)
+        }
+
+        if(unit_num !== equipment.unit_num){
+            equipments.map((changeEquipment) => {
+                if(changeEquipment.id === equipment.id){
+                    changeEquipment.unit_num = unit_num
+                }
+            })
+            this.context.setEquipments(equipments);
+            // EquipmentService.updateEquipment(unit_num, equipment.id);
+        }
+
+        handleGoBack(this.props.rprops.history);
+        
     } 
 
     validateUnitNum = (e) => {
@@ -76,7 +99,7 @@ class EquipmentEditPage extends Component {
         return (  
             <section className='EquipmentEditPage width-wrapper'>
                 
-                <form className='edit-equip' onSubmit={(e) => {this.handleEquipmentEdit(e)}}>
+                <form className='edit-equip' onSubmit={(e) => {this.handleEquipmentEdit(e, equipment)}}>
                     <fieldset>
                         <legend className='blue-back white-text'>
                             <button type='button' className='app-button go-back' onClick={(e) => {handleGoBack(this.props.rprops.history)}}>

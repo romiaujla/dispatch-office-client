@@ -15,6 +15,12 @@ const EquipmentService = {
       .catch(error => {
         console.log(error);
       });
+  },
+  addNewEquipment(equipment){
+    console.log(equipment);
+  },
+  updateEquipment(unit_num, id){
+    
   }
 };
 

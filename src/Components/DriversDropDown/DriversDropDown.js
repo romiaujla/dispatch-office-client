@@ -43,7 +43,12 @@ class DriversDropDown extends Component {
 
     render() {
 
-        const { className = 'select-css', drivers = [], name='driver', id='driver'} = this.props;
+        const { 
+            className = 'select-css', 
+            drivers = [], 
+            name='driver', 
+            id='driver'
+        } = this.props;
 
 
         return (
