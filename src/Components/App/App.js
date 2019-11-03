@@ -26,6 +26,7 @@ class App extends Component {
       loggedIn: false,
       newUser: false,
       shipments: [],
+      drivers: [],
       idleDrivers: [],
       equipments: [],
       loggedInCarrier: {
@@ -38,42 +39,67 @@ class App extends Component {
 
   // gets all the shipments
   getShipments = async () => {
-    const shipments = await CarrierService.getCarrierData()
+    return CarrierService.getCarrierData()
       .then(data => data)
       .catch(err => console.log(err));
-    this.setState({
-      shipments
-    });
+    // this.setState({
+    //   shipments
+    // });
   };
+
+  getDrivers = async () => {
+    return DriversService.getDriversData()
+      .then(data => data)
+      .catch(err => console.log(err))
+    // this.setState({
+    //   drivers
+    // })
+  }
 
   // gets all idleDrivers for dashboard
   getIdleDrivers = async () => {
-    const idleDrivers = await DriversService.getIdleDrivers()
+    return DriversService.getIdleDrivers()
       .then(data => data)
       .catch(err => console.log(err));
-    this.setState({
-      idleDrivers
-    });
   };
 
   getEquipments = async () => {
-    const equipments = await EquipmentService.getEquipments()
+    return EquipmentService.getEquipments()
       .then(data => data)
       .catch(err => console.log(err));
-    this.setState({
-      equipments
-    })
+  }
+
+  // only one function used in context now.
+  getAllData = async () => {
+    if(TokenService.hasAuthToken()){
+      await Promise.all([
+        this.getShipments(),
+        this.getDrivers(),
+        this.getEquipments(),
+        this.getIdleDrivers()
+      ])
+      .then(([
+        shipments,
+        drivers,
+        equipments,
+        idleDrivers
+      ]) => {
+        this.setState({
+          shipments,
+          drivers,
+          equipments,
+          idleDrivers
+        })
+      })
+      .catch((err) => console.log(err));
+    }
   }
 
   componentDidMount = () => {
     this.setState({
       loggedIn: TokenService.hasAuthToken()
     });
-    if (TokenService.hasAuthToken()) {
-      this.getShipments();
-      this.getIdleDrivers();
-      this.getEquipments();
-    }
+    this.getAllData();
   };
 
   setLoggedIn = loggedIn => {
@@ -107,15 +133,13 @@ class App extends Component {
       newUser: this.state.newUser,
       setLoggedIn: this.setLoggedIn,
       setNewUser: this.setNewUser,
-      setShipments: this.setShipments,
       setLoggedInCarrier: this.setLoggedInCarrier,
       loggedInCarrier: this.state.loggedInCarrier,
       shipments: this.state.shipments,
       idleDrivers: this.state.idleDrivers,
-      getShipments: this.getShipments,
-      getIdleDrivers: this.getIdleDrivers,
       equipments: this.state.equipments,
-      getEquipments: this.getEquipments,
+      drivers: this.state.drivers,
+      getAllData: this.getAllData,
     };
 
     return (

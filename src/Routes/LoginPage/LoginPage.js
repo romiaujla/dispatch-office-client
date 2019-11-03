@@ -11,10 +11,7 @@ class LoginPage extends Component {
   onLoginSuccess = async () => {
     this.props.history.push("/");
     this.context.setLoggedIn(true);
-    this.context.getShipments();
-    this.context.getIdleDrivers();
-    this.context.getEquipments();
-    
+    this.context.getAllData();
   };
 
   render() {
