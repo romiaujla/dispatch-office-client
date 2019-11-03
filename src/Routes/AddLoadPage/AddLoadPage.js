@@ -23,11 +23,6 @@ class AddLoadPage extends Component {
         }
     }
 
-    handleAddLoad = (e) => {
-        e.preventDefault();
-        console.log(`Add Load Submitted`);
-    }
-
     static contextType = AppContext
 
     // validation of date, Validates both pickup date and delivery date
@@ -70,6 +65,64 @@ class AddLoadPage extends Component {
         const {idleDrivers} = this.context;
         const availableDrivers = idleDrivers.filter((driver) => !(Object.entries(driver.equipment).length === 0 && driver.equipment.constructor === Object));
         return availableDrivers;
+    }
+
+    handleAddLoad = (e) => {
+        e.preventDefault();
+        const broker = e.target['broker'].value || '';
+        const deliveryWarehouse = {
+            city: e.target['delivery-city'].value,
+            state: e.target['delivery-state'].value,
+            zipcode: e.target['delivery-zipcode'].value
+        };
+        const pickupWarehouse = {
+            city: e.target['pickup-city'].value,
+            state: e.target['pickup-state'].value,
+            zipcode: e.target['pickup-zipcode'].value
+        };
+        const miles = e.target['miles'].value || 0;
+        const rate = e.target['rate'].value || 0;
+        const driverId = parseInt(e.target['driver'].value, 10);
+        
+        // getting driver and equipment from drivers array in context
+        let driver = {}
+        let equipment = {}
+        let status = 'un-assigned';
+        if(driverId !== -1){
+            this.context.drivers.map(contextDriver => {
+                if(contextDriver.id === driverId){
+                    driver = {
+                        id: driverId,
+                        full_name: contextDriver.full_name,
+                        pay_rate: contextDriver.pay_rate,
+                        status: contextDriver.status
+                    }
+                    equipment = {
+                        id: contextDriver.equipment.id,
+                        status: contextDriver.equipment.status,
+                        unit_num: contextDriver.equipment.unit_num
+                    }
+                }
+            });
+            status = 'dispatched'
+        }
+
+        const pickup_date = new Date(e.target['pickup-date'].value);
+
+        const newShipment = {
+            id: this.context.shipments.length+3,
+            pickup_date,
+            broker,
+            deliveryWarehouse,
+            pickupWarehouse,
+            miles,
+            driver,
+            equipment,
+            rate,
+            status,
+        }
+
+        console.log(newShipment);
     }
 
     render() {
@@ -237,23 +290,43 @@ class AddLoadPage extends Component {
                             <h4 className='fieldset-sub-title blue-text'>
                                 Additional Info
                             </h4>
-                            <label htmlFor='delivery-zipcode'>
+                            <label htmlFor='miles'>
                                 <span className='input-title'>Miles</span>
                                 <input
-                                    type='text'
-                                    id='delivery-zipcode'
-                                    name='delivery-zipcode'
-                                    placeholder='Eg. 46225'
-                                    required
+                                    type='number'
+                                    min='0'
+                                    id='miles'
+                                    name='miles'
                                 />
                                 {
                                     // this.state.unitNumError &&
                                     // <span className='error'>{this.state.error}</span>
                                 }
                             </label>
+                            <label htmlFor='rate'>
+                                <span className='input-title'>Rate</span>
+                                <input
+                                    type='number'
+                                    min='0'
+                                    id='rate'
+                                    name='rate'
+                                />
+                                {
+                                    // this.state.unitNumError &&
+                                    // <span className='error'>{this.state.error}</span>
+                                }
+                            </label>
+                            <label htmlFor='broker'>
+                                <span className='input-title'>Broker</span>
+                                <input
+                                    type='text'
+                                    id='broker'
+                                    name='broker'
+                                />
+                            </label>
                             <label htmlFor='driver'>
                                 <span className='input-title'>Assign Driver</span>
-                                <DriversDropDown drivers={drivers} className={'select-css'} />
+                                <DriversDropDown name='driver' id='driver' drivers={drivers} className='select-css' />
                                 {
                                     // incorrectPassword &&
                                     // <span className='error'>{error}</span>
