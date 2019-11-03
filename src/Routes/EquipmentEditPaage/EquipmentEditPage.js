@@ -20,7 +20,10 @@ class EquipmentEditPage extends Component {
     constructor(props){
         super(props);
 
-        // setting state for editing equipment
+        // setting state so that edit equipment page
+        // already has values in it for the selected equipment to edit
+        // if not done this way , then another Get request had to be made for
+        // getting equipment by id 
         const {equipments, idleDrivers} = props;
         const {id} = this.props.rprops.match.params;
         const equipment = equipments.filter(equipment => equipment.id === parseInt(id, 10));
@@ -42,14 +45,9 @@ class EquipmentEditPage extends Component {
             // set one else leave it to current driver which is -1
             currentDriver = driver.id ? driver.id : currentDriver;
             if(currentDriver !== -1){
-                console.log(driver);
                 availableDrivers.unshift(driver);
             }
         }
-        
-        
-        
-        console.log(availableDrivers);
         
         this.state = {
             error: '',
@@ -63,6 +61,7 @@ class EquipmentEditPage extends Component {
     
     static contextType = AppContext
 
+    // Updates the changes in state and in the database
     handleEquipmentEdit = (e, equipmentArray) => {
         e.preventDefault();
         const equipment = equipmentArray[0];
