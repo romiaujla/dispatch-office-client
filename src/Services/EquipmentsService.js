@@ -19,9 +19,8 @@ const EquipmentService = {
   addNewEquipment(equipment){
     console.log(equipment);
   },
-  updateEquipment(unitt_num, id){
-    console.log(`unit_num`, unit_num);
-    console.log(id);
+  updateEquipment(unit_num, id){
+    
   }
 };
 
