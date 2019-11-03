@@ -28,6 +28,7 @@ class App extends Component {
       shipments: [],
       idleDrivers: [],
       equipments: [],
+      drivers: [],
       loggedInCarrier: {
         full_name: "",
         company_name: "",
@@ -94,6 +95,24 @@ class App extends Component {
     });
   };
 
+  setEquipments = equipments => {
+    this.setState({
+      equipments
+    })
+  }
+
+  setDrivers = drivers => {
+    this.setState({
+      drivers
+    })
+  }
+
+  setIdleDrivers = idleDrivers => {
+    this.setState({
+      idleDrivers
+    })
+  }
+
   setNewUser = newUser => {
     this.setState({
       newUser
@@ -108,6 +127,7 @@ class App extends Component {
       setLoggedIn: this.setLoggedIn,
       setNewUser: this.setNewUser,
       setShipments: this.setShipments,
+      setEquipments: this.setEquipments,
       setLoggedInCarrier: this.setLoggedInCarrier,
       loggedInCarrier: this.state.loggedInCarrier,
       shipments: this.state.shipments,
