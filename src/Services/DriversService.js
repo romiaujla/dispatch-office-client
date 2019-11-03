@@ -31,8 +31,7 @@ const DriversService = {
         })
     },
     updateEquipment(driverId, equipmentId){
-        console.log(`Driver Id: `, driverId);
-        console.log(`Equipment Id:`, equipmentId);
+        
     }
 }
 
