@@ -88,6 +88,20 @@ class EquipmentEditPage extends Component {
         return equipment;
     }
 
+    changeEquipmentForDriver = (idleDrivers, driver, newDriverId, oldDriverId, equipment) => {
+        if(driver.id === newDriverId && newDriverId !== -1){
+            driver = this.giveEquipment(driver, equipment);
+            idleDrivers.map((oldDriver) => {
+                if(oldDriverId === oldDriver.id){
+                    oldDriver = this.takeAwayEquipment(oldDriver)
+                }
+            })
+        } else if (driver.id === oldDriverId){ 
+            driver = this.takeAwayEquipment(driver)
+        }
+        return driver;
+    }
+
     // Updates the changes in state and in the database
     handleEquipmentEdit = (e, equipmentArray) => {
 
@@ -96,26 +110,17 @@ class EquipmentEditPage extends Component {
         const oldDriverId = equipment.driver.id === undefined ? -1 : equipment.driver.id;
         const newDriverId = this.state.inIdleQueue ? parseInt(e.target['driver'].value, 10) : oldDriverId;
         const unit_num = e.target['unit-num'].value;
-        const { equipments, idleDrivers } = this.props
-        let executedRemove = false;
-        let executedAdd = false;
-
+        const { equipments, idleDrivers, drivers } = this.props
 
         // first if checks if 'No Driver' just stays as is and then dont enter changing driver
         if(newDriverId !== oldDriverId){
             
             idleDrivers.map((driver) => {
-                if(driver.id === newDriverId && newDriverId !== -1){
-                    driver = this.giveEquipment(driver, equipment);
-                    idleDrivers.map((oldDriver) => {
-                        if(oldDriverId === oldDriver.id){
-                            oldDriver = this.takeAwayEquipment(oldDriver)
-                        }
-                    })
-                } else if (driver.id === oldDriverId){ 
-                    driver = this.takeAwayEquipment(driver)
-                }
-                
+                driver = this.changeEquipmentForDriver(idleDrivers, driver, newDriverId, oldDriverId, equipment);
+            })
+
+            drivers.map((driver) => {
+                driver = this.changeEquipmentForDriver(drivers, driver, newDriverId, oldDriverId, equipment);
             })
 
             equipments.map((changeEquipemnt) => {
@@ -145,6 +150,7 @@ class EquipmentEditPage extends Component {
         
         this.context.setIdleDrivers(idleDrivers);
         this.context.setEquipments(equipments);
+        this.context.setDrivers(drivers);
 
         handleGoBack(this.props.rprops.history);
 
