@@ -1,22 +1,30 @@
 import React from 'react';
 
 // takes user back to the previous page in history
-export function handleGoBack(history){
+export function handleGoBack(history) {
     return history.goBack();
 }
 
+export function routeUserTo(history, route) {
+    return history.push(route);
+}
+
 // Returns true if the object is empty
-export function objectIsEmpty(obj){
+export function objectIsEmpty(obj) {
     return (Object.entries(obj).length === 0 && obj.constructor === Object);
 }
 
 // Returns true if array is empty
-export function arrayIsEmpty(arr){
+export function arrayIsEmpty(arr) {
     return (arr.length === 0);
 }
 
+export function formatCurrency(amount) {
+    return `$${amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
+}
+
 // Returns date in a formatted manner
-export function formatDate(dbDate){
+export function formatDate(dbDate) {
     const date = new Date(dbDate);
     const day = date.getDate();
     const month = date.getMonth();
@@ -24,19 +32,27 @@ export function formatDate(dbDate){
     return `${month + 1}/${day}/${year}`;
 };
 
-export function sortShipments(shipments, property){
-  return shipments.sort((a, b) => (a[property] < b[property] ? 1 : -1));
+export function sortShipments(shipments, property) {
+    return shipments.sort((a, b) => (a[property] < b[property] ? 1 : -1));
 };
 
-export function renderLoadStatusOptions(statusArray){
+export function renderLoadStatusOptions(statusArray) {
     return statusArray.map((status, i) => {
         return (
-            <option 
+            <option
                 key={i}
                 value={status}
-                >
-                    {status}
+            >
+                {status}
             </option>
         )
     })
+}
+
+// to populate the drivers drop down list
+// with only those drivers that are idle and 
+// have an equipment avialable to be assigned
+export function getAvailableDrivers(idleDrivers) {
+    const availableDrivers = idleDrivers.filter((driver) => !(Object.entries(driver.equipment).length === 0 && driver.equipment.constructor === Object));
+    return availableDrivers;
 }
