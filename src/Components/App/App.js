@@ -17,6 +17,7 @@ import EquipmentsPage from "../../Routes/EquipmentsPage/EquipmentsPage";
 import DriversPage from "../../Routes/DriversPage/DriversPage";
 import EquipmentEditPage from "../../Routes/EquipmentEditPaage/EquipmentEditPage";
 import AddLoadPage from "../../Routes/AddLoadPage/AddLoadPage";
+import { objectIsEmpty } from '../../HelperFunctions/HelperFunctions';
 
 class App extends Component {
   constructor(props) {
@@ -28,6 +29,7 @@ class App extends Component {
       shipments: [],
       drivers: [],
       idleDrivers: [],
+      idleEquipments: [],
       equipments: [],
       loggedInCarrier: {
         full_name: "",
@@ -53,7 +55,19 @@ class App extends Component {
   // gets all idleDrivers for dashboard
   getIdleDrivers = async () => {
     return DriversService.getIdleDrivers()
-      .then(data => data)
+      .then(data => {
+        data.map((driver) => {
+          if (!objectIsEmpty(driver.equipment)){
+            this.setState({
+              idleEquipments : [
+                ...this.state.idleEquipments,
+                driver.equipment
+              ]
+            })
+          }
+        })
+        return data
+      })
       .catch(err => console.log(err));
   };
 
@@ -65,27 +79,27 @@ class App extends Component {
 
   // only one function used in context now to be used in login page
   getAllData = async () => {
-    if(TokenService.hasAuthToken()){
+    if (TokenService.hasAuthToken()) {
       await Promise.all([
         this.getShipments(),
         this.getDrivers(),
         this.getEquipments(),
         this.getIdleDrivers()
       ])
-      .then(([
-        shipments,
-        drivers,
-        equipments,
-        idleDrivers
-      ]) => {
-        this.setState({
+        .then(([
           shipments,
           drivers,
           equipments,
           idleDrivers
+        ]) => {
+          this.setState({
+            shipments,
+            drivers,
+            equipments,
+            idleDrivers
+          })
         })
-      })
-      .catch((err) => console.log(err));
+        .catch((err) => console.log(err));
     }
   }
 
@@ -127,6 +141,18 @@ class App extends Component {
   }
 
   setIdleDrivers = idleDrivers => {
+    const idleEquipments = [];
+    this.setState({
+      idleEquipments
+    })
+    idleDrivers.map(driver => {
+      if(!objectIsEmpty(driver.equipment)){
+        idleEquipments.push(driver.equipment)
+        this.setState({
+          idleEquipments
+        })
+      }
+    })
     this.setState({
       idleDrivers
     })
@@ -155,6 +181,7 @@ class App extends Component {
       idleDrivers: this.state.idleDrivers,
       equipments: this.state.equipments,
       drivers: this.state.drivers,
+      idleEquipments: this.state.idleEquipments,
       getAllData: this.getAllData,
     };
 
@@ -211,11 +238,13 @@ class App extends Component {
             <Route
               exact
               path={`${value.basePath}/equipments/edit/:id`}
-              component={(rprops) => {return <EquipmentEditPage 
-                  rprops={rprops} 
+              component={(rprops) => {
+                return <EquipmentEditPage
+                  rprops={rprops}
                   equipments={this.state.equipments}
                   idleDrivers={this.state.idleDrivers}
-                  drivers={this.state.drivers}/>}}
+                  drivers={this.state.drivers} />
+              }}
             />
 
             <Route
