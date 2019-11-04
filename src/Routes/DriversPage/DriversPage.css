@@ -1,0 +1,14 @@
+.DriversPage{
+    font-family: 'Montserrat', sans-serif;
+    margin: 40px auto;
+    border: 1px solid #0B245B;
+    box-shadow: 0 0 10px 1px rgba(0,0,0,0.21);
+}
+.DriversPage h4{
+    text-align: center;
+    text-transform: uppercase;
+    padding: 10px;
+}  
+.DriversPage ul li{
+    margin: 20px;
+}
