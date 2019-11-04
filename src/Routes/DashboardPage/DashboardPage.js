@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './DashboardPage.css';
 import {Link} from 'react-router-dom';
-import AppContext from '../../Contexts/AppContext';
+import config from '../../config';
 import LoadListBox from '../../Components/LoadListBox/LoadListBox';
 import IdleDriversBox from '../../Components/IdleDriversBox/IdleDriversBox';
 
@@ -12,27 +12,38 @@ class DashboardPage extends Component {
         this.state = {  }
     }
 
-    static contextType = AppContext;
-
     render() { 
 
-        const {basePath} = this.context;
+        const secondBoxLoadStatus = [
+            'in transit',
+            'loading',
+            'dispatched',
+            'unloading',
+        ]
 
         return (  
             <section className='DashboardPage width-wrapper'>
                 <div className='add-links'>
-                    <Link className='add-load app-button' to={`${basePath}/load/new`}>
+                    <Link className='add-load app-button' to={`${config.BASEPATH}/load/new`}>
                         Add Load
                     </Link>
-                    <Link className='add-load app-button' to={`${basePath}/driver/new`}>
+                    <Link className='add-load app-button' to={`${config.BASEPATH}/driver/new`}>
                         Add Driver
                     </Link>
-                    <Link className='add-load app-button' to={`${basePath}/equipment/new`}>
+                    <Link className='add-load app-button' to={`${config.BASEPATH}/equipment/new`}>
                         Add Equipment
                     </Link>
                 </div>
-                <LoadListBox loadStatus='un-assigned' />
-                <LoadListBox loadStatus='in transit' />
+                <LoadListBox 
+                    oldLoadStatus='un-assigned' 
+                    loadStatus={['un-assigned']}
+                    boxHeader='Un Assigned Loads'
+                />
+                <LoadListBox 
+                    oldLoadStatus='dispatched' 
+                    loadStatus={secondBoxLoadStatus} 
+                    boxHeader='Loads in progress'
+                />
                 <IdleDriversBox />
 
             </section>
