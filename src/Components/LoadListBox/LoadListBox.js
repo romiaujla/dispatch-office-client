@@ -11,7 +11,6 @@ class LoadListBox extends Component {
   static contextType = AppContext;
 
   static defaultProps = {
-    oldLoadStatus: "",
     loadStatus: [],
     boxHeader: 'Loads'
   };
