@@ -4,6 +4,7 @@ import AppContext from "../../Contexts/AppContext";
 import { Link } from "react-router-dom";
 import {
   formatDate,
+  formatCurrency,
   sortShipments
 } from '../../HelperFunctions/HelperFunctions'
 
@@ -67,10 +68,7 @@ class LoadListBox extends Component {
                 <h6>Rate</h6>
                 <br />
                 <span className="rate-amount red-bold">
-                  $
-                  {shipment.rate
-                    .toString()
-                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                  {formatCurrency(shipment.rate)}
                 </span>
               </div>
               <div className="broker">
