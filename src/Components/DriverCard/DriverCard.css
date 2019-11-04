@@ -1,32 +1,60 @@
 .DriverCard{
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 0 6px 2px rgba(0,0,0,0.25);
+    box-shadow: 0 0 10px 2px rgba(0,0,0,0.21);
 }
-.flex-wrapper{
-    width: 100%;
+.DriverCard .flex-row{
     display: flex;
-    flex-direction: row;
     flex-wrap: wrap;
+    flex-direction: row;
     justify-content: space-between;
-    align-items: center;
+    margin-right: 20px;
 }
-.card-div h6{
+.DriverCard h6{
+    text-transform: uppercase;
+    border-bottom: 1px solid #0b245b;
     display: inline-block;
     margin-bottom: 3px;
-    border-bottom: 1px solid #0b245b;
-    text-transform: uppercase;
+    font-size: 0.5em;
 }
+.DriverCard > div{
+    padding: 10px;
+    width: 100%;
 
-.card-div{
+}
+.DriverCard .flex-row div{
     flex: 1;
-    margin: 15px;
 }
-
-
+.DriverCard .flex-row div:not(:last-child){
+    margin-right: 20px;
+}
+.DriverCard p{
+    font-size: 1em;
+    font-weight: 800;
+}
+.DriverCard .app-button{
+    margin-top: 6px;
+    font-size: 0.7em;
+    text-align: center;
+}
+.DriverCard .no-driver{
+    font-weight: 400;
+    font-size :0.8em;  
+    margin-top: 3px;
+    color: rgb(210, 22, 91)
+}
 @media only screen and (min-width: 480px){
-    .view-button{
-        align-self: center;
+    .DriverCard .driver-buttons{
+        flex: 0;
+        display: flex;
+        flex-direction: column;
+    }
+    .DriverCard .driver-buttons .app-button{
+        width: 100%;
+    }
+    .DriverCard .driver-buttons .app-button:nth-of-type(odd){
+        margin-bottom: 5px;
+    }
+    .DriverCard{
+        display: flex;
+        flex-direction: row;
     }
 }

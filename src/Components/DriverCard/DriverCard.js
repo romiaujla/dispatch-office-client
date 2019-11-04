@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './DriverCard.css';
 import {Link} from 'react-router-dom';
-import AppContext from '../../Contexts/AppContext';
+import config from '../../config';
 
 
 class DriverCard extends Component{
@@ -10,16 +10,13 @@ class DriverCard extends Component{
         driver: ''
     }
 
-    static contextType = AppContext;
-    
     render(){
 
         const {driver} = this.props;
-        const {basePath} = this.context;
 
         return(
-            <div className='DriverCard grey-back'>
-                <div className='flex-wrapper'>
+            <div className='DriverCard grey-back blue-text'>
+                <div className='flex-row'>
                     <div className='card-div'>
                         <h6>Driver</h6>
                         <p>{driver.full_name}</p>
@@ -33,10 +30,13 @@ class DriverCard extends Component{
                         <p>{driver.equipment.unit_num ? driver.equipment.unit_num : 'No Equipment'}</p>
                     </div>
                 </div>
-                <div className='view-button'>
-                    <Link to={`${basePath}/driver/${driver.id}`} className='app-button'>
-                        View
+                <div className='driver-buttons'>
+                    <Link to={`${config.BASEPATH}/driver/edit/${driver.id}`} className='app-button'>
+                        Edit
                     </Link>
+                    <button className='app-button'>
+                        Delete
+                    </button>
                 </div>
             </div>
         )
