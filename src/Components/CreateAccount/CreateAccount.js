@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
 import './CreateAccount.css';
-import {
-    validateUserName,
-    validatePassword
-} from '../../HelperFunctions/HelperFunctions';
 
 class CreateAccount extends Component {
 
@@ -35,7 +31,6 @@ class CreateAccount extends Component {
                                 id='username'
                                 name='username'
                                 required
-                                onChange={(e) => { validateUserName(e) }}
                             />
                             <span className='error'>Invalid Username</span>
                         </label>
@@ -46,7 +41,7 @@ class CreateAccount extends Component {
                                 id='password'
                                 name='password'
                                 required
-                                onChange={(e) => { validatePassword(e) }} />
+                            />
                             <span className='error'>Password Error</span>
                         </label>
                         <label htmlFor='full_name'>
