@@ -22,6 +22,14 @@
     display: flex;
     align-items: center;
 }
+.AddLoadPage #pickup-state::placeholder,
+.AddLoadPage #delivery-state::placeholder{
+    text-transform: none;
+}
+.AddLoadPage #pickup-state,
+.AddLoadPage #delivery-state{
+    text-transform: uppercase;
+}
 .AddLoadPage .go-back{
     margin: 0;
     width: auto;
