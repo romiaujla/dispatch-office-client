@@ -1,37 +1,63 @@
 import React, { Component } from 'react';
 import './LoadByIdPage.css';
 import AppContext from '../../Contexts/AppContext';
-import { arrayIsEmpty, objectIsEmpty, renderLoadStatusOptions } from '../../HelperFunctions/HelperFunctions';
+import { 
+    arrayIsEmpty, 
+    objectIsEmpty, 
+    renderLoadStatusOptions,
+    formatCurrency,
+    getAvailableDrivers
+} from '../../HelperFunctions/HelperFunctions';
+import DriversDropDown from '../../Components/DriversDropDown/DriversDropDown';
 
 class LoadByIdPage extends Component {
 
     static defaultProps = {
         rprops: {},
-        shipments: []
+        shipments: [],
+        idleDrivers: []
     }
 
     constructor(props) {
         super(props);
 
-        const id = parseInt(this.props.rprops.match.params.id, 10)
-        const { shipments } = this.props;
+        const id = parseInt(props.rprops.match.params.id, 10)
+        const { shipments } = props;
         let shipment = {};
         let status = '';
+        let avaialableDrivers = [];
         if (!arrayIsEmpty(shipments)) {
             shipment = shipments.filter(shipment => shipment.id === id)[0];
             status = shipment.status
+            if(shipment.status === 'un-assigned'){
+                avaialableDrivers = getAvailableDrivers(props.idleDrivers)
+            }
         }
-        console.log(status);
         this.state = {
             shipment,
             status,
+            avaialableDrivers
         }
     }
 
     // remove drivers when status is changed to un-assigned
     removeDriverAndEquipmentFromShipment = (shipment) => {
+        
+        let {idleDrivers } = this.context
+        const driver = {
+            ...shipment.driver,
+            pay_rate: shipment.driver.pay_rate.toString(), // converting to string to make sure all objects are of the same data type
+            equipment: shipment.equipment
+        }
+
+        this.context.setIdleDrivers([
+            ...idleDrivers,
+            driver
+        ])
+
         shipment.driver = {}
         shipment.equipment = {}
+
         return shipment;
     }
 
@@ -61,11 +87,20 @@ class LoadByIdPage extends Component {
 
     }
 
+    handleAssignDriver = (e) => {
+        e.preventDefault();
+
+    }
+
     static contextType = AppContext
 
     render() {
 
         const { shipment } = this.state
+        let driverPayout = 0;
+        if(!objectIsEmpty(shipment)){
+            driverPayout = shipment.driver.pay_rate * shipment.miles;
+        }
 
         return (
             !objectIsEmpty(shipment) ?
@@ -116,7 +151,7 @@ class LoadByIdPage extends Component {
                                 </div>
                                 <div className='additional-info info city'>
                                     <h6>Rate</h6>
-                                    <p className='red-text'>${shipment.rate}</p>
+                                    <p className='red-text'>{formatCurrency(shipment.rate)}</p>
                                 </div>
                                 <div className='additional-info info state'>
                                     <h6>Broker</h6>
@@ -127,7 +162,7 @@ class LoadByIdPage extends Component {
                                 <div className='additional-info info'>
                                     <form onSubmit={(e) => { this.handleChangeLoadStatus(e) }}>
                                         <fieldset>
-                                            <legend><h6>Status</h6></legend>
+                                            <legend><h6><label htmlFor='status'>Status</label></h6></legend>
                                             {
                                                 shipment.status !== 'un-assigned'
                                                     ?
@@ -154,7 +189,6 @@ class LoadByIdPage extends Component {
                                                         }
                                                     </select>
                                             }
-
                                             {
                                                 this.state.status !== shipment.status
                                                     ?
@@ -187,17 +221,23 @@ class LoadByIdPage extends Component {
                                         </div>
                                         <div className='additional-info info city'>
                                             <h6>Pay per Mile</h6>
-                                            <p>${shipment.driver.pay_rate}</p>
+                                            <p>{formatCurrency(shipment.driver.pay_rate)}</p>
+                                        </div>
+                                        <div className='additional-info info'>
+                                            <h6>Equipment #</h6>
+                                            <p>{shipment.equipment.unit_num}</p>
                                         </div>
                                     </div>
                                     <div className='additional-info info-wrapper'>
                                         <div className='additional-info info state'>
                                             <h6>Drvier Payout</h6>
-                                            <p className='red-text'>${shipment.driver.pay_rate * shipment.miles}</p>
+                                            <p className='red-text'>{formatCurrency(driverPayout)}</p>
                                         </div>
                                         <div className='additional-info info'>
-                                            <h6>Equipment #</h6>
-                                            <p>{shipment.equipment.unit_num}</p>
+                                            <h6>Load Balance Amount <br />
+                                            ( rate - driver payout )
+                                            </h6>
+                                            <p className='green-text'>{formatCurrency(shipment.rate - driverPayout)}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -206,7 +246,15 @@ class LoadByIdPage extends Component {
                             <div className='driver-info box-style'>
                                 <h3>Assign Driver</h3>
                                 <div className='assign-driver'>
-                                    Assign Driver Section
+                                    <form className='assign-driver-form' onSubmit={(e) => {this.handleAssignDriver(e)}}>
+                                        <fieldset>
+                                            <div className='assign-driver-fields blue-text'>
+                                                <h6>Available Drivers</h6>
+                                                <DriversDropDown drivers={this.state.avaialableDrivers} />
+                                                <button className='app-button' type='submit'>Assign</button>
+                                            </div>
+                                        </fieldset>
+                                    </form>
                                 </div>
                             </div>
                     }
