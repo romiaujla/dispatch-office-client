@@ -15,6 +15,7 @@ export default React.createContext({
     shipments: [],
     setLoggedInCarrier: () => {},
     idleDrivers: [],
+    idleEquipments: [],
     equipments: [],
     drivers: [],
     loadStatus: [
