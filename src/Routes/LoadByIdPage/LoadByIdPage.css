@@ -68,9 +68,58 @@
 .LoadByIdPage form fieldset{
     border:none;
 }
-.LoadByIdPage .assign-driver{
-    height: 200px;
-}
 .LoadByIdPage .select-css{
     text-transform: capitalize;
+}
+.LoadByIdPage .green-text{
+    color: darkgreen;
+    font-weight: 600;;
+}
+.LoadByIdPage .assign-driver fieldset{
+    display: flex;
+    flex-direction: column;
+}
+.LoadByIdPage .assign-driver legend{
+    text-transform: uppercase;
+    padding: 30px;
+    text-align: left;
+}
+.LoadByIdPage .assign-driver .assign-driver-fields{
+    width: 80%;
+    max-width: 500px;
+    margin: 20px auto;
+    text-align: center;
+}
+.LoadByIdPage .assign-driver h6{
+    text-align: left;
+    font-size: 0.9em;
+    font-weight: 400;
+    margin-bottom: 8px;
+}
+.LoadByIdPage .assign-driver .app-button{
+    margin: 15px auto;
+    width: auto;
+}
+@media only screen and (max-width: 600px){
+    .LoadByIdPage .flex-row{
+        flex-direction: column;
+    }
+    .LoadByIdPage .flex-row > div:first-child{
+        margin-right: 0px;
+    }
+    .LoadByIdPage .flex-row > div:not(:first-child){
+        margin-left: 0px;
+        margin-top: 30px;
+    }
+    .LoadByIdPage .additional-info .flex-row > div:last-child{
+        width: 100%;
+        padding: 0px 20px;
+        margin: 0px;
+    }
+    .LoadByIdPage .box-style .info-wrapper{
+        padding: 10px 20px;
+    }
+    .LoadByIdPage .assign-driver .app-button{
+        width: 100%;
+    }
 }
