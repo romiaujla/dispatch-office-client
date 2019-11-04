@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './LoginForm.css';
-import { validateUserName, validatePassword } from '../../HelperFunctions/HelperFunctions';
 import TokenService from '../../Services/TokenService';
 import AuthApiService from '../../Services/AuthApiService';
 import AppContext from '../../Contexts/AppContext';
@@ -88,7 +87,6 @@ class LoginForm extends Component {
                                 id='username'
                                 name='username'
                                 required
-                                onChange={(e) => { validateUserName(e) }}
                             />
                             {
                                 incorrectUsername &&
@@ -103,7 +101,6 @@ class LoginForm extends Component {
                                 id='password'
                                 name='password'
                                 required
-                                onChange={(e) => { validatePassword(e) }} 
                             />
                             {
                                 incorrectPassword &&
