@@ -78,12 +78,10 @@ class EquipmentEditPage extends Component {
     setDriverForEquipment = (equipment, driver) => {
         
         equipment.driver = driver
-        console.log( `After settgin driver`, equipment);
         return equipment;
     }
 
     removeDriverFromEquipment = (equipment) => {
-        console.log(`remove driver entered`);
         equipment.driver = {}
         return equipment;
     }
@@ -95,6 +93,7 @@ class EquipmentEditPage extends Component {
                 if(oldDriverId === oldDriver.id){
                     oldDriver = this.takeAwayEquipment(oldDriver)
                 }
+                return oldDriver;
             })
         } else if (driver.id === oldDriverId){ 
             driver = this.takeAwayEquipment(driver)
@@ -117,10 +116,12 @@ class EquipmentEditPage extends Component {
             
             idleDrivers.map((driver) => {
                 driver = this.changeEquipmentForDriver(idleDrivers, driver, newDriverId, oldDriverId, equipment);
+                return driver;
             })
 
             drivers.map((driver) => {
                 driver = this.changeEquipmentForDriver(drivers, driver, newDriverId, oldDriverId, equipment);
+                return driver;
             })
 
             equipments.map((changeEquipemnt) => {
@@ -133,7 +134,7 @@ class EquipmentEditPage extends Component {
                         changeEquipemnt = this.removeDriverFromEquipment(equipment)
                     }
                 }
-                
+                return changeEquipemnt
             })
             
             // DriversService.updateEquipment(newDriverId, equipment.id)
@@ -144,7 +145,22 @@ class EquipmentEditPage extends Component {
                 if (changeEquipment.id === equipment.id) {
                     changeEquipment.unit_num = unit_num
                 }
-            })
+                return changeEquipment
+            });
+
+            idleDrivers.map((driver) => {
+                if(driver.equipment.id === equipment.id){
+                    driver.equipment.unit_num = unit_num
+                }
+                return driver;
+            });
+
+            drivers.map((driver) => {
+                if(driver.equipment.id === equipment.id){
+                    driver.equipment.unit_num = unit_num
+                }
+                return driver;
+            });
             // EquipmentService.updateEquipment(unit_num, equipment.id);
         }
         
