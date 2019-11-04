@@ -285,6 +285,7 @@ class App extends Component {
                 return <LoadByIdPage
                   rprops={rprops}
                   shipments={this.state.shipments}
+                  idleDrivers={this.state.idleDrivers}
                 />
               }}
             />
