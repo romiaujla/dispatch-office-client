@@ -3,38 +3,35 @@ import "./LoadListBox.css";
 import AppContext from "../../Contexts/AppContext";
 import { Link } from "react-router-dom";
 import {
-  formatDate
+  formatDate,
+  sortShipments
 } from '../../HelperFunctions/HelperFunctions'
 
 class LoadListBox extends Component {
   static contextType = AppContext;
 
   static defaultProps = {
-    loadStatus: ""
-  };
-  
-  // A Method that sorts shipments as per the property requested
-  sortShipments = (shipments, property) => {
-    return shipments.sort((a, b) => (a[property] < b[property] ? 1 : -1));
+    oldLoadStatus: "",
+    loadStatus: [],
+    boxHeader: 'Loads'
   };
 
   getLoadsWithStatus = status => {
-    const { basePath } = this.context;
-    let shipments;
-    if (status !== "all") {
-      // filter shipments based on load status passed in props
-      shipments = this.context.shipments.filter(
-        shipment => shipment.status === status
-      );
-    } else {
-      shipments = this.context.shipments.filter(shipment => shipment);
-      // get sorted shipments with pickup date
-      shipments = this.sortShipments(shipments, "pickup_date");
+    
+    const { basePath} = this.context;
+    let {shipments} = this.context;
+
+    if(status !== 'all'){
+      shipments = shipments.filter((shipment) => status.includes(shipment.status))
     }
+    
 
     if (shipments.length === 0) {
-      return <li className="empty-list">No {status} Loads</li>;
+      return <li className="empty-list">No Loads</li>;
     }
+
+    shipments = sortShipments(shipments, 'pickup_date');
+
     return shipments.map(shipment => {
       return (
         <li className="load" key={shipment.id}>
@@ -95,10 +92,10 @@ class LoadListBox extends Component {
           </div>
           <div className="load-buttons">
             <Link className='app-button' to={`${basePath}/loads/${shipment.id}`}>
-                View
+              View
             </Link>
             <Link className='app-button' to={`${basePath}/loads/edit/${shipment.id}`}>
-                Edit
+              Edit
             </Link>
           </div>
         </li>
@@ -109,7 +106,7 @@ class LoadListBox extends Component {
   render() {
     return (
       <div className="LoadListBox blue-text">
-        <h3 className="blue-back white-text">{this.props.loadStatus} Loads</h3>
+        <h3 className="blue-back white-text">{this.props.boxHeader}</h3>
         <ul className="un-assigned-loads">
           {this.getLoadsWithStatus(this.props.loadStatus)}
         </ul>
