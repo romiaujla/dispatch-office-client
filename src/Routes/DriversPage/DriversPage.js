@@ -11,13 +11,16 @@ class DriversPage extends Component {
     renderDrivers = (drivers) => {
         
         return drivers.map((driver) => {
-            if(driver.status === 'active')
+            if(driver.status === 'active'){
                 return (
                     <li key={driver.id}>
                         <DriverCard driver={driver} />
                     </li>
                 )
-            
+            }
+            else{
+                return ''
+            }
         })
     }
 

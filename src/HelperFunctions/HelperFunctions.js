@@ -1,3 +1,5 @@
+import React from 'react';
+
 // takes user back to the previous page in history
 export function handleGoBack(history){
     return history.goBack();
@@ -25,3 +27,16 @@ export function formatDate(dbDate){
 export function sortShipments(shipments, property){
   return shipments.sort((a, b) => (a[property] < b[property] ? 1 : -1));
 };
+
+export function renderLoadStatusOptions(statusArray){
+    return statusArray.map((status, i) => {
+        return (
+            <option 
+                key={i}
+                value={status}
+                >
+                    {status}
+            </option>
+        )
+    })
+}

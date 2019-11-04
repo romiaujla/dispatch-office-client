@@ -27,11 +27,13 @@ class EquipmentCard extends Component {
             if (driver.equipment.id === id) {
                 driver.equipment = {}
             }
+            return driver
         })
         idleDrivers.map(driver => {
             if (driver.equipment.id === id) {
                 driver.equipment = {}
             }
+            return driver
         })
 
         this.context.setEquipments(equipments);
@@ -43,9 +45,12 @@ class EquipmentCard extends Component {
     render() {
 
         const { equipment } = this.props;
-        const { idleEquipments } = this.context;
-        // console.log(`equipment.id`, equipment.id, '\n');
+        const { idleEquipments, shipments } = this.context;
         const busyEquipment = arrayIsEmpty(idleEquipments.filter((idleEquipment) => idleEquipment.id === equipment.id))
+        let shipmentId = -1;
+        if(busyEquipment && equipment.driver.hasOwnProperty('id')){
+            shipmentId = shipments.filter((shipment) => shipment.equipment.id === equipment.id)[0].id;
+        }
         
         return (
             <div className='EquipmentCard grey-back blue-text'>
@@ -65,10 +70,10 @@ class EquipmentCard extends Component {
                     }
                 </div>
                 {
-                    (!busyEquipment || !equipment.driver.hasOwnProperty('id')) 
+                    shipmentId === -1 
                     ?
                     <div className='equipment-buttons'>
-                        <Link className='app-button' to={`${config.BASEPATH}/equipments/edit/${equipment.id}`}>
+                        <Link className='app-button' to={`${config.BASEPATH}/equipment/edit/${equipment.id}`}>
                             Edit
                         </Link>
                         <button className='app-button' onClick={() => { this.handleDeleteEquipment(equipment.id) }}>
@@ -77,8 +82,11 @@ class EquipmentCard extends Component {
                     </div>
                     :
                     <div className='equipment-buttons'>
-                        <Link className='app-button' to={`${config.BASEPATH}/equipments/edit/${equipment.id}`}>
-                            View Current Load
+                        <span>
+                            Equipment Busy
+                        </span>
+                        <Link className='app-button' to={`${config.BASEPATH}/load/${shipmentId}`}>
+                            View Load
                         </Link>
                     </div>
                 }

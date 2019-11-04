@@ -130,7 +130,7 @@ class EquipmentEditPage extends Component {
                     changeEquipemnt = this.setDriverForEquipment(equipment, idleDrivers.filter(driver => driver.id === newDriverId)[0])
                 }else {
 
-                    if(newDriverId === changeEquipemnt.driver.id || newDriverId === -1 && !removeEcecuted) {
+                    if((newDriverId === changeEquipemnt.driver.id || newDriverId === -1) && !removeEcecuted) {
                         if(changeEquipemnt.id === equipment.id){
                             changeEquipemnt = this.removeDriverFromEquipment(equipment)
                             removeEcecuted = true;

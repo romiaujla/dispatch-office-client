@@ -18,6 +18,7 @@ import DriversPage from "../../Routes/DriversPage/DriversPage";
 import EquipmentEditPage from "../../Routes/EquipmentEditPaage/EquipmentEditPage";
 import AddLoadPage from "../../Routes/AddLoadPage/AddLoadPage";
 import { objectIsEmpty } from '../../HelperFunctions/HelperFunctions';
+import LoadByIdPage from "../../Routes/LoadByIdPage/LoadByIdPage";
 
 class App extends Component {
   constructor(props) {
@@ -57,14 +58,15 @@ class App extends Component {
     return DriversService.getIdleDrivers()
       .then(data => {
         data.map((driver) => {
-          if (!objectIsEmpty(driver.equipment)){
+          if (!objectIsEmpty(driver.equipment)) {
             this.setState({
-              idleEquipments : [
+              idleEquipments: [
                 ...this.state.idleEquipments,
                 driver.equipment
               ]
             })
           }
+          return driver
         })
         return data
       })
@@ -146,12 +148,13 @@ class App extends Component {
       idleEquipments
     })
     idleDrivers.map(driver => {
-      if(!objectIsEmpty(driver.equipment)){
+      if (!objectIsEmpty(driver.equipment)) {
         idleEquipments.push(driver.equipment)
         this.setState({
           idleEquipments
         })
       }
+      return driver
     })
     this.setState({
       idleDrivers
@@ -183,6 +186,14 @@ class App extends Component {
       drivers: this.state.drivers,
       idleEquipments: this.state.idleEquipments,
       getAllData: this.getAllData,
+      loadStatus: [
+        'un-assigned',
+        'dispatched',
+        'loading',
+        'in transit',
+        'unloading',
+        'completed'
+      ]
     };
 
     return (
@@ -237,7 +248,7 @@ class App extends Component {
 
             <Route
               exact
-              path={`${value.basePath}/equipments/edit/:id`}
+              path={`${value.basePath}/equipment/edit/:id`}
               component={(rprops) => {
                 return <EquipmentEditPage
                   rprops={rprops}
@@ -251,6 +262,31 @@ class App extends Component {
               exact
               path={`${value.basePath}/load/new`}
               component={AddLoadPage}
+            />
+
+            {/* 
+              Driver Edit Page
+            <Route
+              exact
+              path={`${value.basePath}/driver/edit/:id`}
+              component={(rprops) => {
+                return <DriverEditPage
+                  rprops={rprops}
+                  equipments={this.state.equipments}
+                  idleDrivers={this.state.idleDrivers}
+                  drivers={this.state.drivers} />
+              }}
+            /> */}
+
+            <Route
+              exact
+              path={`${value.basePath}/load/:id`}
+              component={(rprops) => {
+                return <LoadByIdPage
+                  rprops={rprops}
+                  shipments={this.state.shipments}
+                />
+              }}
             />
 
           </Switch>

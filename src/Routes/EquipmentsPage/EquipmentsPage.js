@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import './EquipmentsPage.css';
 import AppContext from '../../Contexts/AppContext';
 import EquipmentCard from '../../Components/EquipmentCard/EquipmentCard';
 
-class EquipmentsPage extends Component{
+class EquipmentsPage extends Component {
 
     static contextType = AppContext;
 
@@ -12,17 +12,10 @@ class EquipmentsPage extends Component{
         console.log(`Equipment Add Submitted`);
     }
 
-    filterEquipments = (equipments, filters) => {
-        return equipments.filter(equipment => equipment[filters.property] !== filters.value)
-    }
-
     renderEquipmentList = () => {
+
         let { equipments } = this.context;
-        
-        equipments = this.filterEquipments(equipments, {
-            'property': 'status',
-            'value' : 'inactive'
-        })
+        equipments = equipments.filter((equipment) => equipment.status === 'active')
 
         return equipments.map(equip => {
             return (
@@ -33,7 +26,7 @@ class EquipmentsPage extends Component{
         })
     }
 
-    render(){
+    render() {
         return (
             <section className='EquipmentPage width-wrapper'>
                 <div className='box'>

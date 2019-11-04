@@ -90,10 +90,10 @@ class LoadListBox extends Component {
             </span>
           </div>
           <div className="load-buttons">
-            <Link className='app-button' to={`${basePath}/loads/${shipment.id}`}>
+            <Link className='app-button' to={`${basePath}/load/${shipment.id}`}>
               View
             </Link>
-            <Link className='app-button' to={`${basePath}/loads/edit/${shipment.id}`}>
+            <Link className='app-button' to={`${basePath}/load/edit/${shipment.id}`}>
               Edit
             </Link>
           </div>
