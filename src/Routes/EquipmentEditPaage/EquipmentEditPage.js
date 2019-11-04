@@ -124,15 +124,21 @@ class EquipmentEditPage extends Component {
                 return driver;
             })
 
+            let removeEcecuted = false;
             equipments.map((changeEquipemnt) => {
                 if(oldDriverId === -1){
                     changeEquipemnt = this.setDriverForEquipment(equipment, idleDrivers.filter(driver => driver.id === newDriverId)[0])
                 }else {
+
+                    if(newDriverId === changeEquipemnt.driver.id || newDriverId === -1 && !removeEcecuted) {
+                        if(changeEquipemnt.id === equipment.id){
+                            changeEquipemnt = this.removeDriverFromEquipment(equipment)
+                            removeEcecuted = true;
+                        }
+                    }
                     if(changeEquipemnt.id === equipment.id && newDriverId !== -1){
                         changeEquipemnt = this.setDriverForEquipment(equipment, idleDrivers.filter(driver => driver.id === newDriverId)[0]);
-                    } else {
-                        changeEquipemnt = this.removeDriverFromEquipment(equipment)
-                    }
+                    } 
                 }
                 return changeEquipemnt
             })
