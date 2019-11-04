@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import './AddLoadPage.css';
 import {
     handleGoBack,
+    routeUserTo,
     formatDate,
+    getAvailableDrivers,
 } from '../../HelperFunctions/HelperFunctions';
 import {
     notValidDate,
@@ -10,6 +12,7 @@ import {
 } from '../../HelperFunctions/InputFieldValidations';
 import DriversDropDown from '../../Components/DriversDropDown/DriversDropDown';
 import AppContext from '../../Contexts/AppContext';
+import config from '../../config';
 
 class AddLoadPage extends Component {
 
@@ -209,15 +212,6 @@ class AddLoadPage extends Component {
         }
     }
 
-    // to populate the drivers drop down list
-    // with only those drivers that are idle and 
-    // have an equipment avialable to be assigned
-    getAvailableDrivers = () => {
-        const { idleDrivers } = this.context;
-        const availableDrivers = idleDrivers.filter((driver) => !(Object.entries(driver.equipment).length === 0 && driver.equipment.constructor === Object));
-        return availableDrivers;
-    }
-
     updateIdleDriverQueue = (driverId) => {
         let { idleDrivers } = this.context;
         idleDrivers = idleDrivers.filter(driver => driver.id !== driverId);
@@ -290,12 +284,13 @@ class AddLoadPage extends Component {
             newShipment
         ])
 
-        handleGoBack(this.props.history);
+        // handleGoBack(this.props.history);
+        routeUserTo(this.props.history, `${config.BASEPATH}/load/${newShipment.id}`)
 
     }
 
     render() {
-        const availableDrivers = this.getAvailableDrivers()
+        const availableDrivers = getAvailableDrivers(this.context.idleDrivers)
         const { error } = this.state
 
         return (
