@@ -17,4 +17,12 @@ export default React.createContext({
     idleDrivers: [],
     equipments: [],
     drivers: [],
+    loadStatus: [
+        'un-assigned',
+        'dispatched',
+        'loading',
+        'in transit',
+        'unloading',
+        'completed'
+    ]
 });
