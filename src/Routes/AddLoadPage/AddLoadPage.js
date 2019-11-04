@@ -3,8 +3,11 @@ import './AddLoadPage.css';
 import {
     handleGoBack,
     formatDate,
-    validateDate
 } from '../../HelperFunctions/HelperFunctions';
+import {
+    notValidDate,
+    emptySpaces,
+} from '../../HelperFunctions/InputFieldValidations';
 import DriversDropDown from '../../Components/DriversDropDown/DriversDropDown';
 import AppContext from '../../Contexts/AppContext';
 
@@ -13,13 +16,33 @@ class AddLoadPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            hasError: false,
+            availableDrivers: [],
             error: {
                 dateError: 'Enter Date in correct format "MM/DD/YYYY"',
                 pickupDate: false,
                 deliveryDate: false,
+                cityError: 'City is required',
+                pickupCity: false,
+                deliveryCity: false,
+                stateError: 'State is required',
+                pickupState: false,
+                deliveryState: false,
+                zipcodeError: 'Zipcode is required',
+                pickupZipcode: false,
+                deliveryZipcode: false,
             },
             pickupDate: formatDate(new Date()),
             deliveryDate: formatDate(new Date()),
+            pickupCity: '',
+            deliveryCity: '',
+            pickupState: '',
+            deliveryState: '',
+            pickupZipcode: '',
+            deliveryZipcode: '',
+            miles: '',
+            rate: '',
+            broker: '',
         }
     }
 
@@ -35,7 +58,7 @@ class AddLoadPage extends Component {
             ? this.setState({pickupDate: date})
             : this.setState({deliveryDate: date});        
         
-        if(validateDate(date)){
+        if(notValidDate(date)){
             name === 'pickup-date' 
                 ? this.setState({error:{
                     ...this.state.error,
@@ -58,6 +81,102 @@ class AddLoadPage extends Component {
         }
     }
 
+    validateCityInput = (e) => {
+        const city = e.target.value;
+        const { name } = e.target;
+
+        name === 'pickup-city' 
+            ? this.setState({pickupCity: city})
+            : this.setState({deliveryCity: city});        
+        
+
+        if(emptySpaces(city)){
+            name === 'pickup-city' 
+                ? this.setState({error:{
+                    ...this.state.error,
+                    pickupCity:true,
+                }})
+                : this.setState({error:{
+                    ...this.state.error,
+                    deliveryCity:true,
+                }});
+        }else{
+            name === 'pickup-city' 
+                ? this.setState({error:{
+                    ...this.state.error,
+                    pickupCity:false,
+                }})
+                : this.setState({error:{
+                    ...this.state.error,
+                    deliveryCity:false,
+                }});
+        }
+    }
+
+    validateStateInput = (e) => {
+        const state = e.target.value;
+        const { name } = e.target;
+
+        name === 'pickup-state' 
+            ? this.setState({pickupState: state})
+            : this.setState({deliveryState: state});        
+        
+
+        if(emptySpaces(state)){
+            name === 'pickup-state' 
+                ? this.setState({error:{
+                    ...this.state.error,
+                    pickupState:true,
+                }})
+                : this.setState({error:{
+                    ...this.state.error,
+                    deliveryState:true,
+                }});
+        }else{
+            name === 'pickup-state' 
+                ? this.setState({error:{
+                    ...this.state.error,
+                    pickupState:false,
+                }})
+                : this.setState({error:{
+                    ...this.state.error,
+                    deliveryState:false,
+                }});
+        }
+    }
+
+    validateZipcodeInput = (e) => {
+        const zipcode = e.target.value;
+        const { name } = e.target;
+
+        name === 'pickup-zipcode' 
+            ? this.setState({pickupZipcode: zipcode})
+            : this.setState({deliveryZipcode: zipcode});        
+        
+
+        if(emptySpaces(zipcode)){
+            name === 'pickup-zipcode' 
+                ? this.setState({error:{
+                    ...this.state.error,
+                    pickupZipcode:true,
+                }})
+                : this.setState({error:{
+                    ...this.state.error,
+                    deliveryZipcode:true,
+                }});
+        }else{
+            name === 'pickup-zipcode' 
+                ? this.setState({error:{
+                    ...this.state.error,
+                    pickupZipcode:false,
+                }})
+                : this.setState({error:{
+                    ...this.state.error,
+                    deliveryZipcode:false,
+                }});
+        }
+    }
+
     // to populate the drivers drop down list
     // with only those drivers that are idle and 
     // have an equipment avialable to be assigned
@@ -67,21 +186,35 @@ class AddLoadPage extends Component {
         return availableDrivers;
     }
 
+    updateIdleDriverQueue = (driverId) => {
+        let {idleDrivers} = this.context;
+        let indexOfDriver = -1;
+        idleDrivers.filter((idleDriver, index) => {
+            if(idleDriver.id === driverId){
+                indexOfDriver = index
+            }
+            return index;
+        });
+        idleDrivers.splice(indexOfDriver, 1);
+    }
+
     handleAddLoad = (e) => {
+
         e.preventDefault();
-        const broker = e.target['broker'].value || '';
-        const deliveryWarehouse = {
-            city: e.target['delivery-city'].value,
+        
+        const broker = e.target['broker'].value.trim() || '';
+        const delivery_warehouse = {
+            city: e.target['delivery-city'].value.trim(),
             state: e.target['delivery-state'].value,
-            zipcode: e.target['delivery-zipcode'].value
+            zipcode: e.target['delivery-zipcode'].value.trim()
         };
-        const pickupWarehouse = {
-            city: e.target['pickup-city'].value,
+        const pickup_warehouse = {
+            city: e.target['pickup-city'].value.trim(),
             state: e.target['pickup-state'].value,
-            zipcode: e.target['pickup-zipcode'].value
+            zipcode: e.target['pickup-zipcode'].value.trim()
         };
-        const miles = e.target['miles'].value || 0;
-        const rate = e.target['rate'].value || 0;
+        const miles = e.target['miles'].value.trim() || '0';
+        const rate = e.target['rate'].value.trim() || '0';
         const driverId = parseInt(e.target['driver'].value, 10);
         
         // getting driver and equipment from drivers array in context
@@ -103,18 +236,22 @@ class AddLoadPage extends Component {
                         unit_num: contextDriver.equipment.unit_num
                     }
                 }
+                return contextDriver
             });
+            this.updateIdleDriverQueue(driverId);
             status = 'dispatched'
         }
 
-        const pickup_date = new Date(e.target['pickup-date'].value);
+        const pickup_date = e.target['pickup-date'].value;
+        const delivery_date = e.target['delivery-date'].value;
 
         const newShipment = {
-            id: this.context.shipments.length+3,
+            id: this.context.shipments.length+50,
             pickup_date,
+            delivery_date,
             broker,
-            deliveryWarehouse,
-            pickupWarehouse,
+            delivery_warehouse,
+            pickup_warehouse,
             miles,
             driver,
             equipment,
@@ -122,15 +259,18 @@ class AddLoadPage extends Component {
             status,
         }
 
-        console.log(newShipment);
+        this.context.setShipments([
+            ...this.context.shipments,
+            newShipment
+        ])
+
+        handleGoBack(this.props.history);
+        
     }
 
     render() {
-
-        // to populate the drivers drop down list
-        // with only those drivers that are idle and 
-        // have an equipment avialable to be assigned
-        const drivers = this.getAvailableDrivers();
+        const availableDrivers = this.getAvailableDrivers()
+        const {error} = this.state
 
         return (
             <section className='AddLoadPage width-wrapper'>
@@ -168,8 +308,8 @@ class AddLoadPage extends Component {
                                     }}
                                 />
                                 {
-                                    this.state.error.pickupDate &&
-                                    <span className='error'>{this.state.error.dateError}</span>
+                                    error.pickupDate &&
+                                    <span className='error'>{error.dateError}</span>
                                 }
                             </label>
                             <label htmlFor='pickup-city'>
@@ -180,10 +320,12 @@ class AddLoadPage extends Component {
                                     name='pickup-city'
                                     placeholder='Eg. Dallas'
                                     required
+                                    value={this.state.pickupCity}
+                                    onChange={(e) => {this.validateCityInput(e)}}
                                 />
                                 {
-                                    // this.state.unitNumError &&
-                                    // <span className='error'>{this.state.error}</span>
+                                    error.pickupCity &&
+                                    <span className='error'>{error.cityError}</span>
                                 }
                             </label>
                             <label htmlFor='pickup-state'>
@@ -195,10 +337,12 @@ class AddLoadPage extends Component {
                                     id='pickup-state'
                                     name='pickup-state'
                                     required
+                                    value={this.state.pickupState}
+                                    onChange={(e) => {this.validateStateInput(e)}}
                                 />
                                 {
-                                    // this.state.unitNumError &&
-                                    // <span className='error'>{this.state.error}</span>
+                                    this.state.error.pickupState &&
+                                    <span className='error'>{this.state.error.stateError}</span>
                                 }
                             </label>
                             <label htmlFor='pickup-zipcode'>
@@ -206,13 +350,16 @@ class AddLoadPage extends Component {
                                 <input
                                     type='text'
                                     id='pickup-zipcode'
+                                    maxLength='10'
                                     name='pickup-zipcode'
                                     placeholder='Eg. 75001'
                                     required
+                                    value={this.state.pickupZipcode}
+                                    onChange={(e) => {this.validateZipcodeInput(e)}}
                                 />
                                 {
-                                    // this.state.unitNumError &&
-                                    // <span className='error'>{this.state.error}</span>
+                                    this.state.error.pickupZipcode &&
+                                    <span className='error'>{this.state.error.zipcodeError}</span>
                                 }
                             </label>
                             <h4 className='fieldset-sub-title blue-text'>
@@ -252,10 +399,12 @@ class AddLoadPage extends Component {
                                     name='delivery-city'
                                     placeholder='Eg. Indianapolis'
                                     required
+                                    value={this.state.deliveryCity}
+                                    onChange={(e) => {this.validateCityInput(e)}}
                                 />
                                 {
-                                    // this.state.unitNumError &&
-                                    // <span className='error'>{this.state.error}</span>
+                                    this.state.error.deliveryCity &&
+                                    <span className='error'>{this.state.error.cityError}</span>
                                 }
                             </label>
                             <label htmlFor='delivery-state'>
@@ -267,10 +416,12 @@ class AddLoadPage extends Component {
                                     id='delivery-state'
                                     name='delivery-state'
                                     required
+                                    value={this.state.deliveryState}
+                                    onChange={(e) => {this.validateStateInput(e)}}
                                 />
                                 {
-                                    // this.state.unitNumError &&
-                                    // <span className='error'>{this.state.error}</span>
+                                    this.state.error.deliveryState &&
+                                    <span className='error'>{this.state.error.stateError}</span>
                                 }
                             </label>
                             <label htmlFor='delivery-zipcode'>
@@ -279,12 +430,15 @@ class AddLoadPage extends Component {
                                     type='text'
                                     id='delivery-zipcode'
                                     name='delivery-zipcode'
+                                    maxLength='10'
                                     placeholder='Eg. 46225'
                                     required
+                                    value={this.state.deliveryZipcode}
+                                    onChange={(e) => {this.validateZipcodeInput(e)}}
                                 />
                                 {
-                                    // this.state.unitNumError &&
-                                    // <span className='error'>{this.state.error}</span>
+                                    this.state.error.deliveryZipcode &&
+                                    <span className='error'>{this.state.error.zipcodeError}</span>
                                 }
                             </label>
                             <h4 className='fieldset-sub-title blue-text'>
@@ -326,18 +480,40 @@ class AddLoadPage extends Component {
                             </label>
                             <label htmlFor='driver'>
                                 <span className='input-title'>Assign Driver</span>
-                                <DriversDropDown name='driver' id='driver' drivers={drivers} className='select-css' />
+                                <DriversDropDown name='driver' id='driver' drivers={availableDrivers} className='select-css' />
                                 {
                                     // incorrectPassword &&
                                     // <span className='error'>{error}</span>
                                 }
                             </label>
-                            <button
-                                className='app-button'
-                                type='submit'
-                            >
-                                Add New Load
-                                </button>
+                            {
+                                !(
+                                    error.pickupCity ||
+                                    error.deliveryCity ||
+                                    error.pickupDate ||
+                                    error.deliveryDate ||
+                                    error.pickupState ||
+                                    error.deliveryState ||
+                                    error.pickupZipcode ||
+                                    error.deliveryZipcode
+                                )
+                                ?
+                                    <button
+                                        className='app-button'
+                                        type='submit'
+                                    >
+                                         Add New Load
+                                    </button>
+                                :
+                                    <button
+                                        className='app-button'
+                                        type='submit'
+                                        disabled
+                                    >
+                                         Add New Load
+                                    </button>
+                            }
+                               
                         </div>
                     </fieldset>
                 </form>
