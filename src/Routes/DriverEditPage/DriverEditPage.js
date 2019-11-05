@@ -125,6 +125,20 @@ class DriverEditPage extends Component {
         return driversArray;
     }
 
+    makeDriverChanges = (drivers, driverToChange, changes) => {
+        const driversArray = drivers.map((driver) => {
+            if(driver.id === driverToChange.id){
+                driver = {
+                    ...driver,
+                    full_name: changes.full_name,
+                    pay_rate: changes.pay_rate
+                }
+            }
+            return driver;
+        })
+        return driversArray;
+    }
+
     handleEditDriver = (e, changeDriver) => {
 
         e.preventDefault();
@@ -174,10 +188,15 @@ class DriverEditPage extends Component {
             })
 
         }
-
-        // make changes to the changed driver in all drivers array
         
-        // make changes to the changed driver in all idle Drivers array
+        const changes = {
+            full_name,
+            pay_rate
+        }
+        // make changes to the changed driver in all drivers array
+        drivers = this.makeDriverChanges(drivers, changeDriver, changes)
+        idleDrivers = this.makeDriverChanges(idleDrivers, changeDriver, changes)
+        
 
         console.log(`drivers: `, drivers);
         console.log(`idleDrivers`, idleDrivers);
