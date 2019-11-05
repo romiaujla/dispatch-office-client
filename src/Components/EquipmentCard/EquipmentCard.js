@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import config from '../../config';
 import AppContext from '../../Contexts/AppContext';
 import {
-    arrayIsEmpty
+    arrayIsEmpty, objectIsEmpty
 } from '../../HelperFunctions/HelperFunctions'
 
 class EquipmentCard extends Component {
@@ -61,7 +61,7 @@ class EquipmentCard extends Component {
                         <p>{equipment.unit_num}</p>
                     </div>
                     {
-                        equipment.driver !== null &&
+                        !objectIsEmpty(equipment.driver) &&
                         <div className='equip-driver'>
                             <h6>Driver</h6>
                             <p className={equipment.driver.full_name ? '' : 'no-driver'}

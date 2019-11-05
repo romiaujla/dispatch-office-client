@@ -1,0 +1,95 @@
+.AddEquipmentPage{
+    font-family: 'Montserrat', sans-serif;
+    margin: 40px auto;
+    border: 1px solid #0B245B;
+    box-shadow: 0 0 10px 1px rgba(0,0,0,0.21);
+    font-size: 0.8em;
+}
+.AddEquipmentPage .DriversDropDown .select-css{
+    margin-top: 10px;
+}
+.AddEquipmentPage fieldset{
+    border: none;
+}
+.AddEquipmentPage legend{
+    width: 100%;
+    font-size: 1.4em;
+    padding: 20px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 600;
+    box-shadow: 4px 0 10px 1px rgba(0,0,0,0.21);
+    display: flex;
+    align-items: center;
+}
+.AddEquipmentPage #pickup-state::placeholder,
+.AddEquipmentPage #delivery-state::placeholder{
+    text-transform: none;
+}
+.AddEquipmentPage #pickup-state,
+.AddEquipmentPage #delivery-state{
+    text-transform: uppercase;
+}
+.AddEquipmentPage .go-back{
+    margin: 0;
+    width: auto;
+    border: none;
+    font-size: 0.6em;
+}
+.AddEquipmentPage legend span{
+    flex: 1;
+}
+.AddEquipmentPage .flex{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+.AddEquipmentPage label{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.AddEquipmentPage .fieldset-sub-title{
+    text-align: center;
+    padding: 5px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    font-size: 1.4em;
+    border-bottom: 2px solid #e1e0e0;
+}
+.AddEquipmentPage .fieldset-sub-title:not(:first-child){
+    margin-top: 20px;
+}
+.AddEquipmentPage label:nth-of-type(even){
+    margin: 15px 0px 15px 0px;
+}
+.AddEquipmentPage label .input-title{
+    font-size: 0.9em;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+.AddEquipmentPage label input{
+    margin-top: 6px;
+}
+.AddEquipmentPage .error{
+    color: #9A073C;
+    font-weight: 600;
+    font-size: 0.9em;
+    padding: 5px 5px 0px 5px;
+}
+.AddEquipmentPage button.app-button{
+    margin: 25px auto 10px auto;
+}
+.AddEquipmentPage .select-css{
+    margin-top: 6px;
+}
+
+@media only screen and (min-width: 500px){
+    .AddEquipmentPage{
+        width: 80%;
+        max-width: 500px;
+    }
+    .AddEquipmentPage button.app-button{
+        margin-top: 20px;
+    }
+}

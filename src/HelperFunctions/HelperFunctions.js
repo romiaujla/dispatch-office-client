@@ -67,6 +67,19 @@ export function renderEquipmentOptions(equipments) {
     })
 }
 
+export function renderDriverOptions(drivers) {
+    return drivers.map((driver) => {
+        return (
+            <option
+                key={driver.id}
+                value={driver.id}
+            >
+                {driver.full_name}
+            </option>
+        )
+    })
+}
+
 // to populate the drivers drop down list
 // with only those drivers that are idle and 
 // have an equipment avialable to be assigned

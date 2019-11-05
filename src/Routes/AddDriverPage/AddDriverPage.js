@@ -4,7 +4,6 @@ import {
     handleGoBack,
     routeUserTo,
     renderEquipmentOptions,
-    objectIsEmpty
 } from '../../HelperFunctions/HelperFunctions';
 import {
     emptySpaces,
@@ -50,37 +49,54 @@ class AddDriverPage extends Component {
     handleAddDriver = (e) => {
 
         e.preventDefault();
-        const {full_name, pay_rate = '0'} = e.target
+        const full_name = e.target['full_name'].value;
+        const pay_rate = e.target['pay_rate'].value;
         let equipment_id = parseInt(e.target['equipment_id'].value, 10);
-        let equipment = {};
+        let {drivers, idleDrivers, equipments} = this.context
+
+        let driver = {
+            id: drivers.length+60,
+            full_name,
+            pay_rate,
+            status: 'active'
+        }
+        let equipment = {}
         if(equipment_id !== -1){
-            const idleEquipment = this.context.equipments.filter(equipment => equipment.id === equipment_id)[0];
-            console.log(idleEquipment);
-            equipment = {
-                id: idleEquipment.id,
-                unit_num: idleEquipment.unit_num,
-                status: 'active'
+
+            equipments = equipments.map((contextEquipment) => {
+                if(contextEquipment.id === equipment_id){
+                    contextEquipment.driver = driver
+                    equipment = {
+                        id: contextEquipment.id,
+                        unit_num: contextEquipment.unit_num,
+                        status: contextEquipment.status
+                    }
+                }
+                return contextEquipment
+            });
+
+            driver = {
+                ...driver,
+                equipment
             }
         }
 
-        let driver = {
-            id: this.context.drivers.length+50,
-            full_name: full_name.value,
-            pay_rate: pay_rate.value,
-            status: 'active',
-            equipment,
-        }
-        
-        this.updateIdleDriverQueue(driver);
-
-        this.context.setDrivers([
-            ...this.context.drivers,
+        // add new driver to all the drivers
+        drivers = [
+            ...drivers,
             driver
-        ])
+        ]
 
-        console.log(`drivers`, this.context.drivers);
-        console.log(`idleDrivers`, this.context.idleDrivers);
-        console.log(`idleEquipments`, this.context.idleEquipments);
+        // adding new driver to the idle driver queue
+        idleDrivers = [
+            ...idleDrivers,
+            driver
+        ]
+
+        this.context.setDrivers(drivers);
+        this.context.setIdleDrivers(idleDrivers);
+        this.context.setEquipments(equipments);
+
         routeUserTo(this.props.rprops.history, `${config.BASEPATH}/drivers`)
     }
 
@@ -94,7 +110,7 @@ class AddDriverPage extends Component {
                 <form className='add-load-form' onSubmit={(e) => { this.handleAddDriver(e) }}>
                     <fieldset>
                         <legend className='blue-back white-text'>
-                            <button type='button' className='app-button go-back' onClick={(e) => { handleGoBack(this.props.history) }}>
+                            <button type='button' className='app-button go-back' onClick={(e) => { handleGoBack(this.props.rprops.history) }}>
                                 Go Back
                             </button>
                             <span>Add Driver</span>
@@ -132,7 +148,7 @@ class AddDriverPage extends Component {
                                 }
                             </label>
                             <label htmlFor='delivery-zipcode'>
-                                <span className='input-title'>* Zipcode</span>
+                                <span className='input-title'>Available Equipments</span>
                                 <select className='select-css' 
                                     name='equipment_id' 
                                     id='equipment_id'
