@@ -196,19 +196,12 @@ class DriverEditPage extends Component {
         // make changes to the changed driver in all drivers array
         drivers = this.makeDriverChanges(drivers, changeDriver, changes)
         idleDrivers = this.makeDriverChanges(idleDrivers, changeDriver, changes)
-        
-
-        console.log(`drivers: `, drivers);
-        console.log(`idleDrivers`, idleDrivers);
-        console.log(`equipments: `, equipments);
-        
 
         this.context.setDrivers(drivers);
         this.context.setEquipments(equipments);
         this.context.setIdleDrivers(idleDrivers);
 
         console.log(`idleEquipments:`, this.context.idleEquipments);
-
     }
 
     render() {
