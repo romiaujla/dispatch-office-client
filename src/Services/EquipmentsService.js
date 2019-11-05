@@ -19,8 +19,23 @@ const EquipmentService = {
   addNewEquipment(equipment){
     console.log(equipment);
   },
-  updateEquipment(unit_num, id){
-    
+  updateEquipment(unit_num, status, id){
+    return fetch(`${config.API_ENDPOINT}/equips/${id}`, {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+        Authorization: `bearer ${TokenService.getAuthToken()}`
+      },
+      body: JSON.stringify({
+        unit_num,
+        status,
+      })
+    })
+      .then(response => response.json())
+      .then(equipments => equipments)
+      .catch(error => {
+        console.log(error);
+      });
   }
 };
 

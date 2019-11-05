@@ -7,9 +7,12 @@ import {
     renderLoadStatusOptions,
     formatCurrency,
     getAvailableDrivers,
-    isNotUndefined
+    isNotUndefined,
+    routeUserTo
 } from '../../HelperFunctions/HelperFunctions';
 import DriversDropDown from '../../Components/DriversDropDown/DriversDropDown';
+import config from '../../config';
+import {Link} from 'react-router-dom';
 
 class LoadByIdPage extends Component {
 
@@ -18,6 +21,8 @@ class LoadByIdPage extends Component {
         shipments: [],
         idleDrivers: []
     }
+
+    static contextType = AppContext
 
     constructor(props) {
         super(props);
@@ -115,6 +120,7 @@ class LoadByIdPage extends Component {
                     status: idleDriver.equipment.status,
                     unit_num: idleDriver.equipment.unit_num
                 }
+                return;
             } else {
                 return idleDriver;
             }
@@ -153,7 +159,36 @@ class LoadByIdPage extends Component {
         })
     }
 
-    static contextType = AppContext
+    handleShipmentDelete = (shipmentId) => {
+        
+        let {shipments, idleDrivers} = this.context
+        // if shipment has driver, send him to idle driver queue
+        const shipmentToDelete = shipments.filter((shipment) => shipment.id === shipmentId)[0];
+
+        let driver = {};
+        if(!objectIsEmpty(shipmentToDelete.driver)){
+            driver = {
+                ...shipmentToDelete.driver,
+                equipment: {
+                    ...shipmentToDelete.equipment,
+                }
+            }
+
+            idleDrivers = [
+                ...idleDrivers,
+                driver
+            ]            
+        }
+
+        shipments = shipments.filter((shipment) => shipment.id !== shipmentId);
+
+        this.context.setIdleDrivers(idleDrivers);
+        this.context.setShipments(shipments);
+        routeUserTo(this.props.rprops.history, '/');
+
+    }
+
+    
 
     render() {
 
@@ -166,6 +201,17 @@ class LoadByIdPage extends Component {
         return (
             !objectIsEmpty(shipment) ?
                 <section className='LoadByIdPage width-wrapper'>
+                    <div className='load-header'>
+                        <Link className='app-button' to={`${config.BASEPATH}/load/edit/${shipment.id}`}>
+                            Go Back
+                        </Link>
+                        <Link className='app-button edit-button' to={`${config.BASEPATH}/load/edit/${shipment.id}`}>
+                            Edit
+                        </Link>
+                        <a className='app-button' onClick={() => {this.handleShipmentDelete(shipment.id)}}>
+                            Delete
+                        </a>
+                    </div>
                     <div className='flex-row'>
                         <div className='pick-up-info box-style'>
                             <h3>Pick Up Info</h3>

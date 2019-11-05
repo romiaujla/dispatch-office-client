@@ -57,9 +57,19 @@
     width: 70%;
     margin-right: 10%;
 }
+
 .LoadByIdPage button.app-button{
     width: 100%;
     border:none;
+}
+.LoadByIdPage .load-header .app-button{
+    margin-bottom: 8px;
+}
+.LoadByIdPage .load-header{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin: 20px 0px 0px 0px;
 }
 .LoadByIdPage .change-status h6{
     color: #0b245b;
@@ -73,7 +83,7 @@
 }
 .LoadByIdPage .green-text{
     color: darkgreen;
-    font-weight: 600;;
+    font-weight: 600;
 }
 .LoadByIdPage .assign-driver fieldset{
     display: flex;
@@ -99,6 +109,18 @@
 .LoadByIdPage .assign-driver .app-button{
     margin: 15px auto;
     width: auto;
+}
+@media only screen and (min-width: 480px){
+    .LoadByIdPage .load-header .app-button{
+        margin-bottom: 0px;
+        width: auto;
+    }
+    .LoadByIdPage .load-header{
+        display: flex;
+        flex-direction: row;
+        text-align: center;
+        justify-content: space-between;
+    }
 }
 @media only screen and (max-width: 600px){
     .LoadByIdPage .flex-row{

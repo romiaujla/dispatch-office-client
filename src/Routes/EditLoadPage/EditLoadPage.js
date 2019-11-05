@@ -5,14 +5,12 @@ import {
     routeUserTo,
     formatDate,
     getAvailableDrivers,
-    objectIsEmpty,
     arrayIsEmpty,
 } from '../../HelperFunctions/HelperFunctions';
 import {
     notValidDate,
     emptySpaces,
 } from '../../HelperFunctions/InputFieldValidations';
-import DriversDropDown from '../../Components/DriversDropDown/DriversDropDown';
 import AppContext from '../../Contexts/AppContext';
 import config from '../../config';
 
@@ -37,7 +35,7 @@ class EditLoadPage extends Component {
 
 
         this.state = {
-            shipmentToChange: shipment,
+            shipmentId: id,
             availableDrivers: [],
             error: {
                 dateError: 'Enter Date in correct format "MM/DD/YYYY"',
@@ -235,7 +233,7 @@ class EditLoadPage extends Component {
 
         e.preventDefault();
 
-        const { shipmentToChange } = this.state;
+        const { shipmentId } = this.state;
         const broker = e.target['broker'].value.trim() || '';
         const delivery_warehouse = {
             city: e.target['delivery-city'].value.trim(),
@@ -249,15 +247,36 @@ class EditLoadPage extends Component {
         };
         const miles = e.target['miles'].value.trim() || '0';
         const rate = e.target['rate'].value.trim() || '0'
+        const pickup_date = e.target['pickup-date'].value;
+        const delivery_date = e.target['delivery-date'].value;
 
-        // change the shipment here
-        
-        routeUserTo(this.props.rprops.history, `${config.BASEPATH}/load/${shipmentToChange.id}`)
+        const newShipmentFields = {
+            pickup_date,
+            pickup_warehouse,
+            delivery_date,
+            delivery_warehouse,
+            miles,
+            rate,
+            broker
+        }
+
+        let {shipments} = this.context
+        shipments = shipments.map((shipment) => {
+            if(shipment.id === shipmentId){
+                shipment = {
+                    ...shipment,
+                    ...newShipmentFields,
+                }
+            }
+            return shipment;
+        })
+
+        this.context.setShipments(shipments);
+        routeUserTo(this.props.rprops.history, `${config.BASEPATH}/load/${shipmentId}`)
 
     }
 
-    render() {
-        const availableDrivers = getAvailableDrivers(this.context.idleDrivers)
+    render() {        
         const { error } = this.state
 
         return (

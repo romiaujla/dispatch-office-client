@@ -7,6 +7,9 @@ class LoadsPage extends Component {
     render(){
         return (
             <section className='LoadsPage width-wrapper'>
+                <div classname='filters-div'>
+                    {/* Add filters and then change the loads page accordingly */}
+                </div>
                 <LoadListBox loadStatus='all' />
             </section>
         )

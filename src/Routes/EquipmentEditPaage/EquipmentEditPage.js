@@ -8,6 +8,7 @@ import {
     arrayIsEmpty,
     removeEquipmentDriver,
 } from '../../HelperFunctions/HelperFunctions';
+import EquipmentService from '../../Services/EquipmentsService';
 // import EquipmentService from '../../Services/EquipmentsService';
 // import DriversService from '../../Services/DriversService';
 
@@ -124,6 +125,8 @@ class EquipmentEditPage extends Component {
                 driver = this.changeEquipmentForDriver(drivers, driver, newDriverId, oldDriverId, equipment);
                 return driver;
             })
+            
+            // Call driver service to update equipment_id in database
 
             let removeExecuted = false;
             equipments.map((changeEquipemnt) => {
@@ -144,7 +147,7 @@ class EquipmentEditPage extends Component {
                 return changeEquipemnt
             })
             
-            // DriversService.updateEquipment(newDriverId, equipment.id)
+            
         }
 
         if (unit_num !== equipment.unit_num) {
@@ -168,7 +171,9 @@ class EquipmentEditPage extends Component {
                 }
                 return driver;
             });
-            // EquipmentService.updateEquipment(unit_num, equipment.id);
+            
+            // call service to update the database
+            EquipmentService.updateEquipment(unit_num, 'active', equipment.id);
         }
         
         this.context.setIdleDrivers(idleDrivers);
