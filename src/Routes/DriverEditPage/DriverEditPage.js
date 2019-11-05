@@ -8,6 +8,7 @@ import {
     arrayIsEmpty,
     renderEquipmentOptions,
 } from '../../HelperFunctions/HelperFunctions';
+import { isNotValidDriverName, isNotValidPay } from '../../HelperFunctions/InputFieldValidations';
 // import EquipmentService from '../../Services/EquipmentsService';
 // import DriversService from '../../Services/DriversService';
 
@@ -35,22 +36,24 @@ class DriverEditPage extends Component {
         if(!objectIsEmpty(driver)){
             full_name = driver.full_name;
             pay_rate = driver.pay_rate;
-            equipment_id = !objectIsEmpty(driver.equipment) ? driver.equipment : -1;
+            equipment_id = !objectIsEmpty(driver.equipment) ? driver.equipment.id : -1;
         }
 
         let availableEquipments = this.props.equipments.filter((equipment) => !equipment.driver.hasOwnProperty('id') && equipment.status === 'active')
         if(equipment_id !== -1){
+            const currentEquipment = this.props.equipments.filter((propsEquipment) => propsEquipment.id === equipment_id)[0]
             availableEquipments = [
-                ...availableEquipments,
-                this.props.equipments.filter((propsEquipment) => propsEquipment.id === equipment_id)[0]
+                currentEquipment,
+                ...availableEquipments
             ]
+            // console.log(currentEquipment);
         }
 
         this.state = {
             error: {
-                driverNameError: 'Driver name is required',
+                driverNameError: '',
                 driverName: false,
-                driverPayError: 'Driver pay cannot have characters in it',
+                driverPayError: '',
                 driverPay: false,
             },
             availableEquipments,
@@ -63,10 +66,58 @@ class DriverEditPage extends Component {
 
     static contextType = AppContext
 
+    validateDriverName = (full_name) => {
+        const isNotValid = isNotValidDriverName(full_name)
+        this.setState({
+            full_name
+        })
+        if(isNotValid){
+            this.setState({
+                error: {
+                    ...this.state.error,
+                    driverName: true,
+                    driverNameError: isNotValid
+                }
+            })
+        }else{
+            this.setState({
+                error: {
+                    ...this.state.error,
+                    driverName: false,
+                    driverNameError: ''
+                }
+            })
+        }
+    }
+
+    validatePayRate = (pay_rate) => {
+        const isNotValid = isNotValidPay(pay_rate)
+        this.setState({
+            pay_rate
+        })
+        if(isNotValid){
+            this.setState({
+                error: {
+                    ...this.state.error,
+                    driverPay: true,
+                    driverPayError: isNotValid
+                }
+            })
+        }else{
+            this.setState({
+                error: {
+                    ...this.state.error,
+                    driverPay: false,
+                    driverPayError: ''
+                }
+            })
+        }
+    }
+
     render() {
 
         
-        const {full_name, pay_rate, equipment_id, driver, availableEquipments} = this.state;
+        const {full_name, pay_rate, equipment_id, driver, availableEquipments, error} = this.state;
         
 
         return (
@@ -89,11 +140,11 @@ class DriverEditPage extends Component {
                                     name='full_name'
                                     required
                                     value={full_name}
-                                    onChange={(e) => { this.setState({full_name: e.target.value}) }}
+                                    onChange={(e) => { this.validateDriverName(e.target.value)}}
                                 />
                                 {
-                                    this.state.error.driverName &&
-                                    <span className='error'>{this.state.error.driverNameError}</span>
+                                    error.driverName &&
+                                    <span className='error'>{error.driverNameError}</span>
                                 }
                             </label>
                             <label htmlFor='pay_rate'>
@@ -104,11 +155,23 @@ class DriverEditPage extends Component {
                                     name='pay_rate'
                                     required
                                     value={pay_rate}
-                                    onChange={(e) => { this.setState({pay_rate: e.target.value}) }}
+                                    onChange={(e) => { this.validatePayRate(e.target.value) }}
+                                    onBlur={(e) => {
+                                        if(e.target.value.trim() === ''){
+                                            this.setState({
+                                                pay_rate: 0.0,
+                                                error: {
+                                                    ...this.state.error,
+                                                    driverPay: false,
+                                                    driverPayError: ''
+                                                }
+                                            })
+                                        }
+                                    }}
                                 />
                                 {
-                                    this.state.error.driverPay &&
-                                    <span className='error'>{this.state.error.driverPayError}</span>
+                                    error.driverPay &&
+                                    <span className='error'>{error.driverPayError}</span>
                                 }
                             </label>
                             <label htmlFor='driver'>
@@ -121,12 +184,25 @@ class DriverEditPage extends Component {
                                         {renderEquipmentOptions(availableEquipments)}
                                 </select>
                             </label>
-                            <button
-                                className='app-button'
-                                type='submit'
-                            >
-                                Save Changes
-                                </button>
+                            {
+                                error.driverPay ||
+                                error.driverName
+                                    ?
+                                    <button
+                                        className='app-button'
+                                        type='submit'
+                                        disabled
+                                    >
+                                        Save Changes
+                                    </button>
+                                    :
+                                    <button
+                                        className='app-button'
+                                        type='submit'
+                                    >
+                                        Save Changes
+                                    </button>
+                            }
                         </div>
                     </fieldset>
                 </form>

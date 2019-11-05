@@ -111,7 +111,7 @@ class EquipmentEditPage extends Component {
         const unit_num = e.target['unit-num'].value;
         const { equipments, idleDrivers, drivers } = this.props
 
-        // first if checks if 'No Driver' just stays as is and then dont enter changing driver
+        // Enter changing driver only when they change driver selection
         if(newDriverId !== oldDriverId){
             
             idleDrivers.map((driver) => {
