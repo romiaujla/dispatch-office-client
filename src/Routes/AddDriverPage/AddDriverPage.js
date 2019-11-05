@@ -5,9 +5,6 @@ import {
     routeUserTo,
     renderEquipmentOptions,
 } from '../../HelperFunctions/HelperFunctions';
-import {
-    emptySpaces,
-} from '../../HelperFunctions/InputFieldValidations';
 import AppContext from '../../Contexts/AppContext';
 import config from '../../config';
 

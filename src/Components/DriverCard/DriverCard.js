@@ -3,7 +3,7 @@ import './DriverCard.css';
 import {Link} from 'react-router-dom';
 import config from '../../config';
 import AppContext from '../../Contexts/AppContext';
-import { arrayIsEmpty } from '../../HelperFunctions/HelperFunctions';
+import { arrayIsEmpty, objectIsEmpty, removeEquipmentDriver } from '../../HelperFunctions/HelperFunctions';
 
 
 class DriverCard extends Component{
@@ -13,6 +13,37 @@ class DriverCard extends Component{
     }
 
     static contextType = AppContext
+
+    handleDeleteDriver = (driverToRemove) => {
+
+        let {drivers, idleDrivers, equipments} = this.context
+        const driverId = driverToRemove.id
+
+        // if driver had equipment remove driver from equipment
+        if(!objectIsEmpty(driverToRemove.equipment)){
+            equipments = equipments.map((equipment) => {
+                if(equipment.driver.id === driverId){
+                    removeEquipmentDriver(equipment)
+                }
+                return equipment;
+            })
+        }
+
+        // change driver status to inactive in all drivers array
+        drivers = drivers.map((driver)=>{
+            if(driver.id === driverId){
+                driver.status = 'inactive'
+            }
+            return driver
+        })
+
+        // remove driver for idle driver array
+        idleDrivers = idleDrivers.filter((driver) => driver.id !== driverId)
+
+        this.context.setDrivers(drivers);
+        this.context.setIdleDrivers(idleDrivers);
+        this.context.setEquipments(equipments);
+    }
 
     render(){
 
@@ -47,7 +78,7 @@ class DriverCard extends Component{
                         <Link to={`${config.BASEPATH}/driver/edit/${driver.id}`} className='app-button'>
                             Edit
                         </Link>
-                        <button className='app-button'>
+                        <button className='app-button' onClick={() => {this.handleDeleteDriver(driver)}}>
                             Delete
                         </button>
                     </div>

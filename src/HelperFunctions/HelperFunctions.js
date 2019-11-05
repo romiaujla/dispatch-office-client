@@ -87,3 +87,11 @@ export function getAvailableDrivers(idleDrivers) {
     const availableDrivers = idleDrivers.filter((driver) => !(Object.entries(driver.equipment).length === 0 && driver.equipment.constructor === Object));
     return availableDrivers;
 }
+
+export function removeEquipmentDriver(equipment){
+    equipment.driver = {
+        full_name: '',
+        pay_rate: '',
+    }
+    return equipment;
+}

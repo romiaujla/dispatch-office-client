@@ -2,14 +2,13 @@ import React, { Component } from 'react';
 import './DriversPage.css';
 import AppContext from '../../Contexts/AppContext';
 import DriverCard from '../../Components/DriverCard/DriverCard';
-import { objectIsEmpty } from '../../HelperFunctions/HelperFunctions';
 
 class DriversPage extends Component {
 
     static contextType = AppContext
 
 
-    renderDrivers = (drivers, id) => {
+    renderDrivers = (drivers) => {
         
         return drivers.map((driver) => {
             if(driver.status === 'active'){
@@ -30,7 +29,7 @@ class DriversPage extends Component {
         const { drivers } = this.context
         
         // to change background color if viewing specific driver
-        const { id } = !objectIsEmpty(this.props.match.params) ? this.props.match.params : -1
+        // const { id } = !objectIsEmpty(this.props.match.params) ? this.props.match.params : -1
 
         return (
             <section className='DriversPage width-wrapper'>

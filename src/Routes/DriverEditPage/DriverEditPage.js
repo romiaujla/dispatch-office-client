@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
 import './DriverEditPage.css';
-import DriversDropDown from '../../Components/DriversDropDown/DriversDropDown';
 import AppContext from '../../Contexts/AppContext';
 import {
     handleGoBack,
     objectIsEmpty,
-    arrayIsEmpty,
     renderEquipmentOptions,
 } from '../../HelperFunctions/HelperFunctions';
 import { isNotValidDriverName, isNotValidPay } from '../../HelperFunctions/InputFieldValidations';
-// import EquipmentService from '../../Services/EquipmentsService';
-// import DriversService from '../../Services/DriversService';
 
 class DriverEditPage extends Component {
 

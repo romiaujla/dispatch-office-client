@@ -22,6 +22,7 @@ import LoadByIdPage from "../../Routes/LoadByIdPage/LoadByIdPage";
 import AddDriverPage from "../../Routes/AddDriverPage/AddDriverPage";
 import AddEquipmentPage from "../../Routes/AddEquipmentPage/AddEquipmentPage";
 import DriverEditPage from "../../Routes/DriverEditPage/DriverEditPage";
+import EditLoadPage from "../../Routes/EditLoadPage/EditLoadPage";
 
 class App extends Component {
   constructor(props) {
@@ -306,6 +307,19 @@ class App extends Component {
                 return <LoadByIdPage
                   rprops={rprops}
                   shipments={this.state.shipments}
+                  idleDrivers={this.state.idleDrivers}
+                />
+              }}
+            />
+
+            <Route
+              exact
+              path={`${value.basePath}/load/edit/:id`}
+              component={(rprops) => {
+                return <EditLoadPage 
+                  rprops={rprops}
+                  shipments={this.state.shipments}
+                  drivers={this.state.drivers}
                   idleDrivers={this.state.idleDrivers}
                 />
               }}

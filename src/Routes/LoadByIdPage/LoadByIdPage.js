@@ -34,7 +34,6 @@ class LoadByIdPage extends Component {
             if (shipment.status === 'un-assigned') {
                 avaialableDrivers = getAvailableDrivers(props.idleDrivers)
                 driverAssigned = isNotUndefined(avaialableDrivers[0]) ? avaialableDrivers[0].id : -1
-                console.log(driverAssigned);
             }
         }
         this.state = {

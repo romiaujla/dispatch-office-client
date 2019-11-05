@@ -6,6 +6,7 @@ import {
     handleGoBack,
     objectIsEmpty,
     arrayIsEmpty,
+    removeEquipmentDriver,
 } from '../../HelperFunctions/HelperFunctions';
 // import EquipmentService from '../../Services/EquipmentsService';
 // import DriversService from '../../Services/DriversService';
@@ -124,16 +125,16 @@ class EquipmentEditPage extends Component {
                 return driver;
             })
 
-            let removeEcecuted = false;
+            let removeExecuted = false;
             equipments.map((changeEquipemnt) => {
                 if(oldDriverId === -1){
                     changeEquipemnt = this.setDriverForEquipment(equipment, idleDrivers.filter(driver => driver.id === newDriverId)[0])
                 }else {
 
-                    if((newDriverId === changeEquipemnt.driver.id || newDriverId === -1) && !removeEcecuted) {
+                    if((newDriverId === changeEquipemnt.driver.id || newDriverId === -1) && !removeExecuted) {
                         if(changeEquipemnt.id === equipment.id){
-                            changeEquipemnt = this.removeDriverFromEquipment(equipment)
-                            removeEcecuted = true;
+                            changeEquipemnt = removeEquipmentDriver(changeEquipemnt)
+                            removeExecuted = true;
                         }
                     }
                     if(changeEquipemnt.id === equipment.id && newDriverId !== -1){
