@@ -39,7 +39,8 @@ class DriverEditPage extends Component {
             equipment_id = !objectIsEmpty(driver.equipment) ? driver.equipment.id : -1;
         }
 
-        let availableEquipments = this.props.equipments.filter((equipment) => !equipment.driver.hasOwnProperty('id') && equipment.status === 'active')
+        let availableEquipments = [];
+        availableEquipments = this.props.equipments.filter((equipment) => !equipment.driver.hasOwnProperty('id') && equipment.status === 'active')
         if(equipment_id !== -1){
             const currentEquipment = this.props.equipments.filter((propsEquipment) => propsEquipment.id === equipment_id)[0]
             availableEquipments = [
@@ -114,6 +115,83 @@ class DriverEditPage extends Component {
         }
     }
 
+    changeEquipment = (drivers, driverToChange, equipment) => {
+        const driversArray = drivers.map((driver) => {
+            if(driver.id === driverToChange.id){
+                driver.equipment = equipment
+            }
+            return driver
+        }) 
+        return driversArray;
+    }
+
+    handleEditDriver = (e, changeDriver) => {
+
+        e.preventDefault();
+
+        const full_name = e.target['full_name'].value
+        const pay_rate = e.target['pay_rate'].value
+        const newEquipmentId = parseInt(e.target['equipment_id'].value)
+        const oldEquipmentId = !objectIsEmpty(changeDriver.equipment) ? changeDriver.equipment.id : -1;
+
+        let {drivers, idleDrivers, equipments} = this.context
+
+        if(newEquipmentId !== oldEquipmentId){
+
+            let newEquipment = newEquipmentId !== -1 ? equipments.filter((equipment) => equipment.id === newEquipmentId)[0] : {};
+            newEquipment = !objectIsEmpty(newEquipment) 
+                ?
+                {
+                    id: newEquipment.id,
+                    unit_num: newEquipment.unit_num,
+                    status: 'active'
+                } 
+                : {}
+            
+            drivers = this.changeEquipment(drivers, changeDriver, newEquipment)
+            idleDrivers = this.changeEquipment(idleDrivers, changeDriver, newEquipment)
+
+            // remove driver from old equipment if id not -1
+            if(oldEquipmentId !== -1){
+                equipments = equipments.map((equipment) => {
+                    if(equipment.id === oldEquipmentId){
+                        equipment.driver = {}
+                    }
+                    return equipment
+                })
+            }
+
+            equipments = equipments.map((equipment) => {
+                if(equipment.id === newEquipmentId){
+                    equipment.driver = {
+                        id: changeDriver.id,
+                        full_name,
+                        pay_rate,
+                        status: 'active'
+                    }
+                }
+                return equipment
+            })
+
+        }
+
+        // make changes to the changed driver in all drivers array
+        
+        // make changes to the changed driver in all idle Drivers array
+
+        console.log(`drivers: `, drivers);
+        console.log(`idleDrivers`, idleDrivers);
+        console.log(`equipments: `, equipments);
+        
+
+        this.context.setDrivers(drivers);
+        this.context.setEquipments(equipments);
+        this.context.setIdleDrivers(idleDrivers);
+
+        console.log(`idleEquipments:`, this.context.idleEquipments);
+
+    }
+
     render() {
 
         
@@ -123,7 +201,7 @@ class DriverEditPage extends Component {
         return (
             <section className='DriverEditPage width-wrapper'>
 
-                <form className='edit-equip' onSubmit={(e) => { this.handleEquipmentEdit(e, driver) }}>
+                <form className='edit-equip' onSubmit={(e) => { this.handleEditDriver(e, driver) }}>
                     <fieldset>
                         <legend className='blue-back white-text'>
                             <button type='button' className='app-button go-back' onClick={(e) => { handleGoBack(this.props.rprops.history) }}>
@@ -179,6 +257,8 @@ class DriverEditPage extends Component {
                                 <select 
                                     className='select-css' 
                                     value={equipment_id}
+                                    name='equipmen_id'
+                                    id='equipment_id'
                                     onChange={(e) => {this.setState({equipment_id: e.target.value})}}>
                                         <option value='-1'>No Equipment</option>
                                         {renderEquipmentOptions(availableEquipments)}
