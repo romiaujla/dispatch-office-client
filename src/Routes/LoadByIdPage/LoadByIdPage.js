@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import './LoadByIdPage.css';
 import AppContext from '../../Contexts/AppContext';
-import { 
-    arrayIsEmpty, 
-    objectIsEmpty, 
+import {
+    arrayIsEmpty,
+    objectIsEmpty,
     renderLoadStatusOptions,
     formatCurrency,
-    getAvailableDrivers
+    getAvailableDrivers,
+    isNotUndefined
 } from '../../HelperFunctions/HelperFunctions';
 import DriversDropDown from '../../Components/DriversDropDown/DriversDropDown';
 
@@ -26,24 +27,28 @@ class LoadByIdPage extends Component {
         let shipment = {};
         let status = '';
         let avaialableDrivers = [];
+        let driverAssigned = -1;
         if (!arrayIsEmpty(shipments)) {
             shipment = shipments.filter(shipment => shipment.id === id)[0];
             status = shipment.status
-            if(shipment.status === 'un-assigned'){
+            if (shipment.status === 'un-assigned') {
                 avaialableDrivers = getAvailableDrivers(props.idleDrivers)
+                driverAssigned = isNotUndefined(avaialableDrivers[0]) ? avaialableDrivers[0].id : -1
+                console.log(driverAssigned);
             }
         }
         this.state = {
             shipment,
             status,
-            avaialableDrivers
+            avaialableDrivers,
+            driverAssigned
         }
     }
 
     // remove drivers when status is changed to un-assigned
     removeDriverAndEquipmentFromShipment = (shipment) => {
-        
-        let {idleDrivers } = this.context
+
+        let { idleDrivers } = this.context
         const driver = {
             ...shipment.driver,
             pay_rate: shipment.driver.pay_rate.toString(), // converting to string to make sure all objects are of the same data type
@@ -63,8 +68,8 @@ class LoadByIdPage extends Component {
 
     handleChangeLoadStatus = (e) => {
         e.preventDefault();
-        
-        const {status} = this.state;
+
+        const { status } = this.state;
         this.setState({
             shipment: {
                 ...this.state.shipment,
@@ -76,8 +81,11 @@ class LoadByIdPage extends Component {
             shipments = shipments.map((propShipment) => {
                 if (propShipment.id === shipment.id) {
                     propShipment.status = status
-                    if(status === 'un-assigned'){
+                    if (status === 'un-assigned') {
                         propShipment = this.removeDriverAndEquipmentFromShipment(propShipment);
+                    }
+                    if(status === 'completed'){
+                        
                     }
                 }
                 return propShipment
@@ -89,7 +97,61 @@ class LoadByIdPage extends Component {
 
     handleAssignDriver = (e) => {
         e.preventDefault();
+        let { shipment, driverAssigned } = this.state;
+        let { idleDrivers, shipments } = this.props;
 
+        let driver = {};
+        let equipment = {};
+
+        idleDrivers = idleDrivers.filter((idleDriver) => {
+            if (idleDriver.id === driverAssigned) {
+                driver = {
+                    id: driverAssigned,
+                    full_name: idleDriver.full_name,
+                    pay_rate: idleDriver.pay_rate,
+                    status: idleDriver.status
+                }
+                equipment = {
+                    id: idleDriver.equipment.id,
+                    status: idleDriver.equipment.status,
+                    unit_num: idleDriver.equipment.unit_num
+                }
+            } else {
+                return idleDriver;
+            }
+        });
+
+        shipments = shipments.map((propShipment) => {
+            if (propShipment.id === shipment.id) {
+                propShipment = {
+                    ...propShipment,
+                    driver,
+                    equipment,
+                    status: 'dispatched'
+                }
+            }
+            return propShipment
+        })
+
+        this.setState({
+            shipment: {
+                ...this.state.shipment,
+                status: 'dispatched'
+            },
+            status: 'dispatched',
+            avaialableDrivers: idleDrivers,
+            driverAssigned: -1
+        })
+
+        this.context.setIdleDrivers(idleDrivers);
+        this.context.setShipments(shipments);
+
+    }
+
+    onDriverDropDownChange = (id) => {
+        this.setState({
+            driverAssigned: parseInt(id, 10)
+        })
     }
 
     static contextType = AppContext
@@ -98,7 +160,7 @@ class LoadByIdPage extends Component {
 
         const { shipment } = this.state
         let driverPayout = 0;
-        if(!objectIsEmpty(shipment)){
+        if (!objectIsEmpty(shipment)) {
             driverPayout = shipment.driver.pay_rate * shipment.miles;
         }
 
@@ -213,7 +275,7 @@ class LoadByIdPage extends Component {
                             <div className='driver-info box-style'>
                                 <h3>Driver Info</h3>
                                 <div className='flex-row'>
-                                    
+
                                     <div className='additional-info info-wrapper'>
                                         <div className='additional-info info'>
                                             <h6>Driver</h6>
@@ -235,7 +297,7 @@ class LoadByIdPage extends Component {
                                         </div>
                                         <div className='additional-info info'>
                                             <h6>Load Balance Amount <br />
-                                            ( rate - driver payout )
+                                                ( rate - driver payout )
                                             </h6>
                                             <p className='green-text'>{formatCurrency(shipment.rate - driverPayout)}</p>
                                         </div>
@@ -246,12 +308,23 @@ class LoadByIdPage extends Component {
                             <div className='driver-info box-style'>
                                 <h3>Assign Driver</h3>
                                 <div className='assign-driver'>
-                                    <form className='assign-driver-form' onSubmit={(e) => {this.handleAssignDriver(e)}}>
+                                    <form className='assign-driver-form' onSubmit={(e) => { this.handleAssignDriver(e) }}>
                                         <fieldset>
                                             <div className='assign-driver-fields blue-text'>
                                                 <h6>Available Drivers</h6>
-                                                <DriversDropDown drivers={this.state.avaialableDrivers} />
-                                                <button className='app-button' type='submit'>Assign</button>
+                                                <DriversDropDown
+                                                    drivers={this.state.avaialableDrivers}
+                                                    defaultValue={this.state.driverAssigned}
+                                                    handleChange={(id) => { this.onDriverDropDownChange(id) }}
+                                                />
+                                                {
+                                                    this.state.driverAssigned === -1
+                                                        ?
+                                                        <button className='app-button' type='submit' disabled>Assign</button>
+                                                        :
+                                                        <button className='app-button' type='submit'>Assign</button>
+                                                }
+
                                             </div>
                                         </fieldset>
                                     </form>

@@ -21,6 +21,10 @@ class DriversDropDown extends Component {
     handleChange = (e) => {
         this.setState({
             optionsValue: e.target.value
+        }, () => {
+            if(this.props.hasOwnProperty('handleChange')){
+                this.props.handleChange(this.state.optionsValue)
+            }
         })
     }
 
@@ -37,8 +41,7 @@ class DriversDropDown extends Component {
                     </option>
                 )
             })
-        }
-        
+        }   
     }
 
     render() {

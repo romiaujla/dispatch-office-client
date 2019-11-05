@@ -1,0 +1,95 @@
+.AddDriverPage{
+    font-family: 'Montserrat', sans-serif;
+    margin: 40px auto;
+    border: 1px solid #0B245B;
+    box-shadow: 0 0 10px 1px rgba(0,0,0,0.21);
+    font-size: 0.8em;
+}
+.AddDriverPage .DriversDropDown .select-css{
+    margin-top: 10px;
+}
+.AddDriverPage fieldset{
+    border: none;
+}
+.AddDriverPage legend{
+    width: 100%;
+    font-size: 1.4em;
+    padding: 20px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 600;
+    box-shadow: 4px 0 10px 1px rgba(0,0,0,0.21);
+    display: flex;
+    align-items: center;
+}
+.AddDriverPage #pickup-state::placeholder,
+.AddDriverPage #delivery-state::placeholder{
+    text-transform: none;
+}
+.AddDriverPage #pickup-state,
+.AddDriverPage #delivery-state{
+    text-transform: uppercase;
+}
+.AddDriverPage .go-back{
+    margin: 0;
+    width: auto;
+    border: none;
+    font-size: 0.6em;
+}
+.AddDriverPage legend span{
+    flex: 1;
+}
+.AddDriverPage .flex{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+.AddDriverPage label{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.AddDriverPage .fieldset-sub-title{
+    text-align: center;
+    padding: 5px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    font-size: 1.4em;
+    border-bottom: 2px solid #e1e0e0;
+}
+.AddDriverPage .fieldset-sub-title:not(:first-child){
+    margin-top: 20px;
+}
+.AddDriverPage label:nth-of-type(even){
+    margin: 15px 0px 15px 0px;
+}
+.AddDriverPage label .input-title{
+    font-size: 0.9em;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+.AddDriverPage label input{
+    margin-top: 6px;
+}
+.AddDriverPage .error{
+    color: #9A073C;
+    font-weight: 600;
+    font-size: 0.9em;
+    padding: 5px 5px 0px 5px;
+}
+.AddDriverPage button.app-button{
+    margin: 25px auto 10px auto;
+}
+.AddDriverPage .select-css{
+    margin-top: 6px;
+}
+
+@media only screen and (min-width: 500px){
+    .AddDriverPage{
+        width: 80%;
+        max-width: 500px;
+    }
+    .AddDriverPage button.app-button{
+        margin-top: 20px;
+    }
+}

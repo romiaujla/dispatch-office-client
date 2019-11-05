@@ -19,6 +19,7 @@ import EquipmentEditPage from "../../Routes/EquipmentEditPaage/EquipmentEditPage
 import AddLoadPage from "../../Routes/AddLoadPage/AddLoadPage";
 import { objectIsEmpty } from '../../HelperFunctions/HelperFunctions';
 import LoadByIdPage from "../../Routes/LoadByIdPage/LoadByIdPage";
+import AddDriverPage from "../../Routes/AddDriverPage/AddDriverPage";
 
 class App extends Component {
   constructor(props) {
@@ -262,6 +263,16 @@ class App extends Component {
               exact
               path={`${value.basePath}/load/new`}
               component={AddLoadPage}
+            />
+
+            <Route
+              exact
+              path={`${value.basePath}/driver/new`}
+              component={(rprops) => {
+                return <AddDriverPage
+                  rprops={rprops}
+                  equipments={this.state.equipments} />
+              }}
             />
 
             {/* 
