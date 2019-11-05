@@ -26,7 +26,7 @@ class AddDriverPage extends Component {
             error: {
                 driverNameError: 'Driver name is required',
                 driverName: false,
-                driverPayError: '',
+                driverPayError: 'Driver pay cannot have characters in it',
                 driverPay: false,
             },
             full_name: '',
@@ -60,6 +60,7 @@ class AddDriverPage extends Component {
             pay_rate,
             status: 'active'
         }
+        
         let equipment = {}
         if(equipment_id !== -1){
 
