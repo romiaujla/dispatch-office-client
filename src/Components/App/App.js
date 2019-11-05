@@ -21,6 +21,7 @@ import { objectIsEmpty } from '../../HelperFunctions/HelperFunctions';
 import LoadByIdPage from "../../Routes/LoadByIdPage/LoadByIdPage";
 import AddDriverPage from "../../Routes/AddDriverPage/AddDriverPage";
 import AddEquipmentPage from "../../Routes/AddEquipmentPage/AddEquipmentPage";
+import DriverEditPage from "../../Routes/DriverEditPage/DriverEditPage";
 
 class App extends Component {
   constructor(props) {
@@ -286,8 +287,6 @@ class App extends Component {
               }}
             />
 
-            {/* 
-              Driver Edit Page
             <Route
               exact
               path={`${value.basePath}/driver/edit/:id`}
@@ -298,7 +297,7 @@ class App extends Component {
                   idleDrivers={this.state.idleDrivers}
                   drivers={this.state.drivers} />
               }}
-            /> */}
+            />
 
             <Route
               exact
