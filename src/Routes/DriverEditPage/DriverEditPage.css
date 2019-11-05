@@ -1,0 +1,70 @@
+.DriverEditPage{
+    font-family: 'Montserrat', sans-serif;
+    margin: 40px auto;
+    border: 1px solid #0B245B;
+    box-shadow: 0 0 10px 1px rgba(0,0,0,0.21);
+}
+.DriverEditPage .select-css{
+    margin-top: 8px;
+}
+.DriverEditPage fieldset{
+    border: none;
+}
+.DriverEditPage legend{
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 600;
+    box-shadow: 4px 0 10px 1px rgba(0,0,0,0.21);
+    display: flex;
+    align-items: center;
+}
+.DriverEditPage .go-back{
+    margin: 0;
+    width: auto;
+    border: none;
+    font-size: 0.6em;
+}
+.DriverEditPage legend span{
+    flex: 1;
+}
+.DriverEditPage .flex{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+.DriverEditPage label{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.DriverEditPage label:nth-of-type(even){
+    margin: 25px 0px 25px 0px;
+}
+.DriverEditPage label .input-title{
+    font-size: 0.9em;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+.DriverEditPage label input{
+    margin-top: 6px;
+}
+.DriverEditPage .error{
+    color: #9A073C;
+    font-weight: 600;
+    font-size: 0.7em;
+    padding: 5px;
+}
+.DriverEditPage button.app-button{
+    margin: 25px auto 10px auto;
+}
+@media only screen and (min-width: 500px){
+    .DriverEditPage{
+        width: 80%;
+        max-width: 500px;
+    }
+    .DriverEditPage button.app-button{
+        margin-top: 20px;
+    }
+}
