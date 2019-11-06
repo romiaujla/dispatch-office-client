@@ -5,7 +5,9 @@ import config from '../../config';
 import AppContext from '../../Contexts/AppContext';
 import {
     arrayIsEmpty, objectIsEmpty
-} from '../../HelperFunctions/HelperFunctions'
+} from '../../HelperFunctions/HelperFunctions';
+import DriversService from '../../Services/DriversService';
+import EquipmentsService from '../../Services/EquipmentsService';
 
 class EquipmentCard extends Component {
 
@@ -22,9 +24,17 @@ class EquipmentCard extends Component {
 
         let { equipments } = this.context
         const { drivers, idleDrivers } = this.context
-        equipments = equipments.filter((equipment) => equipment.id !== id)
+        equipments = equipments.map((equipment) => {
+            if(equipment.id === id){
+                EquipmentsService.updateEquipment(equipment.unit_num, 'inactive', equipment.id)
+                equipment.status = 'inactive'
+            }
+            return equipment
+        })
+
         drivers.map(driver => {
             if (driver.equipment.id === id) {
+                DriversService.updateEquipment(driver.id, null)
                 driver.equipment = {}
             }
             return driver
