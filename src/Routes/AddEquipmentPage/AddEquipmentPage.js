@@ -22,7 +22,6 @@ class AddEquipmentPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            hasError: true,
             availableDrivers: [],
             error: {
                 equipmentNumError: 'Equipment number is required',
@@ -168,6 +167,7 @@ class AddEquipmentPage extends Component {
                                     placeholder='Eg. A 101'
                                     value={this.state.unit_num}
                                     onChange={(e) => { this.validateUnitNumField(e.target.value) }}
+                                    required
                                 />
                                 {
                                     error.equipmentNum &&
@@ -188,7 +188,7 @@ class AddEquipmentPage extends Component {
                                 
                             </label>
                             {
-                                !this.state.hasError
+                                !error.equipmentNum
                                     ?
                                     <button
                                         className='app-button'

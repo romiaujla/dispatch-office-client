@@ -31,5 +31,10 @@ export function isNotValidPay(pay){
     if(isNaN(pay)){
         return `Pay can only be numeric, cannot contain characters other than 0-9 and only one '.'`;
     }
+
+    if(pay < 0){
+        return `Pay cannot be negative`;
+    }
+
     return false;
 }

@@ -7,6 +7,7 @@ import {
 } from '../../HelperFunctions/HelperFunctions';
 import AppContext from '../../Contexts/AppContext';
 import config from '../../config';
+import { isNotValidDriverName, isNotValidPay } from '../../HelperFunctions/InputFieldValidations';
 
 class AddDriverPage extends Component {
 
@@ -33,6 +34,54 @@ class AddDriverPage extends Component {
     }
 
     static contextType = AppContext
+
+    validateDriverName = (full_name) => {
+        const isNotValid = isNotValidDriverName(full_name)
+        this.setState({
+            full_name
+        })
+        if(isNotValid){
+            this.setState({
+                error: {
+                    ...this.state.error,
+                    driverName: true,
+                    driverNameError: isNotValid
+                }
+            })
+        }else{
+            this.setState({
+                error: {
+                    ...this.state.error,
+                    driverName: false,
+                    driverNameError: ''
+                }
+            })
+        }
+    }
+
+    validatePayRate = (pay_rate) => {
+        const isNotValid = isNotValidPay(pay_rate)
+        this.setState({
+            pay_rate
+        })
+        if(isNotValid){
+            this.setState({
+                error: {
+                    ...this.state.error,
+                    driverPay: true,
+                    driverPayError: isNotValid
+                }
+            })
+        }else{
+            this.setState({
+                error: {
+                    ...this.state.error,
+                    driverPay: false,
+                    driverPayError: ''
+                }
+            })
+        }
+    }
 
     updateIdleDriverQueue = (driver) => {
         let { idleDrivers } = this.context;
@@ -122,7 +171,8 @@ class AddDriverPage extends Component {
                                     name='full_name'
                                     placeholder='Eg. John Doe'
                                     value={this.state.full_name}
-                                    onChange={(e) => { this.setState({full_name: e.target.value}) }}
+                                    onChange={(e) => { this.validateDriverName(e.target.value) }}
+                                    required
                                 />
                                 {
                                     error.driverName &&
@@ -130,7 +180,7 @@ class AddDriverPage extends Component {
                                 }
                             </label>
                             <label htmlFor='pay_rate'>
-                                <span className='input-title'>pay Rate</span>
+                                <span className='input-title'>salary Per mile</span>
                                 <input
                                     type='text'
                                     id='pay_rate'
@@ -138,7 +188,19 @@ class AddDriverPage extends Component {
                                     min='0'
                                     placeholder='Eg. 0.43'
                                     value={this.state.pay_rate}
-                                    onChange={(e) => { this.setState({pay_rate: e.target.value}) }}
+                                    onChange={(e) => { this.validatePayRate(e.target.value) }}
+                                    onBlur={(e) => {
+                                        if(e.target.value.trim() === ''){
+                                            this.setState({
+                                                pay_rate: 0.0,
+                                                error: {
+                                                    ...this.state.error,
+                                                    driverPay: false,
+                                                    driverPayError: ''
+                                                }
+                                            })
+                                        }
+                                    }}
                                 />
                                 {
                                     error.driverPay &&
