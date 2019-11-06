@@ -8,7 +8,8 @@ import {
     formatCurrency,
     getAvailableDrivers,
     isNotUndefined,
-    routeUserTo
+    routeUserTo,
+    handleGoBack
 } from '../../HelperFunctions/HelperFunctions';
 import DriversDropDown from '../../Components/DriversDropDown/DriversDropDown';
 import config from '../../config';
@@ -202,15 +203,15 @@ class LoadByIdPage extends Component {
             !objectIsEmpty(shipment) ?
                 <section className='LoadByIdPage width-wrapper'>
                     <div className='load-header'>
-                        <Link className='app-button' to={`${config.BASEPATH}/load/edit/${shipment.id}`}>
+                        <button className='app-button' onClick={() => {handleGoBack(this.props.rprops.history)}}>
                             Go Back
-                        </Link>
+                        </button>
                         <Link className='app-button edit-button' to={`${config.BASEPATH}/load/edit/${shipment.id}`}>
                             Edit
                         </Link>
-                        <a className='app-button' onClick={() => {this.handleShipmentDelete(shipment.id)}}>
+                        <button className='app-button' onClick={() => {this.handleShipmentDelete(shipment.id)}}>
                             Delete
-                        </a>
+                        </button>
                     </div>
                     <div className='flex-row'>
                         <div className='pick-up-info box-style'>
