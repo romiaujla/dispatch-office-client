@@ -16,6 +16,7 @@ const DriversService = {
                 console.log(error);
             })
     },
+
     getIdleDrivers() {
         return fetch(`${config.API_ENDPOINT}/drivers/idle`, {
             method: 'GET',
@@ -30,6 +31,7 @@ const DriversService = {
                 console.log(error);
             })
     },
+
     updateEquipment(id, equipment_id) {
         return fetch(`${config.API_ENDPOINT}/drivers/${id}`, {
             method: "PATCH",
@@ -47,6 +49,7 @@ const DriversService = {
                 console.log(error);
             })
     },
+
     updateDriver(driver){
         return fetch(`${config.API_ENDPOINT}/drivers/${driver.id}`, {
             method: "PATCH",
@@ -59,6 +62,26 @@ const DriversService = {
                 pay_rate: driver.pay_rate,
                 equipment_id: driver.equipment_id,
                 status: driver.status
+            })
+        })
+            .then(response => response.json())
+            .then(driver => driver)
+            .catch((error) => {
+                console.log(error);
+            })
+    },
+
+    addDriver(driver){
+        return fetch(`${config.API_ENDPOINT}/drivers`, {
+            method: "POST",
+            headers: {
+                "content-type": "application/json",
+                Authorization: `bearer ${TokenService.getAuthToken()}`
+            },
+            body: JSON.stringify({
+                full_name: driver.full_name,
+                pay_rate: driver.pay_rate,
+                equipment_id: driver.equipment_id,
             })
         })
             .then(response => response.json())
