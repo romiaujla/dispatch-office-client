@@ -9,6 +9,7 @@
     font-weight: 600;
 }
 .Logout .app-link{
+    background: inherit;
     border: none;
     cursor: pointer;
 }
