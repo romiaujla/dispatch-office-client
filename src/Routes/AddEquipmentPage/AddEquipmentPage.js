@@ -127,14 +127,6 @@ class AddEquipmentPage extends Component {
             ...equipments,
             equipment
         ]
-
-        // First add equipment to the database
-        // then do a get equipment to update equipments array with the new equipment with the id
-
-        // If the equipment has driver then update driver table using driver service
-        // and then do another get request to get the 
-
-        // then do a getEquipments from db to set equipments
         
         this.context.setDrivers(drivers);
         this.context.setIdleDrivers(idleDrivers);
