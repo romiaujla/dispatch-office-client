@@ -14,7 +14,7 @@ import {
 import DriversDropDown from '../../Components/DriversDropDown/DriversDropDown';
 import config from '../../config';
 import {Link} from 'react-router-dom';
-import ShipmentsSerivce from '../../Services/ShipmentsService';
+import ShipmentsService from '../../Services/ShipmentsService';
 
 class LoadByIdPage extends Component {
 
@@ -85,14 +85,14 @@ class LoadByIdPage extends Component {
             const { shipment } = this.state;
             let { shipments } = this.props;
 
-            ShipmentsSerivce.updateShipment({id: shipment.id, status})
+            ShipmentsService.updateShipment({id: shipment.id, status})
             shipments = shipments.map((propShipment) => {
                 if (propShipment.id === shipment.id) {
                     propShipment.status = status
                     if (status === 'un-assigned') {
                         propShipment = this.removeDriverAndEquipmentFromShipment(propShipment);
                         // update shipment by settin driver_id to null and status to un-assigned
-                        ShipmentsSerivce.updateShipment({id: shipment.id, driver_id: null})
+                        ShipmentsService.updateShipment({id: shipment.id, driver_id: null})
                     }
                     if(status === 'completed'){
                         
@@ -144,7 +144,7 @@ class LoadByIdPage extends Component {
         })
 
         // update shipment in the database
-        ShipmentsSerivce.updateShipment({id: shipment.id ,driver_id: driverAssigned, status: 'dispatched'})
+        ShipmentsService.updateShipment({id: shipment.id ,driver_id: driverAssigned, status: 'dispatched'})
 
         this.setState({
             shipment: {
