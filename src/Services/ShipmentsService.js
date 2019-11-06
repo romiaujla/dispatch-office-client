@@ -31,8 +31,34 @@ const ShipmentsSerivce = {
               console.log(error);
             });
     },
-    updateShipment(){
-        // do stuff here 
+    updateShipment(shipment){
+      return fetch(`${config.API_ENDPOINT}/shipments`, {
+        method: "PATCH",
+        headers: {
+          "content-type": "application/json",
+          Authorization: `bearer ${TokenService.getAuthToken()}`
+        },
+        body: JSON.stringify({
+            rate: shipment.rate, 
+            status: shipment.status, 
+            miles: shipment.miles, 
+            driver_id: shipment.driver_id, 
+            broker: shipment.broker,
+            pickup_date: shipment.pickup_date,
+            delivery_date: shipment.delivery_date,
+            pickup_city: shipment.pickup_city,
+            pickup_state: shipment.pickup_state,
+            pickup_zipcode: shipment.pickup_zipcode,
+            delivery_city: shipment.delivery_city,
+            delivery_state: shipment.delivery_state,
+            delivery_zipcode: shipment.delivery_zipcode
+        })
+      })
+        .then(response => response.json())
+        .then(shipment => shipment)
+        .catch(error => {
+          console.log(error);
+        });
     }
 }
 
