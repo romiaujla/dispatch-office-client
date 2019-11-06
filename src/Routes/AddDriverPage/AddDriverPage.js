@@ -8,6 +8,7 @@ import {
 import AppContext from '../../Contexts/AppContext';
 import config from '../../config';
 import { isNotValidDriverName, isNotValidPay } from '../../HelperFunctions/InputFieldValidations';
+import DriversService from '../../Services/DriversService';
 
 class AddDriverPage extends Component {
 
@@ -92,16 +93,25 @@ class AddDriverPage extends Component {
         this.context.setIdleDrivers(idleDrivers)
     }
 
-    handleAddDriver = (e) => {
+    handleAddDriver = async (e) => {
 
         e.preventDefault();
         const full_name = e.target['full_name'].value;
         const pay_rate = e.target['pay_rate'].value;
         let equipment_id = parseInt(e.target['equipment_id'].value, 10);
+
+        let dbDriver = {
+            full_name,
+            pay_rate,
+            equipment_id: equipment_id !== -1 ? equipment_id : null
+        }
+
+        dbDriver = await DriversService.addDriver(dbDriver)
+
         let {drivers, idleDrivers, equipments} = this.context
 
         let driver = {
-            id: drivers.length+60,
+            id: dbDriver.id,
             full_name,
             pay_rate,
             status: 'active'
@@ -121,11 +131,11 @@ class AddDriverPage extends Component {
                 }
                 return contextEquipment
             });
+        }
 
-            driver = {
-                ...driver,
-                equipment
-            }
+        driver = {
+            ...driver,
+            equipment
         }
 
         // add new driver to all the drivers
