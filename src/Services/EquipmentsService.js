@@ -16,9 +16,25 @@ const EquipmentService = {
         console.log(error);
       });
   },
-  addNewEquipment(equipment){
-    console.log(equipment);
+
+  addNewEquipment(unit_num){
+    return fetch(`${config.API_ENDPOINT}/equips`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        Authorization: `bearer ${TokenService.getAuthToken()}`
+      },
+      body: JSON.stringify({
+        unit_num,
+      })
+    })
+      .then(response => response.json())
+      .then(equipments => equipments)
+      .catch(error => {
+        console.log(error);
+      });
   },
+
   updateEquipment(unit_num, status, id){
     return fetch(`${config.API_ENDPOINT}/equips/${id}`, {
       method: "PATCH",

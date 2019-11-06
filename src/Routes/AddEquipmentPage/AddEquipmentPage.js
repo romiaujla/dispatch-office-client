@@ -9,6 +9,8 @@ import {
 import AppContext from '../../Contexts/AppContext';
 import config from '../../config';
 import { emptySpaces } from '../../HelperFunctions/InputFieldValidations';
+import EquipmentService from '../../Services/EquipmentsService';
+import DriversService from '../../Services/DriversService';
 
 class AddEquipmentPage extends Component {
 
@@ -65,22 +67,29 @@ class AddEquipmentPage extends Component {
         this.context.setIdleDrivers(idleDrivers)
     }
 
-    handleAddEquipment = (e) => {
+    handleAddEquipment = async (e) => {
 
         e.preventDefault();
 
         const unit_num = e.target['unit_num'].value;
         const driver_id = parseInt(e.target['driver_id'].value,10);
 
+        // Add Equipment to the db
+        const dbEquipment = await EquipmentService.addNewEquipment(unit_num);        
+
         let equipment = {
-            unit_num,
-            id: this.context.equipments.length+60,
+            unit_num: dbEquipment.unit_num,
+            id: dbEquipment.id,
             status: 'active'
         }
+
         let driver = {}
         let {equipments, drivers, idleDrivers} = this.context
 
         if(driver_id !== -1){
+
+            // update driver to reference equipment in the db
+            DriversService.updateEquipment(driver_id, equipment.id);
 
             drivers = drivers.map((contextDriver) => {
                 if(contextDriver.id === driver_id){
@@ -101,6 +110,11 @@ class AddEquipmentPage extends Component {
                 }
                 return idleDriver;
             })
+        } else {
+            driver = {
+                full_name: '',
+                pay_rate: ''
+            }
         }
 
         // adding driver to the equipment 
@@ -114,6 +128,14 @@ class AddEquipmentPage extends Component {
             ...equipments,
             equipment
         ]
+
+        // First add equipment to the database
+        // then do a get equipment to update equipments array with the new equipment with the id
+
+        // If the equipment has driver then update driver table using driver service
+        // and then do another get request to get the 
+
+        // then do a getEquipments from db to set equipments
         
         this.context.setDrivers(drivers);
         this.context.setIdleDrivers(idleDrivers);
