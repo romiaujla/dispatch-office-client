@@ -5,7 +5,6 @@ import config from '../../config';
 import AppContext from '../../Contexts/AppContext';
 import { arrayIsEmpty, objectIsEmpty, removeEquipmentDriver } from '../../HelperFunctions/HelperFunctions';
 import DriversService from '../../Services/DriversService';
-import EquipmentsService from '../../Services/EquipmentsService';
 
 
 class DriverCard extends Component{
