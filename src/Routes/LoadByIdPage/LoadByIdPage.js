@@ -14,7 +14,6 @@ import {
 import DriversDropDown from '../../Components/DriversDropDown/DriversDropDown';
 import config from '../../config';
 import {Link} from 'react-router-dom';
-import ShipmentsService from '../../Services/ShipmentsService';
 import ShipmentsSerivce from '../../Services/ShipmentsService';
 
 class LoadByIdPage extends Component {

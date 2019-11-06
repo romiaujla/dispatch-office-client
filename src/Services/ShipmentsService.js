@@ -31,8 +31,9 @@ const ShipmentsSerivce = {
               console.log(error);
             });
     },
+
     updateShipment(shipment){
-      return fetch(`${config.API_ENDPOINT}/shipments`, {
+      return fetch(`${config.API_ENDPOINT}/shipments/${shipment.id}`, {
         method: "PATCH",
         headers: {
           "content-type": "application/json",
@@ -53,6 +54,21 @@ const ShipmentsSerivce = {
             delivery_state: shipment.delivery_state,
             delivery_zipcode: shipment.delivery_zipcode
         })
+      })
+        .then(response => response.json())
+        .then(shipment => shipment)
+        .catch(error => {
+          console.log(error);
+        });
+    },
+
+    deleteShipment(id){
+      return fetch(`${config.API_ENDPOINT}/shipments/${id}`, {
+        method: "DELETE",
+        headers: {
+          "content-type": "application/json",
+          Authorization: `bearer ${TokenService.getAuthToken()}`
+        }
       })
         .then(response => response.json())
         .then(shipment => shipment)
