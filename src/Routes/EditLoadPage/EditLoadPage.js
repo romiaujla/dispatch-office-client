@@ -12,6 +12,7 @@ import {
 } from '../../HelperFunctions/InputFieldValidations';
 import AppContext from '../../Contexts/AppContext';
 import config from '../../config';
+import ShipmentsSerivce from '../../Services/ShipmentsService';
 
 class EditLoadPage extends Component {
 
@@ -43,7 +44,7 @@ class EditLoadPage extends Component {
                 cityError: 'City is required',
                 pickupCity: false,
                 deliveryCity: false,
-                stateError: 'State is required',
+                stateError: 'State is required and must be two characters, Eg. New York will be NY',
                 pickupState: false,
                 deliveryState: false,
                 zipcodeError: 'Zipcode is required',
@@ -92,6 +93,7 @@ class EditLoadPage extends Component {
                     }
                 });
         } else {
+            
             name === 'pickup-date'
                 ? this.setState({
                     error: {
@@ -149,15 +151,15 @@ class EditLoadPage extends Component {
     }
 
     validateStateInput = (e) => {
-        const state = e.target.value;
+        const stateCode = e.target.value;
         const { name } = e.target;
 
         name === 'pickup-state'
-            ? this.setState({ pickupState: state })
-            : this.setState({ deliveryState: state });
+            ? this.setState({ pickupState: stateCode })
+            : this.setState({ deliveryState: stateCode });
 
 
-        if (emptySpaces(state)) {
+        if (emptySpaces(stateCode) || stateCode.trim().length !== 2) {
             name === 'pickup-state'
                 ? this.setState({
                     error: {
@@ -259,6 +261,24 @@ class EditLoadPage extends Component {
             broker
         }
 
+        const updateShipmentInDB = {
+            id: shipmentId,
+            pickup_date,
+            delivery_date,
+            rate,
+            miles,
+            broker,
+            pickup_city: pickup_warehouse.city,
+            pickup_state: pickup_warehouse.state,
+            pickup_zipcode: pickup_warehouse.zipcode,
+            delivery_city: delivery_warehouse.city,
+            delivery_state: delivery_warehouse.state,
+            delivery_zipcode: delivery_warehouse.zipcode
+        }
+
+        // update the fields in the database.
+        ShipmentsSerivce.updateShipment(updateShipmentInDB)
+
         let {shipments} = this.context
         shipments = shipments.map((shipment) => {
             if(shipment.id === shipmentId){
@@ -286,7 +306,7 @@ class EditLoadPage extends Component {
                             <button type='button' className='app-button go-back' onClick={(e) => { handleGoBack(this.props.rprops.history) }}>
                                 Go Back
                             </button>
-                            <span>Add Load</span>
+                            <span>Edit Equipment</span>
                         </legend>
                         <div className='flex'>
                             <h4 className='fieldset-sub-title blue-text'>
