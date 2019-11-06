@@ -13,6 +13,7 @@ import {
 import DriversDropDown from '../../Components/DriversDropDown/DriversDropDown';
 import AppContext from '../../Contexts/AppContext';
 import config from '../../config';
+import ShipmentsSerivce from '../../Services/ShipmentsService';
 
 class AddLoadPage extends Component {
 
@@ -28,7 +29,7 @@ class AddLoadPage extends Component {
                 cityError: 'City is required',
                 pickupCity: false,
                 deliveryCity: false,
-                stateError: 'State is required',
+                stateError: 'State is required and must be two characters, Eg. for New York - NY',
                 pickupState: false,
                 deliveryState: false,
                 zipcodeError: 'Zipcode is required',
@@ -141,7 +142,7 @@ class AddLoadPage extends Component {
             : this.setState({ deliveryState: state });
 
 
-        if (emptySpaces(state)) {
+        if (emptySpaces(state) || state.trim().length !== 2) {
             name === 'pickup-state'
                 ? this.setState({
                     error: {
@@ -218,23 +219,23 @@ class AddLoadPage extends Component {
         this.context.setIdleDrivers(idleDrivers)
     }
 
-    handleAddLoad = (e) => {
+    handleAddLoad = async (e) => {
 
         e.preventDefault();
 
         const broker = e.target['broker'].value.trim() || '';
         const delivery_warehouse = {
             city: e.target['delivery-city'].value.trim(),
-            state: e.target['delivery-state'].value,
+            state: e.target['delivery-state'].value.toUpperCase(),
             zipcode: e.target['delivery-zipcode'].value.trim()
         };
         const pickup_warehouse = {
             city: e.target['pickup-city'].value.trim(),
-            state: e.target['pickup-state'].value,
+            state: e.target['pickup-state'].value.toUpperCase(),
             zipcode: e.target['pickup-zipcode'].value.trim()
         };
-        const miles = e.target['miles'].value.trim() || '0';
-        const rate = e.target['rate'].value.trim() || '0';
+        const miles = e.target['miles'].value.trim() || 0;
+        const rate = e.target['rate'].value.trim() || 0;
         const driverId = parseInt(e.target['driver'].value, 10);
 
         // getting driver and equipment from drivers array in context
@@ -265,8 +266,29 @@ class AddLoadPage extends Component {
         const pickup_date = e.target['pickup-date'].value;
         const delivery_date = e.target['delivery-date'].value;
 
+        // the shipment to store in the database
+        let shipmentInDB = {
+            rate,
+            status,
+            miles,
+            driver_id: driverId !== -1 ? driverId : null,
+            broker,
+            pickup_date,
+            delivery_date,
+            pickup_city: pickup_warehouse.city,
+            pickup_state: pickup_warehouse.state,
+            pickup_zipcode: pickup_warehouse.zipcode,
+            delivery_city: pickup_warehouse.city,
+            delivery_state: pickup_warehouse.state,
+            delivery_zipcode: pickup_warehouse.zipcode
+        }
+        // add and get the new shipment with the id
+        shipmentInDB = await ShipmentsSerivce.insertShipment(shipmentInDB)
+
+        // shipment in the format for the front end to display it correctly
+        // and keep all arrays in order.
         const newShipment = {
-            id: this.context.shipments.length + 50,
+            id: shipmentInDB.id,
             pickup_date,
             delivery_date,
             broker,
