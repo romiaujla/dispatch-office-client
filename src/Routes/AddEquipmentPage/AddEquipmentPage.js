@@ -8,6 +8,7 @@ import {
 } from '../../HelperFunctions/HelperFunctions';
 import AppContext from '../../Contexts/AppContext';
 import config from '../../config';
+import { emptySpaces } from '../../HelperFunctions/InputFieldValidations';
 
 class AddEquipmentPage extends Component {
 
@@ -19,7 +20,7 @@ class AddEquipmentPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            hasError: false,
+            hasError: true,
             availableDrivers: [],
             error: {
                 equipmentNumError: 'Equipment number is required',
@@ -31,6 +32,29 @@ class AddEquipmentPage extends Component {
     }
 
     static contextType = AppContext
+
+    validateUnitNumField = (unit_num) => {
+        this.setState({
+            unit_num
+        })
+        if(emptySpaces(unit_num)){
+            this.setState({
+                hasError: true,
+                error: {
+                    equipmentNumError: 'Equipment number is required',
+                    equipmentNum: true,
+                }
+            })
+        }else{
+            this.setState({
+                hasError: false,
+                error: {
+                    equipmentNumError: '',
+                    equipmentNum: false,
+                }
+            })
+        }
+    }
 
     updateIdleDriverQueue = (driver) => {
         let { idleDrivers } = this.context;
@@ -119,9 +143,9 @@ class AddEquipmentPage extends Component {
                                     type='text'
                                     id='unit_num'
                                     name='unit_num'
-                                    placeholder='Eg. John Doe'
+                                    placeholder='Eg. A 101'
                                     value={this.state.unit_num}
-                                    onChange={(e) => { this.setState({unit_num: e.target.value}) }}
+                                    onChange={(e) => { this.validateUnitNumField(e.target.value) }}
                                 />
                                 {
                                     error.equipmentNum &&
@@ -139,22 +163,16 @@ class AddEquipmentPage extends Component {
                                     <option value='-1'>No Driver</option>
                                     {renderDriverOptions(availableDrivers)}
                                 </select>
-                                {
-                                    this.state.error.deliveryZipcode &&
-                                    <span className='error'>{this.state.error.zipcodeError}</span>
-                                }
+                                
                             </label>
                             {
-                                !(
-                                    error.equipmentNum ||
-                                    error.driverPay
-                                )
+                                !this.state.hasError
                                     ?
                                     <button
                                         className='app-button'
                                         type='submit'
                                     >
-                                        Add New Driver
+                                        Add New Equipment
                                     </button>
                                     :
                                     <button
@@ -162,7 +180,7 @@ class AddEquipmentPage extends Component {
                                         type='submit'
                                         disabled
                                     >
-                                        Add New Driver
+                                        Add New Equipment
                                     </button>
                             }
 

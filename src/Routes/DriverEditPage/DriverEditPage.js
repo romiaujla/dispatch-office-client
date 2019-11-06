@@ -9,6 +9,7 @@ import {
 } from '../../HelperFunctions/HelperFunctions';
 import { isNotValidDriverName, isNotValidPay } from '../../HelperFunctions/InputFieldValidations';
 import config from '../../config';
+import DriversSerivce from '../../Services/DriversService';
 
 class DriverEditPage extends Component {
 
@@ -147,10 +148,11 @@ class DriverEditPage extends Component {
         const oldEquipmentId = !objectIsEmpty(changeDriver.equipment) ? changeDriver.equipment.id : -1;
 
         let {drivers, idleDrivers, equipments} = this.context
+        let newEquipment= {};
 
         if(newEquipmentId !== oldEquipmentId){
 
-            let newEquipment = newEquipmentId !== -1 ? equipments.filter((equipment) => equipment.id === newEquipmentId)[0] : {};
+            newEquipment = newEquipmentId !== -1 ? equipments.filter((equipment) => equipment.id === newEquipmentId)[0] : {};
             newEquipment = !objectIsEmpty(newEquipment) 
                 ?
                 {
@@ -159,7 +161,7 @@ class DriverEditPage extends Component {
                     status: 'active'
                 } 
                 : {}
-            
+
             drivers = this.changeEquipment(drivers, changeDriver, newEquipment)
             idleDrivers = this.changeEquipment(idleDrivers, changeDriver, newEquipment)
 
@@ -194,6 +196,15 @@ class DriverEditPage extends Component {
         // make changes to the changed driver in all drivers array
         drivers = this.makeDriverChanges(drivers, changeDriver, changes)
         idleDrivers = this.makeDriverChanges(idleDrivers, changeDriver, changes)
+
+        const updateDriverInDB = {
+            id: changeDriver.id,
+            full_name,
+            pay_rate,
+            equipment_id: newEquipmentId === -1 ? null : newEquipmentId
+        }
+
+        DriversSerivce.updateDriver(updateDriverInDB);
 
         this.context.setDrivers(drivers);
         this.context.setEquipments(equipments);
