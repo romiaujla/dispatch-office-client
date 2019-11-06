@@ -278,9 +278,9 @@ class AddLoadPage extends Component {
             pickup_city: pickup_warehouse.city,
             pickup_state: pickup_warehouse.state,
             pickup_zipcode: pickup_warehouse.zipcode,
-            delivery_city: pickup_warehouse.city,
-            delivery_state: pickup_warehouse.state,
-            delivery_zipcode: pickup_warehouse.zipcode
+            delivery_city: delivery_warehouse.city,
+            delivery_state: delivery_warehouse.state,
+            delivery_zipcode: delivery_warehouse.zipcode
         }
         // add and get the new shipment with the id
         shipmentInDB = await ShipmentsSerivce.insertShipment(shipmentInDB)
