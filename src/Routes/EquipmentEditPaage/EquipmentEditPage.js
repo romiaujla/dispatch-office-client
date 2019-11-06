@@ -9,6 +9,7 @@ import {
     removeEquipmentDriver,
 } from '../../HelperFunctions/HelperFunctions';
 import EquipmentService from '../../Services/EquipmentsService';
+import DriversService from '../../Services/DriversService';
 // import EquipmentService from '../../Services/EquipmentsService';
 // import DriversService from '../../Services/DriversService';
 
@@ -64,6 +65,7 @@ class EquipmentEditPage extends Component {
     static contextType = AppContext
 
     giveEquipment = (driver, equipment) => {
+        DriversService.updateEquipment(driver.id, equipment.id);
         driver.equipment = {
             id: equipment.id,
             unit_num: equipment.unit_num,
@@ -73,12 +75,12 @@ class EquipmentEditPage extends Component {
     }
 
     takeAwayEquipment = (driver) => {
+        DriversService.updateEquipment(driver.id, null)
         driver.equipment = {}
         return driver;        
     }
 
     setDriverForEquipment = (equipment, driver) => {
-        
         equipment.driver = driver
         return equipment;
     }
@@ -125,8 +127,6 @@ class EquipmentEditPage extends Component {
                 driver = this.changeEquipmentForDriver(drivers, driver, newDriverId, oldDriverId, equipment);
                 return driver;
             })
-            
-            // Call driver service to update equipment_id in database
 
             let removeExecuted = false;
             equipments.map((changeEquipemnt) => {
@@ -146,8 +146,6 @@ class EquipmentEditPage extends Component {
                 }
                 return changeEquipemnt
             })
-            
-            
         }
 
         if (unit_num !== equipment.unit_num) {
@@ -175,6 +173,7 @@ class EquipmentEditPage extends Component {
             // call service to update the database
             EquipmentService.updateEquipment(unit_num, 'active', equipment.id);
         }
+
         
         this.context.setIdleDrivers(idleDrivers);
         this.context.setEquipments(equipments);

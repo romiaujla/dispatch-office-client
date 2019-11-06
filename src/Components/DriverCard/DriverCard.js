@@ -4,6 +4,8 @@ import {Link} from 'react-router-dom';
 import config from '../../config';
 import AppContext from '../../Contexts/AppContext';
 import { arrayIsEmpty, objectIsEmpty, removeEquipmentDriver } from '../../HelperFunctions/HelperFunctions';
+import DriversService from '../../Services/DriversService';
+import EquipmentsService from '../../Services/EquipmentsService';
 
 
 class DriverCard extends Component{
@@ -31,11 +33,21 @@ class DriverCard extends Component{
 
         // change driver status to inactive in all drivers array
         drivers = drivers.map((driver)=>{
+
             if(driver.id === driverId){
                 driver.status = 'inactive'
             }
             return driver
         })
+
+        const updateDriverInDB = {
+            id: driverToRemove.id,
+            full_name: driverToRemove.full_name,
+            pay_rate: driverToRemove.pay_rate,
+            equipment_id: null,
+            status: 'inactive'
+        }
+        DriversService.updateDriver(updateDriverInDB);
 
         // remove driver for idle driver array
         idleDrivers = idleDrivers.filter((driver) => driver.id !== driverId)

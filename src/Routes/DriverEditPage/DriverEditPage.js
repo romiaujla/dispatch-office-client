@@ -5,8 +5,10 @@ import {
     handleGoBack,
     objectIsEmpty,
     renderEquipmentOptions,
+    routeUserTo,
 } from '../../HelperFunctions/HelperFunctions';
 import { isNotValidDriverName, isNotValidPay } from '../../HelperFunctions/InputFieldValidations';
+import config from '../../config';
 
 class DriverEditPage extends Component {
 
@@ -197,7 +199,7 @@ class DriverEditPage extends Component {
         this.context.setEquipments(equipments);
         this.context.setIdleDrivers(idleDrivers);
 
-        console.log(`idleEquipments:`, this.context.idleEquipments);
+        routeUserTo(this.props.rprops.history, `${config.BASEPATH}/drivers`);
     }
 
     render() {

@@ -4,7 +4,6 @@ import {
     handleGoBack,
     routeUserTo,
     formatDate,
-    getAvailableDrivers,
     arrayIsEmpty,
 } from '../../HelperFunctions/HelperFunctions';
 import {
