@@ -14,6 +14,8 @@ import {
 import DriversDropDown from '../../Components/DriversDropDown/DriversDropDown';
 import config from '../../config';
 import {Link} from 'react-router-dom';
+import ShipmentsService from '../../Services/ShipmentsService';
+import ShipmentsSerivce from '../../Services/ShipmentsService';
 
 class LoadByIdPage extends Component {
 
@@ -83,11 +85,15 @@ class LoadByIdPage extends Component {
         }, () => {
             const { shipment } = this.state;
             let { shipments } = this.props;
+
+            ShipmentsSerivce.updateShipment({id: shipment.id, status})
             shipments = shipments.map((propShipment) => {
                 if (propShipment.id === shipment.id) {
                     propShipment.status = status
                     if (status === 'un-assigned') {
                         propShipment = this.removeDriverAndEquipmentFromShipment(propShipment);
+                        // update shipment by settin driver_id to null and status to un-assigned
+                        ShipmentsSerivce.updateShipment({id: shipment.id, driver_id: null})
                     }
                     if(status === 'completed'){
                         
@@ -108,7 +114,7 @@ class LoadByIdPage extends Component {
         let driver = {};
         let equipment = {};
 
-        idleDrivers = idleDrivers.filter((idleDriver) => {
+        idleDrivers = idleDrivers.map((idleDriver) => {
             if (idleDriver.id === driverAssigned) {
                 driver = {
                     id: driverAssigned,
@@ -121,11 +127,10 @@ class LoadByIdPage extends Component {
                     status: idleDriver.equipment.status,
                     unit_num: idleDriver.equipment.unit_num
                 }
-                return;
-            } else {
-                return idleDriver;
             }
-        });
+            return idleDriver;
+        })
+        idleDrivers = idleDrivers.filter((idleDriver) => idleDriver.id !== driverAssigned);
 
         shipments = shipments.map((propShipment) => {
             if (propShipment.id === shipment.id) {
@@ -138,6 +143,9 @@ class LoadByIdPage extends Component {
             }
             return propShipment
         })
+
+        // update shipment in the database
+        ShipmentsSerivce.updateShipment({id: shipment.id ,driver_id: driverAssigned, status: 'dispatched'})
 
         this.setState({
             shipment: {
@@ -182,6 +190,9 @@ class LoadByIdPage extends Component {
         }
 
         shipments = shipments.filter((shipment) => shipment.id !== shipmentId);
+
+        // remove shipment from the database
+        ShipmentsService.deleteShipment(shipmentId);
 
         this.context.setIdleDrivers(idleDrivers);
         this.context.setShipments(shipments);
