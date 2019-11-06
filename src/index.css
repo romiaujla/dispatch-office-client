@@ -61,6 +61,7 @@ body {
 
 /* Global Button Styling */
 .app-button{
+  border: none;
   width: auto;
   background: rgb(210, 22, 91);
   color: #F9FAF5;
