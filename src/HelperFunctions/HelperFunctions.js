@@ -95,3 +95,11 @@ export function removeEquipmentDriver(equipment){
     }
     return equipment;
 }
+
+export function pickupAfterDelivery(pickup, delivery){
+    const pickupYear = new Date(pickup).getFullYear();
+
+    console.log(pickupYear);
+    
+    return false;
+}
