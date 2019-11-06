@@ -60,7 +60,7 @@ class EditLoadPage extends Component {
             deliveryZipcode: delivery_warehouse.zipcode,
             miles: shipment.miles,
             rate: shipment.rate,
-            broker: shipment.broker,
+            broker: shipment.broker || '',
             driverId: driver.id
         }
     }
