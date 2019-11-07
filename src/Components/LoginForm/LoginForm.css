@@ -42,7 +42,9 @@
     font-size: 0.7em;
     padding: 5px;
 }
-
+.LoginForm button.app-button{
+    margin: 30px auto 15px auto;
+}
 @media only screen and (min-width: 500px){
     .LoginForm{
         width: 80%;

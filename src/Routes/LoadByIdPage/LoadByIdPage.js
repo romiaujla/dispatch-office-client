@@ -103,7 +103,7 @@ class LoadByIdPage extends Component {
                         this.setState({
                             completedShipment: true
                         })
-                        propShipment = this.sendDriverToIdleDrivers(propShipment);
+                        this.sendDriverToIdleDrivers(propShipment);
                     }
                 }
                 return propShipment

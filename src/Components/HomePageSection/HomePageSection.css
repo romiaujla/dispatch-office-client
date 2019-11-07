@@ -1,0 +1,9 @@
+.HomePageSection .user-info{
+    padding: 0px;
+    margin: 0px;
+    font-size: 0.7em;
+    text-align:center;
+}
+.HomePageSection .user-info span{
+    font-weight: 600;
+}
