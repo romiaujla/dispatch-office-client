@@ -112,15 +112,21 @@ export function getUnAssignedShipments(shipments){
     return [];
 }
 
+// This function can take in either one string 
+// which will be either one status or take in an
+// array of status and return shipments that have that status
 export function getShipmentWithStatus(shipments, status){
     if(typeof status === 'string'){
         status = [status];
     }
     if(!arrayIsEmpty(shipments)){
-        return shipments.filter(shipment => status.includes(shipments.status));
+        return shipments.filter(shipment => status.includes(shipment.status));
     }
 }
 
+// return all shipments except un-assigned or completed
+// because those are the only two shipments that are not in progress
+// as un-assigned has no driver and completed is already over
 export function getAllShipmentsInProgress(shipments){
     if(!arrayIsEmpty(shipments)){
         return shipments.filter(shipment => !['un-assigned', 'completed'].includes(shipment.status))

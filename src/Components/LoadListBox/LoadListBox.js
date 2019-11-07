@@ -10,7 +10,7 @@ import {
 import config from "../../config";
 
 class LoadListBox extends Component {
-  
+
   static contextType = AppContext;
 
   static defaultProps = {
@@ -21,8 +21,8 @@ class LoadListBox extends Component {
 
   // return the list of shipments
   renderShipments = (shipments) => {
-    
-    if(arrayIsEmpty(shipments)){
+
+    if (arrayIsEmpty(shipments)) {
       return (
         <li className='no-shipments'>
           <div>

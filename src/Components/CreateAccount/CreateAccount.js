@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './CreateAccount.css';
-import { validUserInputs } from '../../HelperFunctions/CreateAccountValidation';
 import { emptySpaces } from '../../HelperFunctions/InputFieldValidations';
 
 
@@ -47,7 +46,12 @@ class CreateAccount extends Component {
         }
     }
 
+    checkErrors = (errInState) => {
+        // if()
+    }
+
     handleFormSubmit = (e) => {
+        this.checkErrors(this.state);
         e.preventDefault();
         const { username, password, full_name, company_name, mc_num } = e.target
         const user = {
@@ -57,8 +61,6 @@ class CreateAccount extends Component {
             mc_num: mc_num.value,
             full_name: full_name.value
         }
-        
-        
 
     }
 
@@ -101,17 +103,26 @@ class CreateAccount extends Component {
                         <label htmlFor='full_name'>
                             <span className='input-title'>* Full Name:</span>
                             <input type='text' id='full_name' name='full_name' required />
-                            <span className='error'>Invalid Username</span>
+                            {
+                                this.state.fullNameError &&
+                                <span className='error'>{this.state.fullNameError}</span>
+                            }
                         </label>
                         <label htmlFor='company_name'>
                             <span className='input-title'>Company Name:</span>
                             <input type='text' id='company_name' name='company_name' />
-                            <span className='error'>Company Name Error</span>
+                            {
+                                this.state.companyNameError &&
+                                <span className='error'>{this.state.companyNameError}</span>
+                            }
                         </label>
                         <label htmlFor='mc_num'>
                             <span className='input-title'>MC Number:</span>
                             <input type='text' id='mc_num' name='mc_num' />
-                            <span className='error'>MC Number Error</span>
+                            {
+                                this.state.mcNumError &&
+                                <span className='error'>{this.state.mcNumError}</span>
+                            }
                         </label>
                         <button
                             className='app-button'
