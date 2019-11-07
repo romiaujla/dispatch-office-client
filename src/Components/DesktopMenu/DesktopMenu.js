@@ -28,36 +28,38 @@ class DesktopMenu extends Component {
 
     handleKeyboardSelect = (e) => {
         e.preventDefault();
-        
-        if(e.toElement.outerHTML === this.driverAnchor.outerHTML){
-            if(this.driverAnchor.parentElement.className === 'has-submenu'){
-                this.driverAnchor.parentElement.className = 'has-submenu open'
-                this.equipmentAnchor.parentElement.className = 'has-submenu';
-                this.loadAnchor.parentElement.className = 'has-submenu';
-            }else{
-                this.driverAnchor.parentElement.className = 'has-submenu'
-            }
-        }
-        
-        if(e.toElement.outerHTML === this.equipmentAnchor.outerHTML){
-            if(this.equipmentAnchor.parentElement.className === 'has-submenu'){
-                this.driverAnchor.parentElement.className = 'has-submenu'
-                this.equipmentAnchor.parentElement.className = 'has-submenu open';
-                this.loadAnchor.parentElement.className = 'has-submenu';
-            }else{
-                this.equipmentAnchor.parentElement.className = 'has-submenu'
-            }
-        }
 
-        if(e.toElement.outerHTML === this.loadAnchor.outerHTML){
-            if(this.loadAnchor.parentElement.className === 'has-submenu'){
-                this.driverAnchor.parentElement.className = 'has-submenu'
-                this.equipmentAnchor.parentElement.className = 'has-submenu';
-                this.loadAnchor.parentElement.className = 'has-submenu open';
-            }else{
-                this.loadAnchor.parentElement.className = 'has-submenu'
-            }
-        } 
+        // Below code works but does not work when the menu looses focus.
+        
+        // if(e.toElement.outerHTML === this.driverAnchor.outerHTML){
+        //     if(this.driverAnchor.parentElement.className === 'has-submenu'){
+        //         this.driverAnchor.parentElement.className = 'has-submenu open'
+        //         this.equipmentAnchor.parentElement.className = 'has-submenu';
+        //         this.loadAnchor.parentElement.className = 'has-submenu';
+        //     }else{
+        //         this.driverAnchor.parentElement.className = 'has-submenu'
+        //     }
+        // }
+        
+        // if(e.toElement.outerHTML === this.equipmentAnchor.outerHTML){
+        //     if(this.equipmentAnchor.parentElement.className === 'has-submenu'){
+        //         this.driverAnchor.parentElement.className = 'has-submenu'
+        //         this.equipmentAnchor.parentElement.className = 'has-submenu open';
+        //         this.loadAnchor.parentElement.className = 'has-submenu';
+        //     }else{
+        //         this.equipmentAnchor.parentElement.className = 'has-submenu'
+        //     }
+        // }
+
+        // if(e.toElement.outerHTML === this.loadAnchor.outerHTML){
+        //     if(this.loadAnchor.parentElement.className === 'has-submenu'){
+        //         this.driverAnchor.parentElement.className = 'has-submenu'
+        //         this.equipmentAnchor.parentElement.className = 'has-submenu';
+        //         this.loadAnchor.parentElement.className = 'has-submenu open';
+        //     }else{
+        //         this.loadAnchor.parentElement.className = 'has-submenu'
+        //     }
+        // } 
 
     }
 
@@ -104,10 +106,10 @@ class DesktopMenu extends Component {
                             </a>
                         <ul>
                             <li>
-                                <Link to={`${basePath}/load/new`}>Add Equipment</Link>
+                                <Link to={`${basePath}/equipment/new`}>Add Equipment</Link>
                             </li>
                             <li>
-                                <Link to={`${basePath}/loads`}>View Equipments</Link>
+                                <Link to={`${basePath}/equipments`}>View Equipments</Link>
                             </li>
                         </ul>
                     </li>
@@ -121,10 +123,10 @@ class DesktopMenu extends Component {
                             </a>
                         <ul>
                             <li>
-                                <Link to={`${basePath}/load/new`}>Add Driver</Link>
+                                <Link to={`${basePath}/driver/new`}>Add Driver</Link>
                             </li>
                             <li>
-                                <Link to={`${basePath}/loads`}>View Drivers</Link>
+                                <Link to={`${basePath}/drivers`}>View Drivers</Link>
                             </li>
                         </ul>
                     </li>
