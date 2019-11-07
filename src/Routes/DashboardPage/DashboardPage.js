@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import './DashboardPage.css';
-import {Link} from 'react-router-dom';
-import config from '../../config';
 import LoadListBox from '../../Components/LoadListBox/LoadListBox';
 import IdleDriversBox from '../../Components/IdleDriversBox/IdleDriversBox';
 import AppContext from '../../Contexts/AppContext';
-import { arrayIsEmpty, getShipmentWithStatus, getAllShipmentsInProgress } from '../../HelperFunctions/HelperFunctions';
+import { getShipmentWithStatus, getAllShipmentsInProgress } from '../../HelperFunctions/HelperFunctions';
 
 class DashboardPage extends Component {
 

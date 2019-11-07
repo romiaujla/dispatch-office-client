@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import {
   formatDate,
   formatCurrency,
-  sortShipments,
   arrayIsEmpty
 } from '../../HelperFunctions/HelperFunctions'
 import config from "../../config";
