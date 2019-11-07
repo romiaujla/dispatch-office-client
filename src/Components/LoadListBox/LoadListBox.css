@@ -101,6 +101,12 @@
 .LoadListBox .load-buttons a:first-child{
     margin-bottom: 8px;
 }
+.LoadListBox .no-shipments{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}
 @media only screen and (min-width: 480px){
     .LoadListBox{
         font-size: 0.9em;

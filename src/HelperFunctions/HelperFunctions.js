@@ -104,3 +104,26 @@ export function pickupAfterDelivery(pickup, delivery){
     
     return false;
 }
+
+export function getUnAssignedShipments(shipments){
+    if(!arrayIsEmpty(shipments)){
+        return shipments.filter(shipment => shipment.status === 'un-assigned')
+    }
+    return [];
+}
+
+export function getShipmentWithStatus(shipments, status){
+    if(typeof status === 'string'){
+        status = [status];
+    }
+    if(!arrayIsEmpty(shipments)){
+        return shipments.filter(shipment => status.includes(shipments.status));
+    }
+}
+
+export function getAllShipmentsInProgress(shipments){
+    if(!arrayIsEmpty(shipments)){
+        return shipments.filter(shipment => !['un-assigned', 'completed'].includes(shipment.status))
+    }
+    return shipments;
+}

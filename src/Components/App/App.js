@@ -235,7 +235,13 @@ class App extends Component {
             <Route
               exact
               path={`${value.basePath}/loads`}
-              component={LoadsPage}
+              component={(rprops) => {
+                return <LoadsPage 
+                  rprops={rprops}
+                  shipments={this.state.shipments}
+                  boxHeader={`All Loads`}
+                />
+              }}
             />
 
             <Route

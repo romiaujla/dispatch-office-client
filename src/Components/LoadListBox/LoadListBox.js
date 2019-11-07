@@ -5,32 +5,33 @@ import { Link } from "react-router-dom";
 import {
   formatDate,
   formatCurrency,
-  sortShipments
+  sortShipments,
+  arrayIsEmpty
 } from '../../HelperFunctions/HelperFunctions'
+import config from "../../config";
 
 class LoadListBox extends Component {
+  
   static contextType = AppContext;
 
   static defaultProps = {
     loadStatus: [],
-    boxHeader: 'Loads'
+    boxHeader: 'Loads',
+    shipments: [],
   };
 
-  getLoadsWithStatus = status => {
+  // return the list of shipments
+  renderShipments = (shipments) => {
     
-    const { basePath} = this.context;
-    let {shipments} = this.context;
-
-    if(status !== 'all'){
-      shipments = shipments.filter((shipment) => status.includes(shipment.status))
+    if(arrayIsEmpty(shipments)){
+      return (
+        <li className='no-shipments'>
+          <div>
+            No Shipments Found
+          </div>
+        </li>
+      )
     }
-    
-
-    if (shipments.length === 0) {
-      return <li className="empty-list">No Loads</li>;
-    }
-
-    shipments = sortShipments(shipments, 'pickup_date');
 
     return shipments.map(shipment => {
       return (
@@ -88,24 +89,27 @@ class LoadListBox extends Component {
             </span>
           </div>
           <div className="load-buttons">
-            <Link className='app-button' to={`${basePath}/load/${shipment.id}`}>
+            <Link className='app-button' to={`${config.BASEPATH}/load/${shipment.id}`}>
               Update / View
             </Link>
-            <Link className='app-button' to={`${basePath}/load/edit/${shipment.id}`}>
+            <Link className='app-button' to={`${config.BASEPATH}/load/edit/${shipment.id}`}>
               Edit
             </Link>
           </div>
         </li>
       );
     });
-  };
+  }
 
   render() {
+
+    const { shipments } = this.props;
+
     return (
       <div className="LoadListBox blue-text">
         <h3 className="blue-back white-text">{this.props.boxHeader}</h3>
         <ul className="un-assigned-loads">
-          {this.getLoadsWithStatus(this.props.loadStatus)}
+          {this.renderShipments(shipments)}
         </ul>
       </div>
     );

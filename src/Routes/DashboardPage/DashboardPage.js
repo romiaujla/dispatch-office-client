@@ -4,6 +4,8 @@ import {Link} from 'react-router-dom';
 import config from '../../config';
 import LoadListBox from '../../Components/LoadListBox/LoadListBox';
 import IdleDriversBox from '../../Components/IdleDriversBox/IdleDriversBox';
+import AppContext from '../../Contexts/AppContext';
+import { arrayIsEmpty, getShipmentWithStatus, getAllShipmentsInProgress } from '../../HelperFunctions/HelperFunctions';
 
 class DashboardPage extends Component {
 
@@ -12,25 +14,26 @@ class DashboardPage extends Component {
         this.state = {  }
     }
 
+    static contextType = AppContext
+
+    
+
     render() { 
 
-        const secondBoxLoadStatus = [
-            'in transit',
-            'loading',
-            'dispatched',
-            'unloading',
-        ]
+        const {shipments} = this.context;
+        const unAssignedShipments = getShipmentWithStatus(shipments, 'un-assigned');
+        const shipmentsInProgress = getAllShipmentsInProgress(shipments);
 
         return (  
             <section className='DashboardPage width-wrapper'>
                 <LoadListBox 
                     oldLoadStatus='un-assigned' 
-                    loadStatus={['un-assigned']}
+                    shipments={unAssignedShipments}
                     boxHeader='Un Assigned Loads'
                 />
                 <LoadListBox 
                     oldLoadStatus='dispatched' 
-                    loadStatus={secondBoxLoadStatus} 
+                    shipments={shipmentsInProgress}
                     boxHeader='Loads in progress'
                 />
                 <IdleDriversBox />
