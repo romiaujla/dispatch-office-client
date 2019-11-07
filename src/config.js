@@ -1,5 +1,5 @@
-// const path = 'http://localhost:8000/api';
-const path = 'https://rocky-waters-07125.herokuapp.com/api';
+const path = 'http://localhost:8000/api';
+// const path = 'https://rocky-waters-07125.herokuapp.com/api';
 
 export default {
     API_ENDPOINT: process.env.API_ENDPOINT || path,

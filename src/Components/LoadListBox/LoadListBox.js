@@ -89,7 +89,7 @@ class LoadListBox extends Component {
           </div>
           <div className="load-buttons">
             <Link className='app-button' to={`${basePath}/load/${shipment.id}`}>
-              View
+              Update / View
             </Link>
             <Link className='app-button' to={`${basePath}/load/edit/${shipment.id}`}>
               Edit

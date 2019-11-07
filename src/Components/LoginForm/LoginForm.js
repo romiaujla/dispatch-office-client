@@ -112,7 +112,7 @@ class LoginForm extends Component {
                             type='submit'
                         >
                             Login
-                            </button>
+                        </button>
                     </div>
                 </fieldset>
             </form>

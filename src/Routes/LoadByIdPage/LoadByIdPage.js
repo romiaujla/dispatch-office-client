@@ -47,14 +47,24 @@ class LoadByIdPage extends Component {
             shipment,
             status,
             avaialableDrivers,
-            driverAssigned
+            driverAssigned,
+            completedShipment: status === 'completed' ? true : false
         }
     }
 
     // remove drivers when status is changed to un-assigned
     removeDriverAndEquipmentFromShipment = (shipment) => {
 
-        let { idleDrivers } = this.context
+        this.sendDriverToIdleDrivers(shipment);
+
+        shipment.driver = {}
+        shipment.equipment = {}
+
+        return shipment;
+    }
+
+    sendDriverToIdleDrivers = (shipment) => {
+        const {idleDrivers} = this.context
         const driver = {
             ...shipment.driver,
             pay_rate: shipment.driver.pay_rate.toString(), // converting to string to make sure all objects are of the same data type
@@ -65,11 +75,6 @@ class LoadByIdPage extends Component {
             ...idleDrivers,
             driver
         ])
-
-        shipment.driver = {}
-        shipment.equipment = {}
-
-        return shipment;
     }
 
     handleChangeLoadStatus = (e) => {
@@ -91,18 +96,20 @@ class LoadByIdPage extends Component {
                     propShipment.status = status
                     if (status === 'un-assigned') {
                         propShipment = this.removeDriverAndEquipmentFromShipment(propShipment);
-                        // update shipment by settin driver_id to null and status to un-assigned
+                        // update shipment by setting driver_id to null and status to un-assigned
                         ShipmentsService.updateShipment({id: shipment.id, driver_id: null})
                     }
                     if(status === 'completed'){
-                        
+                        this.setState({
+                            completedShipment: true
+                        })
+                        propShipment = this.sendDriverToIdleDrivers(propShipment);
                     }
                 }
                 return propShipment
             })
             this.context.setShipments(shipments);
         })
-
     }
 
     handleAssignDriver = (e) => {
@@ -282,7 +289,7 @@ class LoadByIdPage extends Component {
                                         <fieldset>
                                             <legend><h6><label htmlFor='status'>Status</label></h6></legend>
                                             {
-                                                shipment.status !== 'un-assigned'
+                                                shipment.status !== 'un-assigned' && !this.state.completedShipment
                                                     ?
                                                     <select
                                                         className='select-css'

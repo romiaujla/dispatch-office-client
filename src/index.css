@@ -6,7 +6,7 @@
 body, html, main, header, nav, div, p, section,
 ul, li, a, ol, footer, form, fieldset, legend,
 input, textarea, button, label, span,
-h1, h2, h3, h4, h5, h6{
+h1, h2, h3, h4, h5, h6, hr{
   padding: 0;
   margin: 0;
 }

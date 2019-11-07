@@ -25,6 +25,7 @@ export function arrayIsEmpty(arr) {
 }
 
 export function formatCurrency(amount) {
+    amount = parseFloat(amount).toFixed(2);
     return `$${amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
 }
 

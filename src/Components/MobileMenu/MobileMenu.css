@@ -18,7 +18,7 @@
     background: rgb(210, 22, 91);
 }
 .MobileMenu .menu-list{
-    font-size: 1.3em;
+    font-size: 0.9em;
     font-family: 'Montserrat', sans-serif;
     font-weight: 600;
     text-transform: uppercase;
@@ -30,7 +30,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background: #E1E0E0;
+    background: #f9faf5;
 }
 .MobileMenu .menu-item a{
     display: inline-block;
