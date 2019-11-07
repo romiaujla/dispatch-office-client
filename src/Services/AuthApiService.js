@@ -19,12 +19,30 @@ const AuthApiService = {
             
             return res.json();
         })
+        .then(res => res)
+        .catch(error => error)
+    },
+
+    // creating a user
+    postUser(user){
+        return fetch(`${config.API_ENDPOINT}/user`, {
+            method: "POST",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(user)
+        })
         .then(res => {
-            return res
+            if(!res.ok){
+                return res.json().then(e => {
+                    throw new Error(e.error.message)
+                })
+            }
+
+            return res.json();
         })
-        .catch(error => {
-            return error;
-        })
+        .then(res => res)
+        .catch(err => err);
     }
 }
 
