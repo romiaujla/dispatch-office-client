@@ -1,7 +1,51 @@
 import React, { Component } from 'react';
 import './CreateAccount.css';
+import { validUserInputs } from '../../HelperFunctions/CreateAccountValidation';
+import { emptySpaces } from '../../HelperFunctions/InputFieldValidations';
+
 
 class CreateAccount extends Component {
+
+    constructor(props){
+        super(props);
+        this.state = {
+            usernameError: '',
+            passwordError: '',
+            companyNameError: '',
+            mcNumError: '',
+            fullNameError: '',            
+        }
+    }
+
+    validateUserName = (username) => {
+        if(emptySpaces(username)){
+            this.setState({usernameError: `Username is required`})
+        } else if(username.trim().length < 6 || username.trim().length > 20){
+            this.setState({usernameError: `Username must be between 6 to 20 characters`})
+        } else {
+            this.setState({usernameError: ``})
+        }
+    }
+
+    validatePassword = (password) => {
+        if(emptySpaces(password)){
+            this.setState({passwordError: `Username is required`})
+        } else if(password.trim().length < 6 || password.trim().length > 72){
+            this.setState({passwordError: `Password must be between 6 to 72 characters`})
+        } else {
+            this.setState({passwordError: ``})
+        }
+    }
+
+    validateFullName = (full_name) => {
+        if(emptySpaces(full_name)){
+            this.setState({fullNameError: `Full Name is required`})
+        } else if(full_name.trim().length < 6 || full_name.trim().length > 40){
+            this.setState({fullNameError: `Full Name must be between 6 to 40 characters`})
+        } else {
+            this.setState({fullNameError: ``})
+        }
+    }
 
     handleFormSubmit = (e) => {
         e.preventDefault();
@@ -13,7 +57,9 @@ class CreateAccount extends Component {
             mc_num: mc_num.value,
             full_name: full_name.value
         }
-        console.log(user);
+        
+        
+
     }
 
     render() {
@@ -31,8 +77,12 @@ class CreateAccount extends Component {
                                 id='username'
                                 name='username'
                                 required
+                                onChange={(e) => {this.validateUserName(e.target.value)}}
                             />
-                            <span className='error'>Invalid Username</span>
+                            {
+                                this.state.usernameError &&
+                                <span className='error'>{this.state.usernameError}</span>
+                            }
                         </label>
                         <label htmlFor='password'>
                             <span className='input-title'>* Password:</span>
@@ -41,8 +91,12 @@ class CreateAccount extends Component {
                                 id='password'
                                 name='password'
                                 required
+                                onChange={(e) => {this.validatePassword(e.target.value)}}
                             />
-                            <span className='error'>Password Error</span>
+                            {
+                                this.state.passwordError &&
+                                <span className='error'>{this.state.passwordError}</span>
+                            }
                         </label>
                         <label htmlFor='full_name'>
                             <span className='input-title'>* Full Name:</span>
@@ -51,7 +105,7 @@ class CreateAccount extends Component {
                         </label>
                         <label htmlFor='company_name'>
                             <span className='input-title'>Company Name:</span>
-                            <input type='text' id='company_name' name='company_name' required />
+                            <input type='text' id='company_name' name='company_name' />
                             <span className='error'>Company Name Error</span>
                         </label>
                         <label htmlFor='mc_num'>

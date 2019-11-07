@@ -7,14 +7,7 @@ import { getShipmentWithStatus, getAllShipmentsInProgress } from '../../HelperFu
 
 class DashboardPage extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {  }
-    }
-
     static contextType = AppContext
-
-    
 
     render() { 
 
