@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "1fd502122d6e2dfe0d47745ce770cbc8",
+    "revision": "2e0254ab4e0ec4b696d46cd2014bce0c",
     "url": "/dispatch-office-client/index.html"
   },
   {
-    "revision": "3a57026202894de81e83",
-    "url": "/dispatch-office-client/static/css/main.959e6ed2.chunk.css"
+    "revision": "f5513f12786653f150e9",
+    "url": "/dispatch-office-client/static/css/main.d9884228.chunk.css"
   },
   {
     "revision": "c4c6d7998b17a3224cde",
     "url": "/dispatch-office-client/static/js/2.1fb77668.chunk.js"
   },
   {
-    "revision": "3a57026202894de81e83",
-    "url": "/dispatch-office-client/static/js/main.660a6169.chunk.js"
+    "revision": "f5513f12786653f150e9",
+    "url": "/dispatch-office-client/static/js/main.25d1973d.chunk.js"
   },
   {
     "revision": "92bdfa6a251d0a922a03",
