@@ -10,8 +10,7 @@ import {
 } from '../../HelperFunctions/HelperFunctions';
 import EquipmentService from '../../Services/EquipmentsService';
 import DriversService from '../../Services/DriversService';
-// import EquipmentService from '../../Services/EquipmentsService';
-// import DriversService from '../../Services/DriversService';
+import { GoBackButton } from '../../Components/Utils/Utils';
 
 class EquipmentEditPage extends Component {
 
@@ -211,9 +210,7 @@ class EquipmentEditPage extends Component {
                 <form className='edit-equip' onSubmit={(e) => { this.handleEquipmentEdit(e, equipment) }}>
                     <fieldset>
                         <legend className='blue-back white-text'>
-                            <button type='button' className='app-button go-back' onClick={(e) => { handleGoBack(this.props.rprops.history) }}>
-                                Go Back
-                            </button>
+                            <GoBackButton onClick={(e) => { handleGoBack(this.props.rprops.history) }} />
                             <span>Edit Equipment</span>
                         </legend>
                         <div className='flex'>

@@ -10,8 +10,7 @@ import {
 import { isNotValidDriverName, isNotValidPay } from '../../HelperFunctions/InputFieldValidations';
 import config from '../../config';
 import DriversSerivce from '../../Services/DriversService';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import {GoBackButton} from '../../Components/Utils/Utils';
 
 class DriverEditPage extends Component {
 
@@ -227,10 +226,7 @@ class DriverEditPage extends Component {
                 <form className='edit-equip' onSubmit={(e) => { this.handleEditDriver(e, driver) }}>
                     <fieldset>
                         <legend className='blue-back white-text'>
-                            <button type='button' className='app-button go-back' onClick={(e) => { handleGoBack(this.props.rprops.history) }}>
-                                <FontAwesomeIcon icon={faChevronLeft } className='back-icon' />
-                                Go Back
-                            </button>
+                            <GoBackButton onClick={(e) => { handleGoBack(this.props.rprops.history) }} />
                             <span>Edit Driver</span>
                         </legend>
                         <div className='flex'>

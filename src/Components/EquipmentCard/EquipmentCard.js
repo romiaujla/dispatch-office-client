@@ -10,7 +10,10 @@ import DriversService from '../../Services/DriversService';
 import EquipmentsService from '../../Services/EquipmentsService';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit, faTrashAlt, faChevronRight } from '@fortawesome/free-solid-svg-icons'
-
+import {
+    EditButton
+} from '../../Components/Utils/Utils';
+ 
 class EquipmentCard extends Component {
 
     constructor(props) {
@@ -85,10 +88,7 @@ class EquipmentCard extends Component {
                     shipmentId === -1 
                     ?
                     <div className='equipment-buttons'>
-                        <Link className='app-button' to={`${config.BASEPATH}/equipment/edit/${equipment.id}`}>
-                            <FontAwesomeIcon icon={faEdit} className='edit-icon' />
-                            Edit
-                        </Link>
+                        <EditButton to={`${config.BASEPATH}/equipment/edit/${equipment.id}`} />
                         <button className='app-button' onClick={() => { this.handleDeleteEquipment(equipment.id) }}>
                             <FontAwesomeIcon icon={faTrashAlt} className='delete-icon' />
                             Delete

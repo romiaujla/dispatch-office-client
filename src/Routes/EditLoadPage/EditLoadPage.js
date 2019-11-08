@@ -13,6 +13,7 @@ import {
 import AppContext from '../../Contexts/AppContext';
 import config from '../../config';
 import ShipmentsSerivce from '../../Services/ShipmentsService';
+import { GoBackButton } from '../../Components/Utils/Utils'
 
 class EditLoadPage extends Component {
 
@@ -303,9 +304,7 @@ class EditLoadPage extends Component {
                 <form className='add-load-form' onSubmit={(e) => { this.handleEditLoad(e) }}>
                     <fieldset>
                         <legend className='blue-back white-text'>
-                            <button type='button' className='app-button go-back' onClick={(e) => { handleGoBack(this.props.rprops.history) }}>
-                                Go Back
-                            </button>
+                            <GoBackButton onClick={(e) => { handleGoBack(this.props.rprops.history) }} />
                             <span>Edit Equipment</span>
                         </legend>
                         <div className='flex'>

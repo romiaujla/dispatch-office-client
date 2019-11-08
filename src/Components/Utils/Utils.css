@@ -23,15 +23,23 @@
 /* Edit button */
 .EditButton{
     border: none;
-    background: #0b245b;
-    color: #f9faf5;
-    font-size: 1.2em;
+    background: inherit;
+    color: #0b245b;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 1em;
+    font-weight: 600;
+    border:1px solid #0b245b;
     cursor: pointer;
-    border-radius: 50%;
-    padding: 0px;
+    padding: 8px 20px;
+    margin-bottom: 10px;
+    border-radius: 25px;
 }
 .EditButton:hover,
 .EditButton:focus,
 .EditButton:active {
-    color: #e1e0e0;
+    color: rgb(210, 22, 91);
+}
+.EditButton svg{
+    margin-right: 5px;
 }
