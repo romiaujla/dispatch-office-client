@@ -206,6 +206,40 @@ class LoadByIdPage extends Component {
 
     }
 
+    renderUpdateLoadStatusBox = (shipment) => {
+        return (
+            <form onSubmit={(e) => { this.handleChangeLoadStatus(e) }}>
+                <fieldset>
+                <legend><h6><label htmlFor='status'>Status</label></h6></legend>
+                {
+                    <select
+                        className='select-css'
+                        name='status'
+                        id='status'
+                        value={this.state.status}
+                        onChange={(e) => { this.setState({ status: e.target.value }) }}>
+                        {
+                            renderLoadStatusOptions(this.context.loadStatus)
+                        }
+                    </select>
+                }
+                {
+                    this.state.status !== shipment.status
+                    ?
+                    <button type='submit' className='app-button'>
+                        Change Status
+                    </button>
+                    :
+                    <button className='app-button' disabled>
+                        Change Status
+                    </button>
+                }
+            </fieldset>
+        </form>
+                
+        )
+    }
+
     
 
     render() {
@@ -285,49 +319,25 @@ class LoadByIdPage extends Component {
                             </div>
                             <div className='additional-info change-status'>
                                 <div className='additional-info info'>
-                                    <form onSubmit={(e) => { this.handleChangeLoadStatus(e) }}>
-                                        <fieldset>
-                                            <legend><h6><label htmlFor='status'>Status</label></h6></legend>
-                                            {
-                                                shipment.status !== 'un-assigned' && !this.state.completedShipment
-                                                    ?
-                                                    <select
-                                                        className='select-css'
-                                                        name='status'
-                                                        id='status'
-                                                        value={this.state.status}
-                                                        onChange={(e) => { this.setState({ status: e.target.value }) }}>
-                                                        {
-                                                            renderLoadStatusOptions(this.context.loadStatus)
-                                                        }
-                                                    </select>
-                                                    :
-                                                    <select
-                                                        className='select-css'
-                                                        name='status'
-                                                        id='status'
-                                                        disabled
-                                                        defaultValue={this.state.status}
-                                                    >
-                                                        {
-                                                            renderLoadStatusOptions(this.context.loadStatus)
-                                                        }
-                                                    </select>
-                                            }
-                                            {
-                                                this.state.status !== shipment.status
-                                                    ?
-                                                    <button type='submit' className='app-button'>
-                                                        Change Status
-                                                    </button>
-                                                    :
-                                                    <button className='app-button' disabled>
-                                                        Change Status
-                                                    </button>
-                                            }
-                                        </fieldset>
-                                    </form>
-
+                                    {
+                                        (shipment.status !== 'un-assigned' && !this.state.completedShipment)
+                                        &&
+                                        this.renderUpdateLoadStatusBox(shipment)
+                                    }
+                                    {
+                                        shipment.status === 'un-assigned' &&
+                                        <div className='shipment-status'>
+                                            <h6>Status</h6>
+                                            <span>No Driver Assigned</span>
+                                        </div>
+                                    }
+                                    {
+                                        this.state.completedShipment &&
+                                        <div className='shipment-status'>
+                                            <h6>Status</h6>
+                                            <span>Shipment Delivered</span>
+                                        </div>
+                                    }
                                 </div>
                             </div>
                         </div>
