@@ -5,56 +5,17 @@
     box-shadow: 0 0 10px 1px rgba(0,0,0,0.21);
 }
 .EquipmentPage h3{
-    font-size: 0.7em;
+    font-size: 0.94em;
     padding: 10px;
     text-transform: uppercase;
     text-align: center;
 }
-.EquipmentPage fieldset{
-    border: none;
-}
-.EquipmentPage legend{
-    width: 100%;
-    padding: 20px;
-    text-align: center;
-    text-transform: uppercase;
-    font-weight: 600;
-    box-shadow: 4px 0 10px 1px rgba(0,0,0,0.21);
-}
-.EquipmentPage .flex{
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-}
-.EquipmentPage label{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-}
-.EquipmentPage label:nth-of-type(even){
-    margin: 25px 0px;
-}
-.EquipmentPage label .input-title{
-    font-size: 0.9em;
-    text-transform: uppercase;
-    font-weight: 600;
-}
-.EquipmentPage label input{
-    margin-top: 6px;
-}
-.EquipmentPage .error{
-    color: #9A073C;
-    font-weight: 600;
-    font-size: 0.7em;
-    padding: 5px;
-    display: none;
-}
-.EquipmentPage button.app-button{
-    margin: 8px auto;
-}
 
 .EquipmentPage .EquipmentCard{
-    margin: 25px 20px;
+    margin: 40px 40px 0px 40px;
+}
+.EquipmentPage .equipment-list{
+    padding-bottom: 40px;
 }
 .EquipmentPage .box ul{
     display: flex;
