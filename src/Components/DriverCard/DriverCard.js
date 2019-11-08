@@ -1,12 +1,10 @@
 import React, {Component} from 'react';
 import './DriverCard.css';
-import {Link} from 'react-router-dom';
 import config from '../../config';
 import AppContext from '../../Contexts/AppContext';
 import { arrayIsEmpty, objectIsEmpty, removeEquipmentDriver } from '../../HelperFunctions/HelperFunctions';
 import DriversService from '../../Services/DriversService';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faTrashAlt, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { DeleteButton, EditButton, ViewLoadButton } from '../Utils/Utils';
 
 
 class DriverCard extends Component{
@@ -87,25 +85,18 @@ class DriverCard extends Component{
                 {
                     shipmentId === -1 
                     ?
-                    <div className='driver-buttons'>
-                        <Link to={`${config.BASEPATH}/driver/edit/${driver.id}`} className='app-button'>
-                            <FontAwesomeIcon icon={faEdit} className='edit-icon' />
-                            Edit
-                        </Link>
-                        <button className='app-button' onClick={() => {this.handleDeleteDriver(driver)}}>
-                            <FontAwesomeIcon icon={faTrashAlt} className='edit-icon' />
-                            Delete
-                        </button>
+                    <div className='driver-buttons flex-row'>
+                        <EditButton to={`${config.BASEPATH}/driver/edit/${driver.id}`} className='responsive'/>
+                        <DeleteButton onClick={() => {this.handleDeleteDriver(driver)}} className='responsive'/>
                     </div>
                     :
-                    <div className='driver-buttons'>
+                    <div className='driver-buttons flex-row'>
                         <span>
                             Driver Busy
                         </span>
-                        <Link className='app-button' to={`${config.BASEPATH}/load/${shipmentId}`}>
-                            View Load
-                            <FontAwesomeIcon icon={faChevronRight} className='right-icon' />
-                        </Link>
+                        <ViewLoadButton to={`${config.BASEPATH}/load/${shipmentId}`} 
+                            className='responsive'
+                        />
                     </div>
                 }
                 

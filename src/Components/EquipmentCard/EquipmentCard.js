@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './EquipmentCard.css';
-import { Link } from 'react-router-dom';
 import config from '../../config';
 import AppContext from '../../Contexts/AppContext';
 import {
@@ -8,10 +7,8 @@ import {
 } from '../../HelperFunctions/HelperFunctions';
 import DriversService from '../../Services/DriversService';
 import EquipmentsService from '../../Services/EquipmentsService';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEdit, faTrashAlt, faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import {
-    EditButton
+    EditButton, DeleteButton, ViewLoadButton
 } from '../../Components/Utils/Utils';
  
 class EquipmentCard extends Component {
@@ -87,22 +84,16 @@ class EquipmentCard extends Component {
                 {
                     shipmentId === -1 
                     ?
-                    <div className='equipment-buttons'>
-                        <EditButton to={`${config.BASEPATH}/equipment/edit/${equipment.id}`} />
-                        <button className='app-button' onClick={() => { this.handleDeleteEquipment(equipment.id) }}>
-                            <FontAwesomeIcon icon={faTrashAlt} className='delete-icon' />
-                            Delete
-                        </button>
+                    <div className='equipment-buttons flex-row'>
+                        <EditButton to={`${config.BASEPATH}/equipment/edit/${equipment.id}`} className='responsive'/>
+                        <DeleteButton onClick={() => { this.handleDeleteEquipment(equipment.id) }} className='responsive'/>
                     </div>
                     :
-                    <div className='equipment-buttons'>
+                    <div className='equipment-buttons flex-row'>
                         <span>
                             Equipment Busy
                         </span>
-                        <Link className='app-button' to={`${config.BASEPATH}/load/${shipmentId}`}>
-                            View Load
-                            <FontAwesomeIcon icon={faChevronRight} className='next-icon' />
-                        </Link>
+                        <ViewLoadButton to={`${config.BASEPATH}/load/${shipmentId}`} className='responsive'/>
                     </div>
                 }
 

@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import "./LoadListBox.css";
 import AppContext from "../../Contexts/AppContext";
-import { Link } from "react-router-dom";
 import {
   formatDate,
   arrayIsEmpty
 } from '../../HelperFunctions/HelperFunctions'
 import config from "../../config";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTruck, faEdit, faStream } from '@fortawesome/free-solid-svg-icons'
+import { faTruck } from '@fortawesome/free-solid-svg-icons'
+import { UpdateViewButton, EditButton } from "../Utils/Utils";
 
 class LoadListBox extends Component {
 
@@ -79,14 +79,11 @@ class LoadListBox extends Component {
             </span>
           </div>
           <div className="load-buttons">
-            <Link className='app-button' to={`${config.BASEPATH}/load/${shipment.id}`}>
-              <FontAwesomeIcon icon={faStream} className='update-icon' />
-              Update / View
-            </Link>
-            <Link className='app-button' to={`${config.BASEPATH}/load/edit/${shipment.id}`}>
-              <FontAwesomeIcon icon={faEdit} className='edit-icon' />
-              Edit
-            </Link>
+            <UpdateViewButton to={`${config.BASEPATH}/load/${shipment.id}`}
+              className='responsive' 
+              status={shipment.status === 'completed' ? 'View Load' : 'Update Load'}
+            />
+            <EditButton to={`${config.BASEPATH}/load/edit/${shipment.id}`}  className='responsive' />
           </div>
         </li>
       );

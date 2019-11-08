@@ -13,6 +13,9 @@
     transition: 0.2s;
     position: absolute;
 }
+.GoBack span{
+    display: none;
+}
 .GoBack:hover,
 .GoBack:focus,
 .GoBack:active {
@@ -20,26 +23,116 @@
     color: #0b245b;
 }
 
-/* Edit button */
-.EditButton{
+/* Edit, Delete and View Load Buttons */
+.EditButton, 
+.DeleteButton,
+.ViewLoadButton,
+.UpdateViewButton{
+    font-family: 'Montserrat', sans-serif;
     border: none;
+    text-transform: uppercase;
     background: inherit;
     color: #0b245b;
-    margin: 0 auto;
     text-align: center;
-    font-size: 1em;
+    font-size: 0.9em;
     font-weight: 600;
-    border:1px solid #0b245b;
     cursor: pointer;
-    padding: 8px 20px;
-    margin-bottom: 10px;
-    border-radius: 25px;
+    transition: 0.2s;
 }
 .EditButton:hover,
 .EditButton:focus,
-.EditButton:active {
-    color: rgb(210, 22, 91);
+.EditButton:active,
+.DeleteButton:hover,
+.DeleteButton:focus,
+.DeleteButton:active,
+.ViewLoadButton:hover,
+.ViewLoadButton:focus,
+.ViewLoadButton:active,
+.UpdateViewButton:hover,
+.UpdateViewButton:focus,
+.UpdateViewButton:active {
+    color: rgb(255, 0, 93);
 }
-.EditButton svg{
-    margin-right: 5px;
+.EditButton svg,
+.DeleteButton svg,
+.ViewLoadButton svg,
+.FilterButton svg,
+.UpdateViewButton svg{
+    margin: 0px 5px;
+}
+.FilterButton{
+    background: inherit;
+    color: rgb(210, 22, 91);
+    text-transform: uppercase;
+    border: none;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+}
+.EditButton.small,
+.ViewLoadButton.small,
+.DeleteButton.small{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #0b245b;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    height: 40px;
+    width: 40px;
+}
+.EditButton.small span,
+.DeleteButton.small span,
+.ViewLoadButton.small span{
+    display: none;
+}
+.EditButton.small:hover,
+.EditButton.small:focus,
+.EditButton.small:active,
+.DeleteButton.small:hover,
+.DeleteButton.small:focus,
+.DeleteButton.small:active,
+.ViewLoadButton.small:hover,
+.ViewLoadButton.small:focus,
+.ViewLoadButton.small:active{
+    /* color: rgb(210, 22, 91); */
+    background: #f0f1f1;
+    color: #0b245b;
+    /* border-color: rgb(210, 22, 91); */
+}
+
+@media only screen and (max-width: 480px){
+    .EditButton.responsive,
+    .ViewLoadButton.responsive,
+    .DeleteButton.responsive{
+        display: flex;
+        flex-direction: column;
+        border: 1px solid #0b245b;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50px;
+        height: 40px;
+        width: 40px;
+    }
+    .EditButton.responsive span,
+    .DeleteButton.responsive span,
+    .ViewLoadButton.responsive span{
+        display: none;
+    }
+    .EditButton.responsive:hover,
+    .EditButton.responsive:focus,
+    .EditButton.responsive:active,
+    .DeleteButton.responsive:hover,
+    .DeleteButton.responsive:focus,
+    .DeleteButton.responsive:active,
+    .ViewLoadButton.responsive:hover,
+    .ViewLoadButton.responsive:focus,
+    .ViewLoadButton.responsive:active{
+        /* color: rgb(210, 22, 91); */
+        background: #f0f1f1;
+        color: #0b245b;
+        /* border-color: rgb(210, 22, 91); */
+    }
+
 }

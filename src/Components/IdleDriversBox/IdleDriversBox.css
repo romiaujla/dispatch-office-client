@@ -17,3 +17,12 @@
     margin: 20px;
     
 }
+
+.IdleDriversBox .no-idle-drivers{
+    height: 200px;
+    color: #0b245b;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

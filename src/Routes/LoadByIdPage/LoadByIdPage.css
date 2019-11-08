@@ -64,15 +64,6 @@
     width: 100%;
     border:none;
 }
-.LoadByIdPage .load-header .app-button{
-    margin-bottom: 8px;
-}
-.LoadByIdPage .load-header{
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    margin: 20px 0px 0px 0px;
-}
 .LoadByIdPage .change-status h6{
     color: #0b245b;
     border:none;
@@ -126,16 +117,7 @@
     display: inline;
 }
 @media only screen and (min-width: 480px){
-    .LoadByIdPage .load-header .app-button{
-        margin-bottom: 0px;
-        width: auto;
-    }
-    .LoadByIdPage .load-header{
-        display: flex;
-        flex-direction: row;
-        text-align: center;
-        justify-content: space-between;
-    }
+    
 }
 @media only screen and (max-width: 600px){
     .LoadByIdPage .flex-row{
@@ -159,4 +141,37 @@
     .LoadByIdPage .assign-driver .app-button{
         width: 100%;
     }
+}
+
+.LoadByIdPage .GoBack{
+    position: static !important;
+    background: inherit;
+    color: #0b245b;
+    border: 1px solid #0b245b;
+}
+.LoadByIdPage .load-header{
+    margin: 20px 0px 0px 0px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+}
+.LoadByIdPage .load-header span{
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 1.1em;
+}
+.LoadByIdPage .load-header *[class*='Button']:hover{
+    background: rgb(251, 22, 91);
+    color: #f9faf5;
+    border: 1px solid rgb(251, 22, 91);
+}
+.LoadByIdPage .load-header .flex-row{
+    display: flex;
+    flex-direction:  row;
+    justify-content: space-between;
+    align-items: center;
+}
+.LoadByIdPage .load-header .flex-row .EditButton{
+    margin-right: 5px;
 }

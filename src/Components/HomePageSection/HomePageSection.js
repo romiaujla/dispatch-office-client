@@ -13,10 +13,13 @@ class HomePageSection extends Component {
 
         return (
             <div className='HomePageSection width-wrapper'>
+                {/* Make descrtiption so that audience gets involved */}
                 <p>
-                    Welcome !! to <span className='span-title red-text'>Dispatch Office</span>, a transportation management
-                    system, which assists in keeping track of shipments, equipments and drivers. It also assists a carrier 
-                    with assigning drivers to shipments.
+                    Welcome to <span className='span-title red-text'>Dispatch Office</span>. 
+                    This transportation management system will have everything right 
+                    at your fingertips. The one stop app that 
+                    assists in driver assignment, while also keeping track 
+                    of all shipments and equipment. 
                 </p>
                 <p className='user-info'>
                     Dummy User Info <br />

@@ -61,7 +61,7 @@ class CreateAccount extends Component {
             mc_num: mc_num.value,
             full_name: full_name.value
         }
-
+        console.log(user);
     }
 
     render() {

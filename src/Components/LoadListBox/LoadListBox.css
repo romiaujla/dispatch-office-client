@@ -51,7 +51,6 @@
     height: 2px;
     align-items: center;
     margin: 40px 20px;
-    /* padding: 0px 0px; */
     position: relative;
 }
 .LoadListBox .status-line-wrapper{
@@ -73,7 +72,7 @@
 
 /* Status Line Styles */
 .LoadListBox .truck{
-    color: green;
+    color: #0B245B;
     font-size: 2em;
     position: absolute;
 }
@@ -92,7 +91,7 @@
     left: 20%;
 }
 .LoadListBox .line.loading{
-    width: 25%;
+    width: 20%;
 }
 .LoadListBox .truck.in.transit{
     left: 50%;
@@ -124,13 +123,13 @@
     z-index: 1;
 }
 .LoadListBox .circle.green{
-    background: green;
+    background: #0B245B;
 }
 .LoadListBox .circle.red{
     background: rgb(210,22,91);;
 }
 .LoadListBox .line.green{
-    background :green;
+    background :#0B245B;
 }
 .LoadListBox .line.red{
     background: rgb(210,22,91);
@@ -176,12 +175,23 @@
 }
 .LoadListBox .load-buttons{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-between;
-    margin-top: 20px;
+    margin-top: 30px;
+    font-size: 1em;
 }
-.LoadListBox .load-buttons a:first-child{
-    margin-bottom: 8px;
+.LoadListBox .load-buttons button,
+.LoadListBox .load-buttons a{
+    background: rgb(210,22,91);
+    border: none;
+    color: #f9faf5;
+    padding: 8px 20px;
+}
+.LoadListBox .load-buttons button:hover,
+.LoadListBox .load-buttons a:hover,
+.LoadListBox .load-buttons button:focus,
+.LoadListBox .load-buttons a:focus{
+    background: rgb(255, 0, 93);
 }
 .LoadListBox .no-shipments{
     display: flex;
@@ -192,13 +202,7 @@
 }
 @media only screen and (min-width: 480px){
     .LoadListBox{
-        font-size: 0.9em;
-    }
-    .LoadListBox .load-buttons{
-        flex-direction: row;
-    }
-    .LoadListBox .load-buttons a:first-child{
-        margin-bottom: 0px;
+        font-size: 1em;
     }
 }
 @media only screen and (min-width:900px){

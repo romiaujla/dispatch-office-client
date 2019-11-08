@@ -3,6 +3,8 @@ import './MobileMenu.css';
 import AppContext from '../../Contexts/AppContext';
 import { Link } from 'react-router-dom';
 import Backdrop from '../Backdrop/Backdrop';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes, faBars } from '@fortawesome/free-solid-svg-icons';
 
 class MobileMenu extends Component {
 
@@ -57,9 +59,7 @@ class MobileMenu extends Component {
         return (
             <nav className='MobileMenu'>
                 <button className='menu-button' onClick={this.changeMenuOpenState}>
-                    <div></div>
-                    <div></div>
-                    <div></div>
+                    <FontAwesomeIcon icon={faBars} />
                 </button>
                 {
                     this.state.menuOpen &&
@@ -69,7 +69,7 @@ class MobileMenu extends Component {
                             <button
                                 className='close-button'
                                 onClick={this.changeMenuOpenState}>
-                                X
+                                <FontAwesomeIcon icon={faTimes} />
                             </button>
                             <li className='menu-item'>
                                 <Link

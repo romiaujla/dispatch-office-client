@@ -13,10 +13,8 @@ import {
 } from '../../HelperFunctions/HelperFunctions';
 import DriversDropDown from '../../Components/DriversDropDown/DriversDropDown';
 import config from '../../config';
-import {Link} from 'react-router-dom';
 import ShipmentsService from '../../Services/ShipmentsService';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import { faEdit, faTrashAlt, faChevronLeft } from '@fortawesome/free-solid-svg-icons'
+import { GoBackButton, EditButton, DeleteButton } from '../../Components/Utils/Utils';
 
 class LoadByIdPage extends Component {
 
@@ -250,18 +248,14 @@ class LoadByIdPage extends Component {
             !objectIsEmpty(shipment) ?
                 <section className='LoadByIdPage width-wrapper'>
                     <div className='load-header'>
-                        <button className='app-button' onClick={() => {handleGoBack(this.props.rprops.history)}}>
-                            <FontAwesomeIcon icon={faChevronLeft} className='back-icon' />
-                            Go Back
-                        </button>
-                        <Link className='app-button edit-button' to={`${config.BASEPATH}/load/edit/${shipment.id}`}>
-                            <FontAwesomeIcon icon={faEdit} className='edit-icon' />
-                            Edit
-                        </Link>
-                        <button className='app-button' onClick={() => {this.handleShipmentDelete(shipment.id)}}>
-                            <FontAwesomeIcon icon={faTrashAlt} className='delete-icon' />
-                            Delete
-                        </button>
+                        <GoBackButton onClick={() => {handleGoBack(this.props.rprops.history)}} className='GoBackButton responsive'>
+                            <span>Back</span>
+                        </GoBackButton>
+                        <span>Load # {shipment.id}</span>
+                        <div className='flex-row'>
+                            <EditButton to={`${config.BASEPATH}/load/edit/${shipment.id}`} className='small' />
+                            <DeleteButton onClick={() => {this.handleShipmentDelete(shipment.id)}} className='small' />
+                        </div>
                     </div>
                     <div className='flex-row'>
                         <div className='pick-up-info box-style'>

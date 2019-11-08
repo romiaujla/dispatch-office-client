@@ -7,18 +7,15 @@
     justify-content: space-between;
     height: 15px;
     background: #0B245B;
+    color: #e1e0e0;
     cursor: pointer;
     outline: none;
+    font-size: 1.5em;
 }
-.MobileMenu .menu-button div{
-    width: 25px;
-    height: 3px;
-    background: #E1E0E0;
-}
-.MobileMenu .menu-button:hover div,
-.MobileMenu .menu-button:active div,
-.MobileMenu .menu-button:focus div{
-    background: rgb(210, 22, 91);
+.MobileMenu .menu-button:hover,
+.MobileMenu .menu-button:active,
+.MobileMenu .menu-button:focus{
+    color: rgb(210, 22, 91)
 }
 .MobileMenu .menu-list{
     font-size: 0.9em;

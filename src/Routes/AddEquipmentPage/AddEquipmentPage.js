@@ -11,8 +11,6 @@ import config from '../../config';
 import { emptySpaces } from '../../HelperFunctions/InputFieldValidations';
 import EquipmentService from '../../Services/EquipmentsService';
 import DriversService from '../../Services/DriversService';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 import { GoBackButton } from '../../Components/Utils/Utils';
 
 class AddEquipmentPage extends Component {

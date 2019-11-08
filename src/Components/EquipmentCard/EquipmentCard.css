@@ -1,5 +1,6 @@
 .EquipmentCard{
     box-shadow: 0 0 6px 2px rgba(0,0,0,0.21);
+    padding: 10px;
 }
 .EquipmentCard .flex-row{
     display: flex;
@@ -26,10 +27,8 @@
     font-size: 1em;
     font-weight: 800;
 }
-.EquipmentCard .app-button{
-    margin-top: 0px;
-    font-size: 0.7em;
-    text-align: center;
+.EquipmentCard .icon-button:nth-of-type(1){    
+    margin-bottom: 10px
 }
 .EquipmentCard .no-driver{
     font-weight: 400;
@@ -38,22 +37,23 @@
     color: rgb(210, 22, 91)
 }
 .EquipmentCard span{
-    text-transform: uppercase;
     font-size: 0.7em;
-    text-align: center;
-    width: 100%;
-    display: block;
-    font-weight: 600;
+    letter-spacing: 0.06em;
     margin-bottom: 6px;
 }
-.EquipmentCard span::after{
-    content: ' Cannot Edit/Delete';
+.EquipmentCard .responsive span{
+    font-size: 1em;
+}
+.EquipmentCard .flex-row{
+    align-items: center;
 }
 @media only screen and (min-width: 480px){
     .EquipmentCard .equipment-buttons{
         display: flex;    
-        max-width: 175px;    
+        max-width: 150px;    
         flex-direction: column;
+        align-items: flex-end;
+        justify-content: center;
     }
     .EquipmentCard .equipment-buttons .app-button{
         width: 100%;
