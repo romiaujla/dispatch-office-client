@@ -14,19 +14,22 @@
     display: none; 
 }
 .DesktopMenu > ul li:hover ul,
-.DesktopMenu > ul li.open ul{ 
+.DesktopMenu > ul li.open ul,
+.DesktopMenu > ul li a:focus + ul{ 
     display: block;
 }
 .DesktopMenu ul{
     display: flex;
 }
-.DesktopMenu ul li a{
+.DesktopMenu ul li a,
+.DesktopMenu ul li span{
     cursor: pointer;
     display: block;
     padding: 10px 30px;
 }
 .DesktopMenu ul li:hover,
 .DesktopMenu ul li a:focus,
+.DesktopMenu > ul li:focus,
 .DesktopMenu ul li a:active,
 .DesktopMenu > ul li.open,
 .DesktopMenu > ul li.open:hover,
