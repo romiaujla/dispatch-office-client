@@ -8,6 +8,8 @@ import {
   arrayIsEmpty
 } from '../../HelperFunctions/HelperFunctions'
 import config from "../../config";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTruck, faEdit, faFolderOpen } from '@fortawesome/free-solid-svg-icons'
 
 class LoadListBox extends Component {
 
@@ -47,34 +49,24 @@ class LoadListBox extends Component {
           </div>
           <div className="status-line-wrapper">
             <div className="rate-broker">
-              <div className="miles">
-                <h6>Loaded Miles</h6>
+              <div className="driver">
+                <h6>Driver</h6>
                 <br />
-                {shipment.miles}
-              </div>
-              <div className="status">
-                <h6>Status</h6>
-                <br />
-                <span className="red-bold">{shipment.status}</span>
+                {shipment.driver.full_name}
               </div>
             </div>
             <div className="status-line">
-              <div className="circle left"></div>
-              <div className="line"></div>
-              <div className="circle right"></div>
+              <FontAwesomeIcon icon={faTruck} className={`truck ${shipment.status}`}/>
+              <div className={`circle green ${shipment.status}`}></div>
+              <div className={`line increase green ${shipment.status}`}></div>
+              <div className="line red"></div>
+              <div className="circle red"></div>
             </div>
             <div className="rate-broker">
-              <div className="rate">
-                <h6>Rate</h6>
+              <div className="status">
+                <h6>Status</h6>
                 <br />
-                <span className="rate-amount red-bold">
-                  {formatCurrency(shipment.rate)}
-                </span>
-              </div>
-              <div className="broker">
-                <h6>Broker</h6>
-                <br />
-                {shipment.broker}
+                <span className="">{shipment.status}</span>
               </div>
             </div>
           </div>
@@ -89,9 +81,11 @@ class LoadListBox extends Component {
           </div>
           <div className="load-buttons">
             <Link className='app-button' to={`${config.BASEPATH}/load/${shipment.id}`}>
+              <FontAwesomeIcon icon={faFolderOpen} className='update-icon' />
               Update / View
             </Link>
             <Link className='app-button' to={`${config.BASEPATH}/load/edit/${shipment.id}`}>
+              <FontAwesomeIcon icon={faEdit} className='edit-icon' />
               Edit
             </Link>
           </div>

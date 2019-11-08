@@ -177,6 +177,7 @@ class LoadByIdPage extends Component {
     handleShipmentDelete = (shipmentId) => {
         
         let {shipments, idleDrivers} = this.context
+
         // if shipment has driver, send him to idle driver queue
         const shipmentToDelete = shipments.filter((shipment) => shipment.id === shipmentId)[0];
 
@@ -206,6 +207,7 @@ class LoadByIdPage extends Component {
 
     }
 
+    // render the load status only when reuired and do it always
     renderUpdateLoadStatusBox = (shipment) => {
         return (
             <form onSubmit={(e) => { this.handleChangeLoadStatus(e) }}>

@@ -50,30 +50,104 @@
     display: flex;
     height: 2px;
     align-items: center;
-    margin: 10px 0px;
-    padding: 0px 20px;
+    margin: 40px 20px;
+    /* padding: 0px 0px; */
+    position: relative;
 }
 .LoadListBox .status-line-wrapper{
     margin: 10px 0px;
     display: flex;
     flex-direction: column;
 }
-.LoadListBox .circle{
+
+/* Small tags around the status line*/
+.LoadListBox .rate-broker .driver{
+    width: 100%;
+    text-align: right;
+}
+.LoadListBox .rate-broker .status{
+    width: 100%;
+    text-align: left;
+}
+
+
+/* Status Line Styles */
+.LoadListBox .truck{
+    color: green;
+    font-size: 2em;
+    position: absolute;
+    /* bottom: 3px; */
+}
+.LoadListBox .truck.un-assigned{
+    left: 0%;
+    color: rgb(210,22,91) !important;
+}
+.LoadListBox .truck.dispatched{
+    left: 0%;
+}
+.LoadListBox .truck.loading{
+    left: 20%;
+}
+.LoadListBox .line.loading{
+    width: 20%;
+}
+.LoadListBox .truck.in.transit{
+    left: 50%;
+}
+.LoadListBox .line.in.transit{
+    width: 50%;
+}
+.LoadListBox .truck.unloading{
+    left: 80%;
+}
+.LoadListBox .line.unloading{
+    width: 80%;
+}
+.LoadListBox .truck.completed{
+    left: 97%;
+}
+.LoadListBox .line.completed{
+    width: 97%;
+}
+.LoadListBox .line.increase{
+    position: absolute;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    left: 0px;
+    height: 4px;
+    z-index: 1;
+}
+.LoadListBox .circle.green{
+    background: green;
+}
+.LoadListBox .circle.red{
+    background: rgb(210,22,91);;
+}
+.LoadListBox .line.green{
+    background :green;
+}
+.LoadListBox .line.red{
     background: rgb(210,22,91);
-    height: 8px;
+}
+.LoadListBox .circle.un-assigned{
+    background: rgb(210,22,91);
+}
+.LoadListBox .circle{
     width: 8px;
+    height: 8px;
     border-radius: 50%;
 }
+.LoadListBox .status-line .line{
+    flex: 1;
+}
+.LoadListBox .line.red{
+    width: 100%;
+    height: 2px;
+}
+
 .LoadListBox .red-bold{
-    /* color: rgb(210,22,91); */
     font-weight: 800;
     font-size: 1.2em;
-}
-.LoadListBox .status-line .line{
-    height: 2px;
-    width: 100%;
-    flex: 1;
-    background: rgb(210,22,91);
 }
 .LoadListBox .delivery{
     text-align: right;

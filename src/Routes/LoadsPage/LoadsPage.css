@@ -1,0 +1,37 @@
+.LoadsPage{
+    position: relative;
+}
+.LoadsPage .filters-div{
+    position: relative;
+    width: 100%;
+    margin-top: 10px;
+    z-index: 0;
+}
+.LoadsPage .app-link{
+    border: none;
+    background: inherit;
+    cursor: pointer;
+}
+.LoadsPage .Backdrop{
+    z-index: -1;
+}
+.LoadsPage .filters-div .filter-menu{
+    position: absolute;
+    z-index: 1;
+    font-family: 'Montserrat', sans-serif;
+    width: 100%;
+    padding: 20px;
+    background: #e1e0e0;
+    color: #f9faf5;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-size: 0.9em;
+    margin-top: 5px;
+    box-shadow: 0 3px 6px 2px rgba(0,0,0,0.21);
+}
+.LoadsPage .filter-menu .filter span{
+    display: block;
+    color: #0b245b;
+    margin-bottom: 3px;
+}

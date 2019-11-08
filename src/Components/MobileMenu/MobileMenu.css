@@ -1,3 +1,6 @@
+.MobileMenu{
+    z-index: 1;
+}
 .MobileMenu .menu-button{
     display: flex;
     flex-direction: column;
