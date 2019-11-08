@@ -11,6 +11,8 @@ import config from '../../config';
 import { emptySpaces } from '../../HelperFunctions/InputFieldValidations';
 import EquipmentService from '../../Services/EquipmentsService';
 import DriversService from '../../Services/DriversService';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 
 class AddEquipmentPage extends Component {
 
@@ -145,6 +147,7 @@ class AddEquipmentPage extends Component {
                     <fieldset>
                         <legend className='blue-back white-text'>
                             <button type='button' className='app-button go-back' onClick={(e) => { handleGoBack(this.props.rprops.history) }}>
+                                <FontAwesomeIcon icon={faChevronLeft} className='back-icon' />
                                 Go Back
                             </button>
                             <span>Add Equipment</span>

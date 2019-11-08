@@ -5,6 +5,8 @@ import config from '../../config';
 import AppContext from '../../Contexts/AppContext';
 import { arrayIsEmpty, objectIsEmpty, removeEquipmentDriver } from '../../HelperFunctions/HelperFunctions';
 import DriversService from '../../Services/DriversService';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEdit, faTrashAlt, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 
 class DriverCard extends Component{
@@ -87,9 +89,11 @@ class DriverCard extends Component{
                     ?
                     <div className='driver-buttons'>
                         <Link to={`${config.BASEPATH}/driver/edit/${driver.id}`} className='app-button'>
+                            <FontAwesomeIcon icon={faEdit} className='edit-icon' />
                             Edit
                         </Link>
                         <button className='app-button' onClick={() => {this.handleDeleteDriver(driver)}}>
+                            <FontAwesomeIcon icon={faTrashAlt} className='edit-icon' />
                             Delete
                         </button>
                     </div>
@@ -100,6 +104,7 @@ class DriverCard extends Component{
                         </span>
                         <Link className='app-button' to={`${config.BASEPATH}/load/${shipmentId}`}>
                             View Load
+                            <FontAwesomeIcon icon={faChevronRight} className='right-icon' />
                         </Link>
                     </div>
                 }

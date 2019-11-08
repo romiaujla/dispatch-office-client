@@ -76,8 +76,11 @@
     color: green;
     font-size: 2em;
     position: absolute;
-    /* bottom: 3px; */
 }
+.LoadListBox .truck:hover{
+    cursor: pointer;
+}
+
 .LoadListBox .truck.un-assigned{
     left: 0%;
     color: rgb(210,22,91) !important;
@@ -89,13 +92,16 @@
     left: 20%;
 }
 .LoadListBox .line.loading{
-    width: 20%;
+    width: 25%;
 }
 .LoadListBox .truck.in.transit{
     left: 50%;
 }
 .LoadListBox .line.in.transit{
     width: 50%;
+}
+.LoadListBox .truck-status.in.transit{
+    left: 20%;
 }
 .LoadListBox .truck.unloading{
     left: 80%;
@@ -144,6 +150,8 @@
     width: 100%;
     height: 2px;
 }
+/* End of status line styling */
+
 
 .LoadListBox .red-bold{
     font-weight: 800;

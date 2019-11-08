@@ -35,3 +35,12 @@
     color: #0b245b;
     margin-bottom: 3px;
 }
+.LoadsPage .filters-div .app-button{
+    width: auto;
+}
+@media only screen and (min-width: 480px){
+    .LoadsPage .filters-div{
+        width: 100%;
+        max-width: 500px;
+    }
+}

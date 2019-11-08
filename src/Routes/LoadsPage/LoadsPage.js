@@ -6,6 +6,8 @@ import {
     renderAllDriverOptions, getShipmentsWithDriverId,
 } from '../../HelperFunctions/LoadsPageHelperFunctions';
 import Backdrop from '../../Components/Backdrop/Backdrop';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faFilter } from '@fortawesome/free-solid-svg-icons'
 
 class LoadsPage extends Component {
 
@@ -41,7 +43,10 @@ class LoadsPage extends Component {
         return (
             <section className='LoadsPage width-wrapper'>
                 <div className='filters-div'>
-                    <button className='app-link' onClick={() => {this.handleOpeningFilterMenu()}}>Filters</button>
+                    <button className='app-button' onClick={() => {this.handleOpeningFilterMenu()}}>
+                        <FontAwesomeIcon icon={faFilter} className='filter-icon' />
+                        Filters
+                    </button>
                     {
                         this.state.filterMenu &&
                         <>

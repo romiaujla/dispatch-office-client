@@ -52,7 +52,7 @@
 @media only screen and (min-width: 480px){
     .EquipmentCard .equipment-buttons{
         display: flex;    
-        max-width: 150px;    
+        max-width: 175px;    
         flex-direction: column;
     }
     .EquipmentCard .equipment-buttons .app-button{

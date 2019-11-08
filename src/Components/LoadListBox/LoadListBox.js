@@ -4,12 +4,11 @@ import AppContext from "../../Contexts/AppContext";
 import { Link } from "react-router-dom";
 import {
   formatDate,
-  formatCurrency,
   arrayIsEmpty
 } from '../../HelperFunctions/HelperFunctions'
 import config from "../../config";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTruck, faEdit, faFolderOpen } from '@fortawesome/free-solid-svg-icons'
+import { faTruck, faEdit, faStream } from '@fortawesome/free-solid-svg-icons'
 
 class LoadListBox extends Component {
 
@@ -52,7 +51,7 @@ class LoadListBox extends Component {
               <div className="driver">
                 <h6>Driver</h6>
                 <br />
-                {shipment.driver.full_name}
+                {shipment.driver.full_name ? shipment.driver.full_name : 'No Driver Assigned'}
               </div>
             </div>
             <div className="status-line">
@@ -64,9 +63,9 @@ class LoadListBox extends Component {
             </div>
             <div className="rate-broker">
               <div className="status">
-                <h6>Status</h6>
+                <h6>Equipment #</h6>
                 <br />
-                <span className="">{shipment.status}</span>
+                <span className="">{shipment.equipment.unit_num ? shipment.equipment.unit_num : `No Equipment Assigned`}</span>
               </div>
             </div>
           </div>
@@ -81,7 +80,7 @@ class LoadListBox extends Component {
           </div>
           <div className="load-buttons">
             <Link className='app-button' to={`${config.BASEPATH}/load/${shipment.id}`}>
-              <FontAwesomeIcon icon={faFolderOpen} className='update-icon' />
+              <FontAwesomeIcon icon={faStream} className='update-icon' />
               Update / View
             </Link>
             <Link className='app-button' to={`${config.BASEPATH}/load/edit/${shipment.id}`}>

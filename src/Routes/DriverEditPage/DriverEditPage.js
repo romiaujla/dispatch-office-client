@@ -10,6 +10,8 @@ import {
 import { isNotValidDriverName, isNotValidPay } from '../../HelperFunctions/InputFieldValidations';
 import config from '../../config';
 import DriversSerivce from '../../Services/DriversService';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
 class DriverEditPage extends Component {
 
@@ -226,6 +228,7 @@ class DriverEditPage extends Component {
                     <fieldset>
                         <legend className='blue-back white-text'>
                             <button type='button' className='app-button go-back' onClick={(e) => { handleGoBack(this.props.rprops.history) }}>
+                                <FontAwesomeIcon icon={faChevronLeft } className='back-icon' />
                                 Go Back
                             </button>
                             <span>Edit Driver</span>
@@ -285,25 +288,13 @@ class DriverEditPage extends Component {
                                         {renderEquipmentOptions(availableEquipments)}
                                 </select>
                             </label>
-                            {
-                                error.driverPay ||
-                                error.driverName
-                                    ?
-                                    <button
-                                        className='app-button'
-                                        type='submit'
-                                        disabled
-                                    >
-                                        Save Changes
-                                    </button>
-                                    :
-                                    <button
-                                        className='app-button'
-                                        type='submit'
-                                    >
-                                        Save Changes
-                                    </button>
-                            }
+                            <button
+                                className='app-button'
+                                type='submit'
+                                disabled={error.driverPay || error.driverName}
+                            >
+                                Save
+                            </button>
                         </div>
                     </fieldset>
                 </form>

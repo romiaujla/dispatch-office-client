@@ -9,6 +9,8 @@ import AppContext from '../../Contexts/AppContext';
 import config from '../../config';
 import { isNotValidDriverName, isNotValidPay } from '../../HelperFunctions/InputFieldValidations';
 import DriversService from '../../Services/DriversService';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 
 class AddDriverPage extends Component {
 
@@ -168,6 +170,7 @@ class AddDriverPage extends Component {
                     <fieldset>
                         <legend className='blue-back white-text'>
                             <button type='button' className='app-button go-back' onClick={(e) => { handleGoBack(this.props.rprops.history) }}>
+                                <FontAwesomeIcon icon={faChevronLeft} className='back-icon' />
                                 Go Back
                             </button>
                             <span>Add Driver</span>

@@ -15,6 +15,8 @@ import DriversDropDown from '../../Components/DriversDropDown/DriversDropDown';
 import config from '../../config';
 import {Link} from 'react-router-dom';
 import ShipmentsService from '../../Services/ShipmentsService';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import { faEdit, faTrashAlt, faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 
 class LoadByIdPage extends Component {
 
@@ -224,18 +226,10 @@ class LoadByIdPage extends Component {
                             renderLoadStatusOptions(this.context.loadStatus)
                         }
                     </select>
-                }
-                {
-                    this.state.status !== shipment.status
-                    ?
-                    <button type='submit' className='app-button'>
-                        Change Status
-                    </button>
-                    :
-                    <button className='app-button' disabled>
-                        Change Status
-                    </button>
-                }
+                }                
+                <button className='app-button' disabled={this.state.status === shipment.status}>
+                    Change Status
+                </button>
             </fieldset>
         </form>
                 
@@ -257,12 +251,15 @@ class LoadByIdPage extends Component {
                 <section className='LoadByIdPage width-wrapper'>
                     <div className='load-header'>
                         <button className='app-button' onClick={() => {handleGoBack(this.props.rprops.history)}}>
+                            <FontAwesomeIcon icon={faChevronLeft} className='back-icon' />
                             Go Back
                         </button>
                         <Link className='app-button edit-button' to={`${config.BASEPATH}/load/edit/${shipment.id}`}>
+                            <FontAwesomeIcon icon={faEdit} className='edit-icon' />
                             Edit
                         </Link>
                         <button className='app-button' onClick={() => {this.handleShipmentDelete(shipment.id)}}>
+                            <FontAwesomeIcon icon={faTrashAlt} className='delete-icon' />
                             Delete
                         </button>
                     </div>

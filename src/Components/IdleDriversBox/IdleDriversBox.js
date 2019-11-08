@@ -8,7 +8,8 @@ class IdleDriversBox extends Component {
     static contextType = AppContext;
 
     renderIdleDriversList = () => {
-        const {idleDrivers} = this.context
+        let {idleDrivers} = this.context
+        idleDrivers = idleDrivers.filter(idleDriver => idleDriver.status === 'active');
         return idleDrivers.map((iDriver) => {
             return <li key={iDriver.id}><DriverCard driver={iDriver} /></li>
         })

@@ -8,6 +8,8 @@ import {
 } from '../../HelperFunctions/HelperFunctions';
 import DriversService from '../../Services/DriversService';
 import EquipmentsService from '../../Services/EquipmentsService';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEdit, faTrashAlt, faChevronRight } from '@fortawesome/free-solid-svg-icons'
 
 class EquipmentCard extends Component {
 
@@ -84,9 +86,11 @@ class EquipmentCard extends Component {
                     ?
                     <div className='equipment-buttons'>
                         <Link className='app-button' to={`${config.BASEPATH}/equipment/edit/${equipment.id}`}>
+                            <FontAwesomeIcon icon={faEdit} className='edit-icon' />
                             Edit
                         </Link>
                         <button className='app-button' onClick={() => { this.handleDeleteEquipment(equipment.id) }}>
+                            <FontAwesomeIcon icon={faTrashAlt} className='delete-icon' />
                             Delete
                         </button>
                     </div>
@@ -97,6 +101,7 @@ class EquipmentCard extends Component {
                         </span>
                         <Link className='app-button' to={`${config.BASEPATH}/load/${shipmentId}`}>
                             View Load
+                            <FontAwesomeIcon icon={faChevronRight} className='next-icon' />
                         </Link>
                     </div>
                 }
