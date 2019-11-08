@@ -43,7 +43,8 @@
 .LoadByIdPage .box-style .info:nth-of-type(odd){
     margin: 10px 0px;
 }
-.LoadByIdPage .info h6{
+.LoadByIdPage .info h6,
+.LoadByIdPage .shipment-status h6{
     text-transform: uppercase;
     margin-bottom: 3px;
     border-bottom: 1px solid #0b245b;
@@ -111,6 +112,18 @@
 .LoadByIdPage .assign-driver .app-button{
     margin: 15px auto;
     width: auto;
+}
+.LoadByIdPage .shipment-status{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    justify-content: center;
+    height: 150px;
+    font-weight: 600;
+    color: darkgreen;
+}
+.LoadByIdPage .shipment-status h6{
+    display: inline;
 }
 @media only screen and (min-width: 480px){
     .LoadByIdPage .load-header .app-button{
