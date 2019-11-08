@@ -14,8 +14,7 @@ import DriversDropDown from '../../Components/DriversDropDown/DriversDropDown';
 import AppContext from '../../Contexts/AppContext';
 import config from '../../config';
 import ShipmentsSerivce from '../../Services/ShipmentsService';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faChevronLeft} from '@fortawesome/free-solid-svg-icons';
+import {GoBackButton} from '../../Components/Utils/Utils'
 
 class AddLoadPage extends Component {
 
@@ -322,10 +321,7 @@ class AddLoadPage extends Component {
                 <form className='add-load-form' onSubmit={(e) => { this.handleAddLoad(e) }}>
                     <fieldset>
                         <legend className='blue-back white-text'>
-                            <button type='button' className='app-button go-back' onClick={(e) => { handleGoBack(this.props.history) }}>
-                                <FontAwesomeIcon icon={faChevronLeft} className='back-icon' />
-                                Go Back
-                            </button>
+                            <GoBackButton onClick={(e) => { handleGoBack(this.props.history) }} />
                             <span>Add Load</span>
                         </legend>
                         <div className='flex'>

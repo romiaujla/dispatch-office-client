@@ -13,6 +13,7 @@ import EquipmentService from '../../Services/EquipmentsService';
 import DriversService from '../../Services/DriversService';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
+import { GoBackButton } from '../../Components/Utils/Utils';
 
 class AddEquipmentPage extends Component {
 
@@ -146,10 +147,7 @@ class AddEquipmentPage extends Component {
                 <form className='add-load-form' onSubmit={(e) => { this.handleAddEquipment(e) }}>
                     <fieldset>
                         <legend className='blue-back white-text'>
-                            <button type='button' className='app-button go-back' onClick={(e) => { handleGoBack(this.props.rprops.history) }}>
-                                <FontAwesomeIcon icon={faChevronLeft} className='back-icon' />
-                                Go Back
-                            </button>
+                            <GoBackButton onClick={(e) => { handleGoBack(this.props.rprops.history) }} />
                             <span>Add Equipment</span>
                         </legend>
                         <div className='flex'>
