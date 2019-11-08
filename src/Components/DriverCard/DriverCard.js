@@ -63,7 +63,7 @@ class DriverCard extends Component{
         let shipmentId = -1;
         const busyDriver = arrayIsEmpty(idleDrivers.filter(idleDriver => idleDriver.id === driver.id));
         if(busyDriver){
-            shipmentId = shipments.filter((shipment) => shipment.driver.id === driver.id)[0].id;
+            shipmentId = shipments.filter((shipment) => (shipment.driver.id === driver.id && shipment.status !== 'completed'))[0].id;
         }
 
         return(
