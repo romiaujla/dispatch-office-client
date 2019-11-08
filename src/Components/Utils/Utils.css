@@ -1,0 +1,37 @@
+/* Goback button */
+.GoBack {
+    border: none;
+    background: #0b245b;
+    color: #f9faf5;
+    font-size: 1em;
+    height: 35px;
+    width: 35px;
+    cursor: pointer;
+    border-radius: 50%;
+    border: 1px solid #f9faf5;
+    padding: 0px;
+    transition: 0.2s;
+    position: absolute;
+}
+.GoBack:hover,
+.GoBack:focus,
+.GoBack:active {
+    background: #f9faf5;
+    color: #0b245b;
+}
+
+/* Edit button */
+.EditButton{
+    border: none;
+    background: #0b245b;
+    color: #f9faf5;
+    font-size: 1.2em;
+    cursor: pointer;
+    border-radius: 50%;
+    padding: 0px;
+}
+.EditButton:hover,
+.EditButton:focus,
+.EditButton:active {
+    color: #e1e0e0;
+}
