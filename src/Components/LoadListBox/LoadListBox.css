@@ -182,16 +182,11 @@
 }
 .LoadListBox .load-buttons button,
 .LoadListBox .load-buttons a{
-    background: rgb(210,22,91);
-    border: none;
-    color: #f9faf5;
+    background: inherit;
+    border: 1px solid #0b245b;
+    color: #0b245b;
     padding: 8px 20px;
-}
-.LoadListBox .load-buttons button:hover,
-.LoadListBox .load-buttons a:hover,
-.LoadListBox .load-buttons button:focus,
-.LoadListBox .load-buttons a:focus{
-    background: rgb(255, 0, 93);
+    font-size: 1.4em;
 }
 .LoadListBox .no-shipments{
     display: flex;
@@ -203,6 +198,20 @@
 @media only screen and (min-width: 480px){
     .LoadListBox{
         font-size: 1em;
+    }
+    .LoadListBox .load-buttons button,
+    .LoadListBox .load-buttons a{
+        background: rgb(210,22,91);
+        border: none;
+        color: #f9faf5;
+        padding: 8px 20px;
+        font-size: 0.8em;
+    }
+    .LoadListBox .load-buttons button:hover,
+    .LoadListBox .load-buttons a:hover,
+    .LoadListBox .load-buttons button:focus,
+    .LoadListBox .load-buttons a:focus{
+        background: rgb(255, 0, 93);
     }
 }
 @media only screen and (min-width:900px){

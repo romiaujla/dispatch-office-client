@@ -72,7 +72,8 @@
 }
 .EditButton.small,
 .ViewLoadButton.small,
-.DeleteButton.small{
+.DeleteButton.small,
+.UpdateViewButton.small{
     display: flex;
     flex-direction: column;
     border: 1px solid #0b245b;
@@ -84,7 +85,8 @@
 }
 .EditButton.small span,
 .DeleteButton.small span,
-.ViewLoadButton.small span{
+.ViewLoadButton.small span,
+.UpdateViewButton.small span{
     display: none;
 }
 .EditButton.small:hover,
@@ -95,7 +97,10 @@
 .DeleteButton.small:active,
 .ViewLoadButton.small:hover,
 .ViewLoadButton.small:focus,
-.ViewLoadButton.small:active{
+.ViewLoadButton.small:active,
+.UpdateViewButton.small:hover,
+.UpdateViewButton.small:focus,
+.UpdateViewButton.small:active{
     /* color: rgb(210, 22, 91); */
     background: #f0f1f1;
     color: #0b245b;
@@ -105,7 +110,8 @@
 @media only screen and (max-width: 480px){
     .EditButton.responsive,
     .ViewLoadButton.responsive,
-    .DeleteButton.responsive{
+    .DeleteButton.responsive,
+    .UpdateViewButton.responsive{
         display: flex;
         flex-direction: column;
         border: 1px solid #0b245b;
@@ -117,7 +123,8 @@
     }
     .EditButton.responsive span,
     .DeleteButton.responsive span,
-    .ViewLoadButton.responsive span{
+    .ViewLoadButton.responsive span,
+    .UpdateViewButton.responsive span{
         display: none;
     }
     .EditButton.responsive:hover,
@@ -128,7 +135,10 @@
     .DeleteButton.responsive:active,
     .ViewLoadButton.responsive:hover,
     .ViewLoadButton.responsive:focus,
-    .ViewLoadButton.responsive:active{
+    .ViewLoadButton.responsive:active,
+    .UpdateViewButton.responsive:hover,
+    .UpdateViewButton.responsive:focus,
+    .UpdateViewButton.responsive:active{
         /* color: rgb(210, 22, 91); */
         background: #f0f1f1;
         color: #0b245b;

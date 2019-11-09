@@ -57,11 +57,11 @@ export function FilterButton({className, ...props}){
     )
 }
 
-export function UpdateViewButton({className, ...props}){
+export function UpdateViewButton({className, status, ...props}){
     return (
-        <Link className={['UpdateViewButton', className].join(' ')} {...props}>
+        <Link className={['UpdateViewButton ', className].join(' ')} {...props}>
             <FontAwesomeIcon icon={faBoxes} className='boxes-icon' />
-            <span>{props.status}</span>
+            <span>{status}</span>
         </Link>
     )
 }
