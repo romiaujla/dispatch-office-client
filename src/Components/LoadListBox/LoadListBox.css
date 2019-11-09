@@ -37,7 +37,7 @@
     margin: 50px 20px;
 }
 .LoadListBox ul .load:last-child{
-    margin-bottom: 0px;
+    margin-bottom: 15px;
 }
 .LoadListBox .load h6{
     display: inline-block;

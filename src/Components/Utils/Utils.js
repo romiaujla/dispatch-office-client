@@ -52,7 +52,7 @@ export function FilterButton({className, ...props}){
     return (
         <button className={['FilterButton ', className].join(' ')} {...props}>
             <FontAwesomeIcon icon={faFilter} className='filter-icon' />
-            <span>Fiilter</span>
+            <span>Filter</span>
         </button>
     )
 }
