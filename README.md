@@ -17,13 +17,13 @@ A react app built using the PERN stack (PostgresSQL, Express, React and Nodejs) 
 <img src="https://github.com/romiaujla/dispatch-office-client/blob/master/screenshots/dashboard-unassigned-loads.png" data-canonical-src="https://github.com/romiaujla/dispatch-office-client/blob/master/screenshots/dashboard-unassigned-loads.png" width="300" height="600" />
 
 ###### Loads In Transit Section on Dashboard
-![dashboard-in-transit](https://github.com/romiaujla/dispatch-office-client/blob/master/screenshots/dashboard-in-transit-loads.png)
+<img src="https://github.com/romiaujla/dispatch-office-client/blob/master/screenshots/dashboard-in-transit-loads.png" data-canonical-src="https://github.com/romiaujla/dispatch-office-client/blob/master/screenshots/dashboard-in-transit-loads.png" width="300" height="600" />
 
 ###### Idle Drivers Section on the Dashboard
-![dashboard-idle-drivers](https://github.com/romiaujla/dispatch-office-client/blob/master/screenshots/dashboard-idle-drivers.png)
+<img src="https://github.com/romiaujla/dispatch-office-client/blob/master/screenshots/dashboard-idle-drivers.png" data-canonical-src="https://github.com/romiaujla/dispatch-office-client/blob/master/screenshots/dashboard-idle-drivers.png" width="300" height="600" />
 
 ###### Menu Items For management
-![other-menu](https://github.com/romiaujla/dispatch-office-client/blob/master/screenshots/menu.png)
+<img src="https://github.com/romiaujla/dispatch-office-client/blob/master/screenshots/menu.png" data-canonical-src="https://github.com/romiaujla/dispatch-office-client/blob/master/screenshots/menu.png" width="300" height="600" />
 
 
 #### Tech Used
