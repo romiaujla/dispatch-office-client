@@ -14,7 +14,6 @@ A react app built using the PERN stack (PostgresSQL, Express, React and Nodejs) 
 
 #### Mobile Screenshots
 ###### UnAssigned Loads on Dashboard
-![dashboard](https://github.com/romiaujla/dispatch-office-client/blob/master/screenshots/dashboard-unassigned-loads.png | height=300)
 <img src="https://github.com/romiaujla/dispatch-office-client/blob/master/screenshots/dashboard-unassigned-loads.png" data-canonical-src="https://github.com/romiaujla/dispatch-office-client/blob/master/screenshots/dashboard-unassigned-loads.png" width="200" height="400" />
 
 ###### Loads In Transit Section on Dashboard
