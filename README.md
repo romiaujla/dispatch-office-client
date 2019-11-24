@@ -16,11 +16,17 @@ A react app built using the PERN stack (PostgresSQL, Express, React and Nodejs) 
 ###### UnAssigned Loads on Dashboard
 <img src="https://github.com/romiaujla/dispatch-office-client/blob/master/screenshots/dashboard-unassigned-loads.png" data-canonical-src="https://github.com/romiaujla/dispatch-office-client/blob/master/screenshots/dashboard-unassigned-loads.png" width="315" />
 
+
+
 ###### Loads In Transit Section on Dashboard
 <img src="https://github.com/romiaujla/dispatch-office-client/blob/master/screenshots/dashboard-in-transit-loads.png" data-canonical-src="https://github.com/romiaujla/dispatch-office-client/blob/master/screenshots/dashboard-in-transit-loads.png" width="315" />
 
+
+
 ###### Idle Drivers Section on the Dashboard
 <img src="https://github.com/romiaujla/dispatch-office-client/blob/master/screenshots/dashboard-idle-drivers.png" data-canonical-src="https://github.com/romiaujla/dispatch-office-client/blob/master/screenshots/dashboard-idle-drivers.png" width="315" />
+
+
 
 ###### Menu Items For management
 <img src="https://github.com/romiaujla/dispatch-office-client/blob/master/screenshots/menu.png" data-canonical-src="https://github.com/romiaujla/dispatch-office-client/blob/master/screenshots/menu.png" width="315" />
