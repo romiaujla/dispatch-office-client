@@ -11,7 +11,21 @@ A react app built using the PERN stack (PostgresSQL, Express, React and Nodejs) 
 - Link to API Repo
    - https://github.com/romiaujla/dispatch-office-server
    
-   
+
+#### Mobile Screenshots
+###### UnAssigned Loads on Dashboard
+![dashboard](https://github.com/romiaujla/dispatch-office-client/blob/master/screenshots/dashboard-unassigned-loads.png)
+
+###### Loads In Transit Section on Dashboard
+![dashboard-in-transit](https://github.com/romiaujla/dispatch-office-client/blob/master/screenshots/dashboard-in-transit-loads.png)
+
+###### Idle Drivers Section on the Dashboard
+![dashboard-idle-drivers](https://github.com/romiaujla/dispatch-office-client/blob/master/screenshots/dashboard-idle-drivers.png)
+
+###### Menu Items For management
+![other-menu](https://github.com/romiaujla/dispatch-office-client/blob/master/screenshots/menu.png)
+
+
 #### Tech Used
 - Front End: React, React Router, Javascript, HTML5, CSS3
 - Back End: NodeJS, Express, Postgresql
