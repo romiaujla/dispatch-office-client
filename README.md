@@ -31,14 +31,10 @@ A react app built using the PERN stack (PostgresSQL, Express, React and Nodejs) 
 ###### Menu Items For management
 <img src="https://github.com/romiaujla/dispatch-office-client/blob/master/screenshots/menu.png" data-canonical-src="https://github.com/romiaujla/dispatch-office-client/blob/master/screenshots/menu.png" width="315" />
 
-
 #### Tech Used
 - Front End: React, React Router, Javascript, HTML5, CSS3
 - Back End: NodeJS, Express, Postgresql
 - Deployment: Heroku for Server, Github Pages for client
-
-
-
 
 #### Features for the future
 - Have driver accounts, so the status of the load can be updated by the drivers as well.
@@ -54,3 +50,5 @@ A react app built using the PERN stack (PostgresSQL, Express, React and Nodejs) 
 - Designed the wireframes
 - Built the static client in ReactJS and adding styles using CSS3.
 - Built the backend using NodeJS and Expres using the TDD with Mocha, Chai and Supertest.
+- Did rigourous testing on all end-points to make sure everything is working seamlessly
+- Kept deploying after each module of the application was complete and kept building on them.
