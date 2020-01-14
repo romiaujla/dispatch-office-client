@@ -28,9 +28,6 @@ class HomePageSection extends Component {
                 <p className='user-info'>
                     Password: <span>password</span>
                 </p>
-                <Link to={`${basePath}/create-account`} className='app-button'>
-                    Create Account
-                </Link>
                 <Link to={`${basePath}/login`} className='app-link'>
                     Login
                 </Link>
