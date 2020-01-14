@@ -162,7 +162,7 @@ export default {
       equipment: {}
     }
   ],
-  idleEequipments: [
+  idleEquipments: [
     { id: 2, unit_num: "102", status: "active" },
     { id: 5, unit_num: "105", status: "active" }
   ],
