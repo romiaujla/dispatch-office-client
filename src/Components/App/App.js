@@ -4,7 +4,6 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import Header from "../Header/Header";
 import HomePage from "../../Routes/HomePage/HomePage";
 import AppContext from "../../Contexts/AppContext";
-import CreateAccountPage from "../../Routes/CreateAccountPage/CreateAccountPage";
 import LoginPage from "../../Routes/LoginPage/LoginPage";
 import TokenService from "../../Services/TokenService";
 import DashboardPage from "../../Routes/DashboardPage/DashboardPage";
@@ -213,12 +212,6 @@ class App extends Component {
             </Route>
 
             <Route exact path={value.basePath} component={HomePage} />
-
-            <Route
-              exact
-              path={`${value.basePath}/create-account`}
-              component={CreateAccountPage}
-            />
 
             <Route
               exact
